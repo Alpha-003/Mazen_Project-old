@@ -4,14 +4,14 @@ import { Link as RouterLink } from 'react-router-dom';
 // material-ui
 import {
   Button,
-  Checkbox,
-  Divider,
-  FormControlLabel,
+  // Checkbox,
+  // Divider,
+  // FormControlLabel,
   FormHelperText,
   Grid,
   Link,
   InputAdornment,
-  InputLabel,
+  // InputLabel,
   OutlinedInput,
   Stack,
   Typography
@@ -24,7 +24,7 @@ import { Formik } from 'formik';
 // project import
 import useAuth from 'hooks/useAuth';
 import useScriptRef from 'hooks/useScriptRef';
-import FirebaseSocial from './FirebaseSocial';
+// import FirebaseSocial from './FirebaseSocial';
 import IconButton from 'components/@extended/IconButton';
 import AnimateButton from 'components/@extended/AnimateButton';
 
@@ -34,7 +34,7 @@ import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const AuthLogin = () => {
-  const [checked, setChecked] = React.useState(false);
+  // const [checked, setChecked] = React.useState(false);
   const [capsWarning, setCapsWarning] = React.useState(false);
 
   const { isLoggedIn, firebaseEmailPasswordSignIn } = useAuth();
@@ -99,7 +99,7 @@ const AuthLogin = () => {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Stack spacing={1}>
-                  <InputLabel htmlFor="email-login">Email Address</InputLabel>
+                  {/* <InputLabel htmlFor="email-login">Email Address</InputLabel> */}
                   <OutlinedInput
                     id="email-login"
                     type="email"
@@ -120,7 +120,7 @@ const AuthLogin = () => {
               </Grid>
               <Grid item xs={12}>
                 <Stack spacing={1}>
-                  <InputLabel htmlFor="password-login">Password</InputLabel>
+                  {/* <InputLabel htmlFor="password-login">Password</InputLabel> */}
                   <OutlinedInput
                     fullWidth
                     color={capsWarning ? 'warning' : 'primary'}
@@ -163,30 +163,6 @@ const AuthLogin = () => {
                 </Stack>
               </Grid>
 
-              <Grid item xs={12} sx={{ mt: -1 }}>
-                <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={checked}
-                        onChange={(event) => setChecked(event.target.checked)}
-                        name="checked"
-                        color="primary"
-                        size="small"
-                      />
-                    }
-                    label={<Typography variant="h6">Keep me sign in</Typography>}
-                  />
-                  <Link
-                    variant="h6"
-                    component={RouterLink}
-                    to={isLoggedIn ? '/auth/forgot-password' : '/forgot-password'}
-                    color="text.primary"
-                  >
-                    Forgot Password?
-                  </Link>
-                </Stack>
-              </Grid>
               {errors.submit && (
                 <Grid item xs={12}>
                   <FormHelperText error>{errors.submit}</FormHelperText>
@@ -199,14 +175,24 @@ const AuthLogin = () => {
                   </Button>
                 </AnimateButton>
               </Grid>
-              <Grid item xs={12}>
+
+              <Grid item xs={12} sx={{ mt: -1 }}>
+                <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
+                  <Link
+                    variant="h6"
+                    component={RouterLink}
+                    to={isLoggedIn ? '/auth/forgot-password' : '/forgot-password'}
+                    color="text.primary"
+                  >
+                    Forgot Password?
+                  </Link>
+                </Stack>
+              </Grid>
+              {/* <Grid item xs={12}>
                 <Divider>
                   <Typography variant="caption"> Login with</Typography>
                 </Divider>
-              </Grid>
-              <Grid item xs={12}>
-                <FirebaseSocial />
-              </Grid>
+              </Grid> */}
             </Grid>
           </form>
         )}

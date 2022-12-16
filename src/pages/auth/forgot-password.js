@@ -26,7 +26,7 @@ const ForgotPassword = () => {
               sx={{ textDecoration: 'none' }}
               color="primary"
             >
-              Back to Login
+              Already have an account?
             </Typography>
           </Stack>
         </Grid>

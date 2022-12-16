@@ -15,7 +15,7 @@ const AuthFooter = () => {
         textAlign={matchDownSM ? 'center' : 'inherit'}
       >
         <Typography variant="subtitle2" color="secondary" component="span">
-          This site is protected by{' '}
+          This site is protected by RE-CAPTCHA and the Google{' '}
           <Typography component={Link} variant="subtitle2" href="#mantis-privacy" target="_blank" underline="hover">
             Privacy Policy
           </Typography>
