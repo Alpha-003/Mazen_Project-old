@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 // material-ui
-import { Button, FormHelperText, Grid, InputLabel, OutlinedInput, Stack, Typography } from '@mui/material';
+import { Button, FormHelperText, Grid, OutlinedInput, Stack } from '@mui/material';
 
 // third party
 import * as Yup from 'yup';
@@ -80,7 +80,7 @@ const AuthForgotPassword = () => {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Stack spacing={1}>
-                  <InputLabel htmlFor="email-forgot">Email Address</InputLabel>
+                  {/* <InputLabel htmlFor="email-forgot">Email Address</InputLabel> */}
                   <OutlinedInput
                     fullWidth
                     error={Boolean(touched.email && errors.email)}
@@ -105,13 +105,10 @@ const AuthForgotPassword = () => {
                   <FormHelperText error>{errors.submit}</FormHelperText>
                 </Grid>
               )}
-              <Grid item xs={12} sx={{ mb: -2 }}>
-                <Typography variant="caption">Do not forgot to check SPAM box.</Typography>
-              </Grid>
               <Grid item xs={12}>
                 <AnimateButton>
                   <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
-                    Send Password Reset Email
+                    Sign In
                   </Button>
                 </AnimateButton>
               </Grid>
