@@ -100,7 +100,7 @@ const AvatarStyle = styled(MuiAvatar, { shouldForwardProp: (prop) => prop !== 'c
 
 // ==============================|| EXTENDED - AVATAR ||============================== //
 
-export default function Avatar({ variant = 'circular', children, color = 'primary', type, size = 'md', ...others }) {
+export default function Avatar({ variant = 'rounded', children, color = 'primary', type, size = 'md', ...others }) {
   const theme = useTheme();
 
   return (
