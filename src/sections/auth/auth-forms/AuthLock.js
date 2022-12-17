@@ -11,7 +11,7 @@ import {
   Grid,
   Link,
   InputAdornment,
-  // InputLabel,
+  InputLabel,
   OutlinedInput,
   Stack,
   Typography
@@ -33,7 +33,7 @@ import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
-const AuthLogin = () => {
+const AuthLock = () => {
   // const [checked, setChecked] = React.useState(false);
   const [capsWarning, setCapsWarning] = React.useState(false);
 
@@ -61,12 +61,10 @@ const AuthLogin = () => {
     <>
       <Formik
         initialValues={{
-          email: 'info@codedthemes.com',
-          password: '123456',
+          password: '',
           submit: null
         }}
         validationSchema={Yup.object().shape({
-          email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
           password: Yup.string().max(255).required('Password is required')
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
@@ -97,30 +95,10 @@ const AuthLogin = () => {
         {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
           <form noValidate onSubmit={handleSubmit}>
             <Grid container spacing={3}>
+              <Grid item xs={12}></Grid>
               <Grid item xs={12}>
-                <Stack spacing={1}>
-                  {/* <InputLabel htmlFor="email-login">Email Address</InputLabel> */}
-                  <OutlinedInput
-                    id="email-login"
-                    type="email"
-                    value={values.email}
-                    name="email"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    placeholder="Enter email address"
-                    fullWidth
-                    error={Boolean(touched.email && errors.email)}
-                  />
-                  {touched.email && errors.email && (
-                    <FormHelperText error id="standard-weight-helper-text-email-login">
-                      {errors.email}
-                    </FormHelperText>
-                  )}
-                </Stack>
-              </Grid>
-              <Grid item xs={12}>
-                <Stack spacing={1}>
-                  {/* <InputLabel htmlFor="password-login">Password</InputLabel> */}
+                <Stack spacing={1} alignItems="center">
+                  <InputLabel htmlFor="password-login">Enter your Password</InputLabel>
                   <OutlinedInput
                     fullWidth
                     color={capsWarning ? 'warning' : 'primary'}
@@ -171,19 +149,14 @@ const AuthLogin = () => {
               <Grid item xs={12}>
                 <AnimateButton>
                   <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
-                    Login
+                    Submit
                   </Button>
                 </AnimateButton>
               </Grid>
 
               <Grid item xs={12} sx={{ mt: -1 }}>
-                <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
-                  <Link
-                    variant="h6"
-                    component={RouterLink}
-                    to={isLoggedIn ? '/auth/forgot-password' : '/forgot-password'}
-                    color="text.primary"
-                  >
+                <Stack direction="row" spacing={2}>
+                  <Link variant="h6" component={RouterLink} to={isLoggedIn ? '/auth/forgot-password' : '/forgot-password'}>
                     Forgot Password?
                   </Link>
                 </Stack>
@@ -201,4 +174,4 @@ const AuthLogin = () => {
   );
 };
 
-export default AuthLogin;
+export default AuthLock;
