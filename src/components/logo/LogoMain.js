@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import logo from 'assets/images/Logo.png'
-import logoDark from 'assets/images/Logo.png'
+import logo from 'assets/images/logo.png'
+import logoDark from 'assets/images/logo.png'
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
