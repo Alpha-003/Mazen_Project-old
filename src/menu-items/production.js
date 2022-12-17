@@ -2,7 +2,7 @@
 import { FormattedMessage } from 'react-intl';
 
 // assets
-import { BorderVerticleOutlined, FileSyncOutlined, DatabaseOutlined } from '@ant-design/icons';
+import { BorderVerticleOutlined, FileSyncOutlined, DatabaseOutlined, AppstoreOutlined } from '@ant-design/icons';
 
 // icons
 const icons = {
@@ -50,7 +50,7 @@ const production = {
       id: 'stages',
       title: <FormattedMessage id="Stages" />,
       type: 'collapse',
-      icon: icon.DatabaseOutlined,
+      icon: icons.DatabaseOutlined,
       children: [
         {
           id: 'categories-list',
