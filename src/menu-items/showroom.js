@@ -19,7 +19,7 @@ const icons = {
 
 const showroom = {
   id: 'group-showroom',
-  title: <FormattedMessage id="Showroom" />,
+  title: <FormattedMessage id="showroom" />,
   type: 'group',
   children: [
     {
@@ -38,7 +38,7 @@ const showroom = {
     },
     {
       id: 'bundles',
-      title: <FormattedMessage id="Bundles" />,
+      title: <FormattedMessage id="bundles" />,
       type: 'collapse',
       icon: icons.BuildOutlined,
       children: [
@@ -52,7 +52,7 @@ const showroom = {
     },
     {
       id: 'categories',
-      title: <FormattedMessage id="Categories" />,
+      title: <FormattedMessage id="categories" />,
       type: 'collapse',
       icon: AppstoreOutlined,
       children: [

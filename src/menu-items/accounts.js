@@ -14,12 +14,12 @@ const icons = {
 
 const accounts = {
   id: 'group-widget',
-  title: <FormattedMessage id="Accounts" />,
+  title: <FormattedMessage id="accounts" />,
   type: 'group',
   children: [
     {
       id: 'people',
-      title: <FormattedMessage id="People" />,
+      title: <FormattedMessage id="people" />,
       type: 'collapse',
       icon: icons.UsergroupAddOutlined,
       children: [
@@ -33,7 +33,7 @@ const accounts = {
     },
     {
       id: 'organization',
-      title: <FormattedMessage id="Organization" />,
+      title: <FormattedMessage id="organization" />,
       type: 'collapse',
       icon: icons.BankOutlined,
       children: [

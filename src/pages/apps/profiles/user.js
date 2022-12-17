@@ -5,7 +5,7 @@ import { Grid } from '@mui/material';
 import { Outlet } from 'react-router';
 
 // project import
-import ProfileCard from 'sections/apps/profiles/user/ProfileCard';
+// import ProfileCard from 'sections/apps/profiles/user/ProfileCard';
 import ProfileTabs from 'sections/apps/profiles/user/ProfileTabs';
 
 // ==============================|| PROFILE - USER ||============================== //
@@ -19,9 +19,9 @@ const UserProfile = () => {
 
   return (
     <Grid container spacing={3}>
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
         <ProfileCard focusInput={focusInput} />
-      </Grid>
+      </Grid> */}
       <Grid item xs={12} md={3}>
         <ProfileTabs focusInput={focusInput} />
       </Grid>

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // material-ui
 import { useOutletContext } from 'react-router';
 
@@ -5,12 +6,12 @@ import { useDispatch } from 'react-redux';
 
 // material-ui
 import {
-  Autocomplete,
+  // Autocomplete,
   Box,
   Button,
-  CardHeader,
-  Chip,
-  Divider,
+  // CardHeader,
+  // Chip,
+  // Divider,
   FormHelperText,
   Grid,
   InputLabel,
@@ -19,8 +20,8 @@ import {
   Stack,
   TextField
 } from '@mui/material';
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+// import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+// import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 // third party
 import * as Yup from 'yup';
@@ -29,64 +30,67 @@ import { Formik } from 'formik';
 // project import
 import { openSnackbar } from 'store/reducers/snackbar';
 // import { useInputRef } from './index';
-import countries from 'data/countries';
+// import countries from 'data/countries';
 import MainCard from 'components/MainCard';
 
 // assets
-import { CloseOutlined } from '@ant-design/icons';
+// import { CloseOutlined } from '@ant-design/icons';
+import React from 'react';
 
 // styles & constant
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP
-    }
-  }
+// const ITEM_HEIGHT = 48;
+// const ITEM_PADDING_TOP = 8;
+// const MenuProps = {
+//   PaperProps: {
+//     style: {
+//       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP
+//     }
+//   }
+// };
+const style = {
+  color: 'red'
 };
-
-const skills = [
-  'Adobe XD',
-  'After Effect',
-  'Angular',
-  'Animation',
-  'ASP.Net',
-  'Bootstrap',
-  'C#',
-  'CC',
-  'Corel Draw',
-  'CSS',
-  'DIV',
-  'Dreamweaver',
-  'Figma',
-  'Graphics',
-  'HTML',
-  'Illustrator',
-  'J2Ee',
-  'Java',
-  'Javascript',
-  'JQuery',
-  'Logo Design',
-  'Material UI',
-  'Motion',
-  'MVC',
-  'MySQL',
-  'NodeJS',
-  'npm',
-  'Photoshop',
-  'PHP',
-  'React',
-  'Redux',
-  'Reduxjs & tooltit',
-  'SASS',
-  'SCSS',
-  'SQL Server',
-  'SVG',
-  'UI/UX',
-  'User Interface Designing',
-  'Wordpress'
-];
+// const skills = [
+//   'Adobe XD',
+//   'After Effect',
+//   'Angular',
+//   'Animation',
+//   'ASP.Net',
+//   'Bootstrap',
+//   'C#',
+//   'CC',
+//   'Corel Draw',
+//   'CSS',
+//   'DIV',
+//   'Dreamweaver',
+//   'Figma',
+//   'Graphics',
+//   'HTML',
+//   'Illustrator',
+//   'J2Ee',
+//   'Java',
+//   'Javascript',
+//   'JQuery',
+//   'Logo Design',
+//   'Material UI',
+//   'Motion',
+//   'MVC',
+//   'MySQL',
+//   'NodeJS',
+//   'npm',
+//   'Photoshop',
+//   'PHP',
+//   'React',
+//   'Redux',
+//   'Reduxjs & tooltit',
+//   'SASS',
+//   'SCSS',
+//   'SQL Server',
+//   'SVG',
+//   'UI/UX',
+//   'User Interface Designing',
+//   'Wordpress'
+// ];
 
 function useInputRef() {
   return useOutletContext();
@@ -95,13 +99,13 @@ function useInputRef() {
 // ==============================|| TAB - PERSONAL ||============================== //
 
 const TabPersonal = () => {
-  const handleChangeDay = (event, date, setFieldValue) => {
-    setFieldValue('dob', new Date(date.setDate(parseInt(event.target.value, 10))));
-  };
+  // const handleChangeDay = (event, date, setFieldValue) => {
+  //   setFieldValue('dob', new Date(date.setDate(parseInt(event.target.value, 10))));
+  // };
 
-  const handleChangeMonth = (event, date, setFieldValue) => {
-    setFieldValue('dob', new Date(date.setMonth(parseInt(event.target.value, 10))));
-  };
+  // const handleChangeMonth = (event, date, setFieldValue) => {
+  //   setFieldValue('dob', new Date(date.setMonth(parseInt(event.target.value, 10))));
+  // };
 
   const maxDate = new Date();
   maxDate.setFullYear(maxDate.getFullYear() - 18);
@@ -109,142 +113,180 @@ const TabPersonal = () => {
   const dispatch = useDispatch();
   const inputRef = useInputRef();
 
+  // custom code
+  // const [role,setRole] = React.useState('')
+  // const handleChange = (event) => {
+  //   setRole(event.target.value)
+  // }
+
   return (
-    <MainCard content={false} title="Personal Information" sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem' } }}>
-      <Formik
-        initialValues={{
-          firstname: 'Stebin',
-          lastname: 'Ben',
-          email: 'stebin.ben@gmail.com',
-          dob: new Date('03-10-1993'),
-          countryCode: '+91',
-          contact: 9652364852,
-          designation: 'Full Stack Developer',
-          address: '3801 Chalk Butte Rd, Cut Bank, MT 59427, United States',
-          address1: '301 Chalk Butte Rd, Cut Bank, NY 96572, New York',
-          country: 'US',
-          state: 'California',
-          skill: [
-            'Adobe XD',
-            'Angular',
-            'Corel Draw',
-            'Figma',
-            'HTML',
-            'Illustrator',
-            'Javascript',
-            'Logo Design',
-            'Material UI',
-            'NodeJS',
-            'npm',
-            'Photoshop',
-            'React',
-            'Reduxjs & tooltit',
-            'SASS'
-          ],
-          note: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.`,
-          submit: null
-        }}
-        validationSchema={Yup.object().shape({
-          firstname: Yup.string().max(255).required('First Name is required.'),
-          lastname: Yup.string().max(255).required('Last Name is required.'),
-          email: Yup.string().email('Invalid email address.').max(255).required('Email is required.'),
-          dob: Yup.date().max(maxDate, 'Age should be 18+ years.').required('Date of birth is requird.'),
-          contact: Yup.number()
-            .test('len', 'Contact should be exactly 10 digit', (val) => val?.toString().length === 10)
-            .required('Phone number is required'),
-          designation: Yup.string().required('Designation is required'),
-          address: Yup.string().min(50, 'Address to short.').required('Address is required'),
-          country: Yup.string().required('Country is required'),
-          state: Yup.string().required('State is required'),
-          note: Yup.string().min(150, 'Not shoulde be more then 150 char.')
-        })}
-        onSubmit={(values, { setErrors, setStatus, setSubmitting }) => {
-          try {
-            dispatch(
-              openSnackbar({
-                open: true,
-                message: 'Personal profile updated successfully.',
-                variant: 'alert',
-                alert: {
-                  color: 'success'
-                },
-                close: false
-              })
-            );
-            setStatus({ success: false });
-            setSubmitting(false);
-          } catch (err) {
-            setStatus({ success: false });
-            setErrors({ submit: err.message });
-            setSubmitting(false);
-          }
-        }}
-      >
-        {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, setFieldValue, touched, values }) => (
-          <form noValidate onSubmit={handleSubmit}>
-            <Box sx={{ p: 2.5 }}>
-              <Grid container spacing={3}>
-                <Grid item xs={12} sm={6}>
-                  <Stack spacing={1.25}>
-                    <InputLabel htmlFor="personal-first-name">First Name</InputLabel>
-                    <TextField
-                      fullWidth
-                      id="personal-first-name"
-                      value={values.firstname}
-                      name="firstname"
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      placeholder="First Name"
-                      autoFocus
-                      inputRef={inputRef}
-                    />
-                    {touched.firstname && errors.firstname && (
-                      <FormHelperText error id="personal-first-name-helper">
-                        {errors.firstname}
-                      </FormHelperText>
-                    )}
-                  </Stack>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Stack spacing={1.25}>
-                    <InputLabel htmlFor="personal-last-name">Last Name</InputLabel>
-                    <TextField
-                      fullWidth
-                      id="personal-last-name"
-                      value={values.lastname}
-                      name="lastname"
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      placeholder="Last Name"
-                    />
-                    {touched.lastname && errors.lastname && (
-                      <FormHelperText error id="personal-last-name-helper">
-                        {errors.lastname}
-                      </FormHelperText>
-                    )}
-                  </Stack>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Stack spacing={1.25}>
-                    <InputLabel htmlFor="personal-email">Email Address</InputLabel>
-                    <TextField
-                      type="email"
-                      fullWidth
-                      value={values.email}
-                      name="email"
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      id="personal-email"
-                      placeholder="Email Address"
-                    />
-                    {touched.email && errors.email && (
-                      <FormHelperText error id="personal-email-helper">
-                        {errors.email}
-                      </FormHelperText>
-                    )}
-                  </Stack>
-                </Grid>
-                <Grid item xs={12} sm={6}>
+    <Formik
+      initialValues={{
+        firstname: 'Stebin',
+        lastname: 'Ben',
+        email: 'stebin.ben@gmail.com',
+        dob: new Date('03-10-1993'),
+        countryCode: '+91',
+        jobTitle: 'owner',
+        lang: 'arabic',
+        contact: 9652364852,
+        designation: 'Full Stack Developer',
+        address: '3801 Chalk Butte Rd, Cut Bank, MT 59427, United States',
+        address1: '301 Chalk Butte Rd, Cut Bank, NY 96572, New York',
+        country: 'US',
+        state: 'California',
+        skill: [
+          'Adobe XD',
+          'Angular',
+          'Corel Draw',
+          'Figma',
+          'HTML',
+          'Illustrator',
+          'Javascript',
+          'Logo Design',
+          'Material UI',
+          'NodeJS',
+          'npm',
+          'Photoshop',
+          'React',
+          'Reduxjs & tooltit',
+          'SASS'
+        ],
+        note: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.`,
+        submit: null
+      }}
+      validationSchema={Yup.object().shape({
+        firstname: Yup.string().max(255).required('First Name is required.'),
+        lastname: Yup.string().max(255).required('Last Name is required.'),
+        email: Yup.string().email('Invalid email address.').max(255).required('Email is required.'),
+        dob: Yup.date().max(maxDate, 'Age should be 18+ years.').required('Date of birth is requird.'),
+        contact: Yup.number()
+          .test('len', 'Contact should be exactly 10 digit', (val) => val?.toString().length === 10)
+          .required('Phone number is required'),
+        designation: Yup.string().required('Designation is required'),
+        address: Yup.string().min(50, 'Address to short.').required('Address is required'),
+        country: Yup.string().required('Country is required'),
+        state: Yup.string().required('State is required'),
+        note: Yup.string().min(150, 'Not shoulde be more then 150 char.')
+      })}
+      onSubmit={(values, { setErrors, setStatus, setSubmitting }) => {
+        try {
+          dispatch(
+            openSnackbar({
+              open: true,
+              message: 'Personal profile updated successfully.',
+              variant: 'alert',
+              alert: {
+                color: 'success'
+              },
+              close: false
+            })
+          );
+          setStatus({ success: false });
+          setSubmitting(false);
+        } catch (err) {
+          setStatus({ success: false });
+          setErrors({ submit: err.message });
+          setSubmitting(false);
+        }
+      }}
+    >
+      {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, setFieldValue, touched, values }) => (
+        <form noValidate onSubmit={handleSubmit}>
+          <Grid container rowSpacing={2} justifyContent="end">
+            <Grid item xs={12}>
+              <MainCard title="Select" content={false} sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem' } }}>
+                <Box sx={{ p: 2.5 }}>
+                  <Grid container spacing={3}>
+                    {/* first namee english */}
+                    <Grid item xs={12} sm={6}>
+                      <Stack spacing={1.25}>
+                        <InputLabel htmlFor="personal-first-name-eng">
+                          <span style={style}>*</span> First Name (English)
+                        </InputLabel>
+                        <TextField
+                          fullWidth
+                          id="personal-first-name-eng"
+                          // value={values.firstname}
+                          name="firstname"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          placeholder="First Name Eng"
+                          autoFocus
+                          inputRef={inputRef}
+                        />
+                        {touched.firstname && errors.firstname && (
+                          <FormHelperText error id="personal-first-name-helper">
+                            {errors.firstname}
+                          </FormHelperText>
+                        )}
+                      </Stack>
+                    </Grid>
+                    {/* first name arabic */}
+                    <Grid item xs={12} sm={6}>
+                      <Stack spacing={1.25}>
+                        <InputLabel htmlFor="personal-first-name-ar">
+                          <span style={style}>*</span> First Name (Arabic)
+                        </InputLabel>
+                        <TextField
+                          fullWidth
+                          id="personal-first-nam-ar"
+                          // value={values.lastname}
+                          name="lastname"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          placeholder="First Name Arabic"
+                        />
+                        {touched.lastname && errors.lastname && (
+                          <FormHelperText error id="personal-last-name-helper">
+                            {errors.lastname}
+                          </FormHelperText>
+                        )}
+                      </Stack>
+                    </Grid>
+                    {/* last name english */}
+                    <Grid item xs={12} sm={6}>
+                      <Stack spacing={1.25}>
+                        <InputLabel htmlFor="personal-last-name-eng">Last Name (English)</InputLabel>
+                        <TextField
+                          fullWidth
+                          id="personal-last-name-eng"
+                          // value={values.lastname}
+                          name="lastnameEng"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          placeholder="Last Name English"
+                        />
+                        {touched.lastname && errors.lastname && (
+                          <FormHelperText error id="personal-last-name-helper">
+                            {errors.lastname}
+                          </FormHelperText>
+                        )}
+                      </Stack>
+                    </Grid>
+                    {/* last name arabic */}
+                    <Grid item xs={12} sm={6}>
+                      <Stack spacing={1.25}>
+                        <InputLabel htmlFor="personal-last-name-ar">Last Name (Arabic)</InputLabel>
+                        <TextField
+                          fullWidth
+                          id="personal-last-name-ar"
+                          // value={values.lastname}
+                          name="lastname"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          placeholder="Last Name Arabic"
+                        />
+                        {touched.lastname && errors.lastname && (
+                          <FormHelperText error id="personal-last-name-helper">
+                            {errors.lastname}
+                          </FormHelperText>
+                        )}
+                      </Stack>
+                    </Grid>
+
+                    {/* date of birth */}
+                    {/* <Grid item xs={12} sm={6}>
                   <Stack spacing={1.25}>
                     <InputLabel htmlFor="personal-date">Date of Birth (+18)</InputLabel>
                     <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
@@ -309,10 +351,12 @@ const TabPersonal = () => {
                       </FormHelperText>
                     )}
                   </Stack>
-                </Grid>
-                <Grid item xs={12} sm={6}>
+                </Grid> */}
+
+                    {/* default mobile number */}
+                    {/* <Grid item xs={12} sm={6}>
                   <Stack spacing={1.25}>
-                    <InputLabel htmlFor="personal-phone">Phone Number</InputLabel>
+                    <InputLabel htmlFor="personal-phone">Phon</InputLabel>
                     <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
                       <Select value={values.countryCode} name="countryCode" onBlur={handleBlur} onChange={handleChange}>
                         <MenuItem value="+91">+91</MenuItem>
@@ -344,29 +388,138 @@ const TabPersonal = () => {
                       </FormHelperText>
                     )}
                   </Stack>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Stack spacing={1.25}>
-                    <InputLabel htmlFor="personal-designation">Designation</InputLabel>
-                    <TextField
-                      fullWidth
-                      id="personal-designation"
-                      value={values.designation}
-                      name="designation"
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      placeholder="Designation"
-                    />
-                    {touched.designation && errors.designation && (
-                      <FormHelperText error id="personal-designation-helper">
-                        {errors.designation}
+                </Grid> */}
+
+                    {/* job title */}
+                    <Grid item xs={12} sm={6}>
+                      <Stack spacing={1.25}>
+                        <InputLabel htmlFor="job-title">Job Title</InputLabel>
+                        <Select id="job-title" value={values.jobTitle} name="jobTitle" onChange={handleChange} label="Select Role">
+                          <MenuItem value="owner">Owner</MenuItem>
+                          <MenuItem value="regulator">Regulator</MenuItem>
+                          <MenuItem value="client">Client</MenuItem>
+                        </Select>
+                      </Stack>
+                    </Grid>
+                    {/* Preferred Language */}
+                    <Grid item xs={12} sm={6}>
+                      <Stack spacing={1.25}>
+                        <InputLabel htmlFor="lang">Preferred Language</InputLabel>
+                        <Select id="lang" value={values.lang} name="lang" onChange={handleChange} label="Select Role">
+                          <MenuItem value="english">English</MenuItem>
+                          <MenuItem value="arabic">Arabic</MenuItem>
+                          <MenuItem value="spanish">Spanish</MenuItem>
+                        </Select>
+                      </Stack>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </MainCard>
+            </Grid>
+            <Grid item xs={12}>
+              <MainCard title="Contact Details" content={false} sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem' } }}>
+                <Box sx={{ p: 2.5 }}>
+                  <Grid container spacing={3}>
+                    {/* Mobile Number */}
+                    <Grid item xs={12} sm={6}>
+                      <Stack spacing={1.25}>
+                        <InputLabel htmlFor="personal-mobile">
+                          <span style={style}>*</span> Mobile Number
+                        </InputLabel>
+                        <TextField
+                          type="number"
+                          fullWidth
+                          // value={values.email}
+                          name="mobile"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          id="personal-mobile"
+                          placeholder="example"
+                        />
+                        {/* {touched.email && errors.email && (
+                      <FormHelperText error id="personal-email-helper">
+                        {errors.email}
                       </FormHelperText>
-                    )}
-                  </Stack>
-                </Grid>
-              </Grid>
+                    )} */}
+                      </Stack>
+                    </Grid>
+                    {/* email */}
+                    <Grid item xs={12} sm={6}>
+                      <Stack spacing={1.25}>
+                        <InputLabel htmlFor="personal-email">Email Address</InputLabel>
+                        <TextField
+                          type="email"
+                          fullWidth
+                          value={values.email}
+                          name="email"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          id="personal-email"
+                          placeholder="Email Address"
+                        />
+                        {touched.email && errors.email && (
+                          <FormHelperText error id="personal-email-helper">
+                            {errors.email}
+                          </FormHelperText>
+                        )}
+                      </Stack>
+                    </Grid>
+                    {/* Phone 1 */}
+                    <Grid item xs={12} sm={6}>
+                      <Stack spacing={1.25}>
+                        <InputLabel htmlFor="phone-1">Phone 1</InputLabel>
+                        <TextField
+                          fullWidth
+                          id="phone-1"
+                          // value={values.lastname}
+                          name="phone1"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          placeholder="example"
+                        />
+                        {touched.lastname && errors.lastname && (
+                          <FormHelperText error id="personal-last-name-helper">
+                            {errors.lastname}
+                          </FormHelperText>
+                        )}
+                      </Stack>
+                    </Grid>
+                    {/* Phone 2 */}
+                    <Grid item xs={12} sm={6}>
+                      <Stack spacing={1.25}>
+                        <InputLabel htmlFor="phone-2">Phone 1</InputLabel>
+                        <TextField
+                          fullWidth
+                          id="phone-2"
+                          // value={values.lastname}
+                          name="phone2"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          placeholder="example"
+                        />
+                        {touched.lastname && errors.lastname && (
+                          <FormHelperText error id="personal-last-name-helper">
+                            {errors.lastname}
+                          </FormHelperText>
+                        )}
+                      </Stack>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </MainCard>
+            </Grid>
+            <Box>
+              <Stack direction="row" justifyContent="flex-end" alignItems="center" spacing={2} sx={{ mt: 2 }}>
+                <Button variant="outlined" color="secondary">
+                  Cancel
+                </Button>
+                <Button disabled={isSubmitting || Object.keys(errors).length !== 0} type="submit" variant="contained">
+                  Save
+                </Button>
+              </Stack>
             </Box>
-            <CardHeader title="Address" />
+          </Grid>
+          {/* <CardHeader title="Address" />
             <Divider />
             <Box sx={{ p: 2.5 }}>
               <Grid container spacing={3}>
@@ -550,11 +703,10 @@ const TabPersonal = () => {
                   Save
                 </Button>
               </Stack>
-            </Box>
-          </form>
-        )}
-      </Formik>
-    </MainCard>
+            </Box> */}
+        </form>
+      )}
+    </Formik>
   );
 };
 
