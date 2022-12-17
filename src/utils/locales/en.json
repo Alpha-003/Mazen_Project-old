@@ -127,5 +127,21 @@
   "user-list": "User List",
   "user-profile": "User Profile",
   "utils": "Utils",
-  "widgets": "Widgets"
+  "widgets": "Widgets",
+  "accounts": "Accounts",
+  "people": "People",
+  "organization": "Organization",
+  "showroom": "Showroom",
+  "bundles": "Bundles",
+  "categories": "Categories",
+  "production": "Production",
+  "jobs": "Jobs",
+  "material-group": "Material Group",
+  "stages": "Stages",
+  "machines": "Machines",
+  "financials": "Financials",
+  "order": "Order",
+  "payments": "Payments",
+  "support": "Support",
+  "tickets": "Tickets"
 }

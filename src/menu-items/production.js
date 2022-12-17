@@ -2,7 +2,7 @@
 import { FormattedMessage } from 'react-intl';
 
 // assets
-import { BorderVerticleOutlined, FileSyncOutlined, DatabaseOutlined } from '@ant-design/icons';
+import { BorderVerticleOutlined, FileSyncOutlined, DatabaseOutlined,AppstoreOutlined } from '@ant-design/icons';
 
 // icons
 const icons = {
@@ -15,12 +15,12 @@ const icons = {
 
 const production = {
   id: 'group-production',
-  title: <FormattedMessage id="Production" />,
+  title: <FormattedMessage id="production" />,
   type: 'group',
   children: [
     {
       id: 'jobs',
-      title: <FormattedMessage id="Jobs" />,
+      title: <FormattedMessage id="jobs" />,
       type: 'collapse',
       icon: icons.FileSyncOutlined,
       children: [
@@ -34,7 +34,7 @@ const production = {
     },
     {
       id: 'material-group',
-      title: <FormattedMessage id="Material Groups" />,
+      title: <FormattedMessage id="material-group" />,
       type: 'collapse',
       icon: icons.BorderVerticleOutlined,
       children: [
@@ -48,9 +48,9 @@ const production = {
     },
     {
       id: 'stages',
-      title: <FormattedMessage id="Stages" />,
+      title: <FormattedMessage id="stages" />,
       type: 'collapse',
-      icon: icon.DatabaseOutlined,
+      icon: icons.DatabaseOutlined,
       children: [
         {
           id: 'categories-list',
@@ -62,7 +62,7 @@ const production = {
     },
     {
       id: 'machines',
-      title: <FormattedMessage id="Machines" />,
+      title: <FormattedMessage id="machines" />,
       type: 'collapse',
       icon: AppstoreOutlined,
       children: [
