@@ -26,7 +26,7 @@ import IconButton from 'components/@extended/IconButton';
 import Transitions from 'components/@extended/Transitions';
 
 // assets
-import { BellOutlined, CheckCircleOutlined, GiftOutlined, MessageOutlined, SettingOutlined } from '@ant-design/icons';
+import { BellOutlined, CloseOutlined, GiftOutlined, MessageOutlined, SettingOutlined } from '@ant-design/icons';
 
 // sx styles
 const avatarSX = {
@@ -52,7 +52,7 @@ const Notification = () => {
   const matchesXs = useMediaQuery(theme.breakpoints.down('md'));
 
   const anchorRef = useRef(null);
-  const [read, setRead] = useState(2);
+  const [read] = useState(2);
   const [open, setOpen] = useState(false);
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -122,15 +122,11 @@ const Notification = () => {
                   border={false}
                   content={false}
                   secondary={
-                    <>
-                      {read > 0 && (
-                        <Tooltip title="Mark as all read">
-                          <IconButton color="success" size="small" onClick={() => setRead(0)}>
-                            <CheckCircleOutlined style={{ fontSize: '1.15rem' }} />
-                          </IconButton>
-                        </Tooltip>
-                      )}
-                    </>
+                    <Tooltip title="Close">
+                      <IconButton color="grey" size="small" onClick={handleClose}>
+                        <CloseOutlined style={{ fontSize: '1.15rem' }} />
+                      </IconButton>
+                    </Tooltip>
                   }
                 >
                   <List

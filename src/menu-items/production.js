@@ -2,7 +2,7 @@
 import { FormattedMessage } from 'react-intl';
 
 // assets
-import { BorderVerticleOutlined, FileSyncOutlined, DatabaseOutlined,AppstoreOutlined } from '@ant-design/icons';
+import { BorderVerticleOutlined, FileSyncOutlined, DatabaseOutlined, AppstoreOutlined } from '@ant-design/icons';
 
 // icons
 const icons = {
