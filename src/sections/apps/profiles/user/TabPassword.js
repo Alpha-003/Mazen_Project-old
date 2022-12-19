@@ -22,7 +22,7 @@ import {
 import MainCard from 'components/MainCard';
 import IconButton from 'components/@extended/IconButton';
 import { openSnackbar } from 'store/reducers/snackbar';
-import { isNumber, isLowercaseChar, isUppercaseChar, isSpecialChar, minLength } from 'utils/password-validation';
+import { isNumber, isLowercaseChar, isUppercaseChar, minLength } from 'utils/password-validation';
 
 // third party
 import * as Yup from 'yup';
@@ -105,9 +105,9 @@ const TabPassword = () => {
               <Grid item container spacing={3} xs={12} sm={6}>
                 <Grid item xs={12}>
                   <Stack spacing={1.25}>
-                    <InputLabel htmlFor="password-old">Old Password</InputLabel>
+                    <InputLabel htmlFor="password-old">Current Password</InputLabel>
                     <OutlinedInput
-                      placeholder="Enter Old Password"
+                      placeholder="Enter Current Password"
                       id="password-old"
                       type={showOldPassword ? 'text' : 'password'}
                       value={values.old}
@@ -208,7 +208,7 @@ const TabPassword = () => {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Box sx={{ p: { xs: 0, sm: 2, md: 4, lg: 5 } }}>
-                  <Typography variant="h5">New password must contain:</Typography>
+                  <Typography variant="h5">Password must contain:</Typography>
                   <List sx={{ p: 0, mt: 1 }}>
                     <ListItem divider>
                       <ListItemIcon sx={{ color: minLength(values.password) ? 'success.main' : 'inherit' }}>
@@ -220,25 +220,19 @@ const TabPassword = () => {
                       <ListItemIcon sx={{ color: isLowercaseChar(values.password) ? 'success.main' : 'inherit' }}>
                         {isLowercaseChar(values.password) ? <CheckOutlined /> : <LineOutlined />}
                       </ListItemIcon>
-                      <ListItemText primary="At least 1 lower letter (a-z)" />
+                      <ListItemText primary="At least 1 lower letter (a..z)" />
                     </ListItem>
                     <ListItem divider>
                       <ListItemIcon sx={{ color: isUppercaseChar(values.password) ? 'success.main' : 'inherit' }}>
                         {isUppercaseChar(values.password) ? <CheckOutlined /> : <LineOutlined />}
                       </ListItemIcon>
-                      <ListItemText primary="At least 1 uppercase letter (A-Z)" />
+                      <ListItemText primary="At least 1 uppercase letter (A..Z)" />
                     </ListItem>
                     <ListItem divider>
                       <ListItemIcon sx={{ color: isNumber(values.password) ? 'success.main' : 'inherit' }}>
                         {isNumber(values.password) ? <CheckOutlined /> : <LineOutlined />}
                       </ListItemIcon>
-                      <ListItemText primary="At least 1 number (0-9)" />
-                    </ListItem>
-                    <ListItem>
-                      <ListItemIcon sx={{ color: isSpecialChar(values.password) ? 'success.main' : 'inherit' }}>
-                        {isSpecialChar(values.password) ? <CheckOutlined /> : <LineOutlined />}
-                      </ListItemIcon>
-                      <ListItemText primary="At least 1 special characters" />
+                      <ListItemText primary="At least 1 number (0..9)" />
                     </ListItem>
                   </List>
                 </Box>
@@ -249,7 +243,7 @@ const TabPassword = () => {
                     Cancel
                   </Button>
                   <Button disabled={isSubmitting || Object.keys(errors).length !== 0} type="submit" variant="contained">
-                    Save
+                    Change Password
                   </Button>
                 </Stack>
               </Grid>
