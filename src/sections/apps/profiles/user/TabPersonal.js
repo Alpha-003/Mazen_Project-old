@@ -18,7 +18,9 @@ import {
   MenuItem,
   Select,
   Stack,
-  TextField
+  TextField,
+  ToggleButtonGroup,
+  ToggleButton
 } from '@mui/material';
 // import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 // import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -118,6 +120,10 @@ const TabPersonal = () => {
   // const handleChange = (event) => {
   //   setRole(event.target.value)
   // }
+  const [gend, setGend] = React.useState('male');
+  const setChange = (event, newAlignment) => {
+    setGend(newAlignment);
+  };
 
   return (
     <Formik
@@ -134,6 +140,7 @@ const TabPersonal = () => {
         address: '3801 Chalk Butte Rd, Cut Bank, MT 59427, United States',
         address1: '301 Chalk Butte Rd, Cut Bank, NY 96572, New York',
         country: 'US',
+        gender: 'female',
         state: 'California',
         skill: [
           'Adobe XD',
@@ -410,6 +417,19 @@ const TabPersonal = () => {
                           <MenuItem value="arabic">Arabic</MenuItem>
                           <MenuItem value="spanish">Spanish</MenuItem>
                         </Select>
+                      </Stack>
+                    </Grid>
+                    {/* genders */}
+                    <Grid item xs={12} sm={6}>
+                      <Stack spaceing={1.25}>
+                        <ToggleButtonGroup color="primary" value={gend} exclusive onChange={setChange} aria-label="Platform">
+                          <ToggleButton sx={{ width: '93px' }} value="male">
+                            Male
+                          </ToggleButton>
+                          <ToggleButton sx={{ width: '93px' }} value="female">
+                            Female
+                          </ToggleButton>
+                        </ToggleButtonGroup>
                       </Stack>
                     </Grid>
                   </Grid>

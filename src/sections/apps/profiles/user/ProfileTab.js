@@ -6,7 +6,7 @@ import { useTheme } from '@mui/material/styles';
 import { List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 
 // assets
-import { CreditCardOutlined, LockOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
+import { KeyOutlined, PushpinOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 
 function getPathIndex(pathname) {
   let selectedTab = 0;
@@ -54,13 +54,13 @@ const ProfileTab = () => {
       </ListItemButton>
       <ListItemButton selected={selectedIndex === 1} onClick={() => handleListItemClick(1, '/apps/profiles/user/payment')}>
         <ListItemIcon>
-          <CreditCardOutlined />
+          <PushpinOutlined />
         </ListItemIcon>
-        <ListItemText primary="Payment" />
+        <ListItemText primary="Addresses" />
       </ListItemButton>
       <ListItemButton selected={selectedIndex === 2} onClick={() => handleListItemClick(2, '/apps/profiles/user/password')}>
         <ListItemIcon>
-          <LockOutlined />
+          <KeyOutlined />
         </ListItemIcon>
         <ListItemText primary="Change Password" />
       </ListItemButton>
