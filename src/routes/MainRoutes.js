@@ -106,6 +106,9 @@ const AppContactUS = Loadable(lazy(() => import('pages/contact-us')));
 const SamplePage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
 const PricingPage = Loadable(lazy(() => import('pages/extra-pages/pricing')));
 
+// account - people
+const AllUserList = Loadable(lazy(() => import('pages/accounts/people/all')));
+
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -441,7 +444,16 @@ const MainRoutes = {
         {
           path: 'pricing',
           element: <PricingPage />
-        }
+        },
+        {
+          path: '/people',
+          children: [
+            {
+              path: 'all',
+              element: < AllUserList />
+            },
+          ]
+        },
       ]
     },
     {

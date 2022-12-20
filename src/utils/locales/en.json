@@ -143,5 +143,6 @@
   "order": "Order",
   "payments": "Payments",
   "support": "Support",
-  "tickets": "Tickets"
+  "tickets": "Tickets",
+  "all-people": "All"
 }

@@ -25,9 +25,9 @@ const accounts = {
       children: [
         {
           id: 'people-list',
-          title: <FormattedMessage id="list" />,
+          title: <FormattedMessage id="all-people" />,
           type: 'item',
-          url: '/apps/people/list'
+          url: '/people/all'
         }
       ]
     },
@@ -41,7 +41,7 @@ const accounts = {
           id: 'organization-list',
           title: <FormattedMessage id="list" />,
           type: 'item',
-          url: '/apps/organization/list'
+          url: '/organization/list'
         }
       ]
     },
