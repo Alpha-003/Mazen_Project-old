@@ -28,6 +28,12 @@ const accounts = {
           title: <FormattedMessage id="all-people" />,
           type: 'item',
           url: '/people/all'
+        },
+        {
+          id: 'people-search',
+          title: <FormattedMessage id="search-people" />,
+          type: 'item',
+          url: '/people/search'
         }
       ]
     },
