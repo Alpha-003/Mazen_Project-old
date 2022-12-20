@@ -2,6 +2,7 @@ import { lazy } from 'react';
 import { useRoutes } from 'react-router-dom';
 
 // project import
+import GuestGuard from 'utils/route-guard/GuestGuard';
 import CommonLayout from 'layout/CommonLayout';
 import Loadable from 'components/Loadable';
 import ComponentsRoutes from './ComponentsRoutes';
@@ -17,7 +18,11 @@ export default function ThemeRoutes() {
   return useRoutes([
     {
       path: '/',
-      element: <CommonLayout layout="landing" />,
+      element: (
+        <GuestGuard>
+          <CommonLayout />
+        </GuestGuard>
+      ),
       children: [
         {
           path: '/',
