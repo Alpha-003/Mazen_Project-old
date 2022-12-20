@@ -12,7 +12,6 @@ import useAuth from 'hooks/useAuth';
 
 const DropdownList = ({ handleLogout }) => {
   const { user } = useAuth();
-  console.log(user);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
