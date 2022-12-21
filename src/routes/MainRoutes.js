@@ -26,7 +26,7 @@ const AppKanbanBoard = Loadable(lazy(() => import('sections/apps/kanban/Board'))
 
 const UserProfile = Loadable(lazy(() => import('pages/apps/profiles/user')));
 const UserTabPersonal = Loadable(lazy(() => import('sections/apps/profiles/user/TabPersonal')));
-const UserTabPayment = Loadable(lazy(() => import('sections/apps/profiles/user/TabPayment')));
+const UserTabAddressess = Loadable(lazy(() => import('sections/apps/profiles/user/TabAddressess')));
 const UserTabPassword = Loadable(lazy(() => import('sections/apps/profiles/user/TabPassword')));
 const AccountTabRole = Loadable(lazy(() => import('sections/apps/profiles/account/TabRole')));
 const UserTabSettings = Loadable(lazy(() => import('sections/apps/profiles/user/TabSettings')));
@@ -108,6 +108,9 @@ const PricingPage = Loadable(lazy(() => import('pages/extra-pages/pricing')));
 
 // account - people
 const AllUserList = Loadable(lazy(() => import('pages/accounts/people/all')));
+// accoutn - people
+const PeopleSearch = Loadable(lazy(() => import('pages/accounts/people/search')));
+
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -229,7 +232,7 @@ const MainRoutes = {
                     },
                     {
                       path: 'payment',
-                      element: <UserTabPayment />
+                      element: <UserTabAddressess />
                     },
                     {
                       path: 'password',
@@ -452,6 +455,10 @@ const MainRoutes = {
               path: 'all',
               element: < AllUserList />
             },
+            {
+              path:'search',
+              element:<PeopleSearch />
+            }
           ]
         },
       ]

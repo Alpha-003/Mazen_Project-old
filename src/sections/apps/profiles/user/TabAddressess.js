@@ -9,7 +9,7 @@ import MainCard from 'components/MainCard';
 
 // ==============================|| TAB - PAYMENT ||============================== //
 
-const TabPayment = () => {
+const TabAddressess = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -209,4 +209,4 @@ const TabPayment = () => {
   );
 };
 
-export default TabPayment;
+export default TabAddressess;
