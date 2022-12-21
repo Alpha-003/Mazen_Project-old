@@ -19,7 +19,6 @@ import {
 } from '@mui/material';
 
 // third-party
-import NumberFormat from 'react-number-format';
 import { useFilters, useExpanded, useGlobalFilter, useRowSelect, useSortBy, useTable, usePagination } from 'react-table';
 
 // project import
@@ -126,7 +125,11 @@ function ReactTable({ columns, data, getHeaderProps, renderRowSubComponent, hand
             {headerGroups.map((headerGroup, i) => (
               <TableRow key={i} {...headerGroup.getHeaderGroupProps()} sx={{ '& > th:first-of-type': { width: '58px' } }}>
                 {headerGroup.headers.map((column, index) => (
-                  <TableCell key={index} {...column.getHeaderProps([{ className: column.className }, getHeaderProps(column)])}>
+                  <TableCell
+                    sx={{ '&': { textTransform: 'capitalize' } }}
+                    key={index}
+                    {...column.getHeaderProps([{ className: column.className }, getHeaderProps(column)])}
+                  >
                     <HeaderSort column={column} />
                   </TableCell>
                 ))}
@@ -209,7 +212,7 @@ const AllUserList = () => {
         className: 'cell-center'
       },
       {
-        Header: 'User Name',
+        Header: 'Customer Name',
         accessor: 'fatherName',
         // eslint-disable-next-line
         Cell: ({ row }) => {
@@ -218,7 +221,7 @@ const AllUserList = () => {
           return (
             <Stack direction="row" spacing={1.5} alignItems="center">
               {/* eslint-disable-next-line */}
-              <Avatar alt="Avatar 1" size="sm" src={avatarImage(`./avatar-${!values.avatar ? 1 : values.avatar}.png`)} />
+              <Avatar variant="circle" alt="Avatar 1" size="sm" src={avatarImage(`./avatar-${!values.avatar ? 1 : values.avatar}.png`)} />
               <Stack spacing={0}>
                 {/* eslint-disable-next-line */}
                 <Typography variant="subtitle1">{values.fatherName}</Typography>
@@ -241,19 +244,21 @@ const AllUserList = () => {
         accessor: 'email'
       },
       {
-        Header: 'Contact',
-        accessor: 'contact',
-        // eslint-disable-next-line
-        Cell: ({ value }) => <NumberFormat displayType="text" format="+1 (###) ###-####" mask="_" defaultValue={value} />
+        Header: 'Location',
+        accessor: 'address'
       },
       {
-        Header: 'Age',
+        Header: 'Order',
         accessor: 'age',
         className: 'cell-right'
       },
       {
-        Header: 'Country',
-        accessor: 'country'
+        Header: 'Spent',
+        accessor: 'amount',
+        className: 'cell-right',
+        Cell: ({ value }) => {
+          return `$${value.toFixed(2)}`;
+        }
       },
       {
         Header: 'Status',
@@ -262,9 +267,9 @@ const AllUserList = () => {
         Cell: ({ value }) => {
           switch (value) {
             case 'Complicated':
-              return <Chip color="error" label="Rejected" size="small" variant="light" />;
+              return <Chip color="error" label="Canceled" size="small" variant="light" />;
             case 'Relationship':
-              return <Chip color="success" label="Verified" size="small" variant="light" />;
+              return <Chip color="success" label="Complete" size="small" variant="light" />;
             case 'Single':
             default:
               return <Chip color="info" label="Pending" size="small" variant="light" />;
