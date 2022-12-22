@@ -3,6 +3,8 @@
 import { useOutletContext } from 'react-router';
 
 import { useDispatch } from 'react-redux';
+// icons
+import { CloseOutlined } from '@ant-design/icons';
 
 // material-ui
 import {
@@ -20,7 +22,9 @@ import {
   Stack,
   TextField,
   ToggleButtonGroup,
-  ToggleButton
+  ToggleButton,
+  Autocomplete,
+  Chip
 } from '@mui/material';
 // import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 // import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -63,6 +67,48 @@ const TabDetails = () => {
   const setChange = (event, newAlignment) => {
     setGend(newAlignment);
   };
+const skills = [
+  'Adobe XD',
+  'After Effect',
+  'Angular',
+  'Animation',
+  'ASP.Net',
+  'Bootstrap',
+  'C#',
+  'CC',
+  'Corel Draw',
+  'CSS',
+  'DIV',
+  'Dreamweaver',
+  'Figma',
+  'Graphics',
+  'HTML',
+  'Illustrator',
+  'J2Ee',
+  'Java',
+  'Javascript',
+  'JQuery',
+  'Logo Design',
+  'Material UI',
+  'Motion',
+  'MVC',
+  'MySQL',
+  'NodeJS',
+  'npm',
+  'Photoshop',
+  'PHP',
+  'React',
+  'Redux',
+  'Reduxjs & tooltit',
+  'SASS',
+  'SCSS',
+  'SQL Server',
+  'SVG',
+  'UI/UX',
+  'User Interface Designing',
+  'Wordpress'
+];
+
 
   return (
     <Formik
@@ -81,6 +127,23 @@ const TabDetails = () => {
         country: 'US',
         gender: 'female',
         state: 'California',
+        skill: [
+          'Adobe XD',
+          'Angular',
+          'Corel Draw',
+          'Figma',
+          'HTML',
+          'Illustrator',
+          'Javascript',
+          'Logo Design',
+          'Material UI',
+          'NodeJS',
+          'npm',
+          'Photoshop',
+          'React',
+          'Reduxjs & tooltit',
+          'SASS'
+        ],
         note: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.`,
         submit: null
       }}
@@ -170,27 +233,74 @@ const TabDetails = () => {
                         )}
                       </Stack>
                     </Grid>
-                    {/* job title */}
+                    {/* Printing Frequency */}
                     <Grid item xs={12} sm={6}>
                       <Stack spacing={1.25}>
-                        <InputLabel htmlFor="job-title">Job Title</InputLabel>
-                        <Select id="job-title" value={values.printFrequency} name="printFrequency" onChange={handleChange}>
+                        <InputLabel htmlFor="printFrequency">Printing Frequency</InputLabel>
+                        <Select id="printFrequency" value={values.printFrequency} name="printFrequency" onChange={handleChange}>
                           <MenuItem value="val1">Once a month</MenuItem>
                           <MenuItem value="val2">Value2</MenuItem>
                           <MenuItem value="val3">Client3</MenuItem>
                         </Select>
                       </Stack>
                     </Grid>
-                    {/* Preferred Language */}
+                    {/*Organization Size */}
                     <Grid item xs={12} sm={6}>
                       <Stack spacing={1.25}>
-                        <InputLabel htmlFor="lang">Preferred Language</InputLabel>
-                        <Select id="lang" value={values.oraganizationsSize} name="oraganizationsSize" onChange={handleChange}>
+                        <InputLabel htmlFor="orgSize">Organization Size</InputLabel>
+                        <Select id="orgSize" value={values.oraganizationsSize} name="oraganizationsSize" onChange={handleChange}>
                           <MenuItem value="val1">1-5 Employees</MenuItem>
                           <MenuItem value="val2">val2</MenuItem>
                           <MenuItem value="val3">val3</MenuItem>
                         </Select>
                       </Stack>
+                    </Grid>
+                    {/* Category  */}
+                    <Grid item xs={12}>
+                      <Box sx={{ display: 'flex', flexWrap: 'wrap', listStyle: 'none', m: 0 }} component="ul">
+                        <Autocomplete
+                          multiple
+                          fullWidth
+                          id="tags-outlined"
+                          options={skills}
+                          value={values.skill}
+                          onBlur={handleBlur}
+                          getOptionLabel={(label) => label}
+                          onChange={(event, newValue) => {
+                            setFieldValue('skill', newValue);
+                          }}
+                          renderInput={(params) => <TextField {...params} name="skill" placeholder="Add Skills" />}
+                          renderTags={(value, getTagProps) =>
+                            value.map((option, index) => (
+                              <Chip
+                                key={index}
+                                {...getTagProps({ index })}
+                                variant="combined"
+                                label={option}
+                                deleteIcon={<CloseOutlined style={{ fontSize: '0.75rem' }} />}
+                                sx={{ color: 'text.primary' }}
+                              />
+                            ))
+                          }
+                          sx={{
+                            '& .MuiOutlinedInput-root': {
+                              p: 0,
+                              '& .MuiAutocomplete-tag': {
+                                m: 1
+                              },
+                              '& fieldset': {
+                                display: 'none'
+                              },
+                              '& .MuiAutocomplete-endAdornment': {
+                                display: 'none'
+                              },
+                              '& .MuiAutocomplete-popupIndicator': {
+                                display: 'none'
+                              }
+                            }
+                          }}
+                        />
+                      </Box>
                     </Grid>
                   </Grid>
                 </Box>
