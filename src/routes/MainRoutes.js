@@ -108,8 +108,17 @@ const PricingPage = Loadable(lazy(() => import('pages/extra-pages/pricing')));
 
 // account - people
 const AllUserList = Loadable(lazy(() => import('pages/accounts/people/all')));
-// accoutn - people
-const PeopleSearch = Loadable(lazy(() => import('pages/accounts/people/search')));
+
+// accoutn - people - search
+const PeopleSearch = Loadable(lazy(() => import('pages/accounts/people/search/search')));
+const DetailsSearch = Loadable(lazy(() => import('pages/accounts/people/search/tabs/details')));
+const AddressesSearch = Loadable(lazy(() => import('pages/accounts/people/search/tabs/addresses')));
+const QuotationsSearch = Loadable(lazy(() => import('pages/accounts/people/search/tabs/quotations')));
+const OrdersSearch = Loadable(lazy(() => import('pages/accounts/people/search/tabs/orders')));
+const ProjectsSearch = Loadable(lazy(() => import('pages/accounts/people/search/tabs/projects')));
+const TicketsSearch = Loadable(lazy(() => import('pages/accounts/people/search/tabs/tickets')));
+const MembersSearch = Loadable(lazy(() => import('pages/accounts/people/search/tabs/members')));
+const PaymentsSearch = Loadable(lazy(() => import('pages/accounts/people/search/tabs/payments')));
 
 
 // ==============================|| MAIN ROUTING ||============================== //
@@ -456,8 +465,43 @@ const MainRoutes = {
               element: < AllUserList />
             },
             {
-              path:'search',
-              element:<PeopleSearch />
+              path: 'search',
+              element: <PeopleSearch />,
+              children: [
+                {
+                  path: 'details',
+                  element: <DetailsSearch />
+                },
+                {
+                  path: 'addresses',
+                  element: <AddressesSearch />
+                },
+                {
+                  path: 'quotations',
+                  element: <QuotationsSearch />
+                },
+                {
+                  path: 'orders',
+                  element: <OrdersSearch />
+                },
+                {
+                  path: 'projects',
+                  element: <ProjectsSearch />
+                },
+                {
+                  path: 'tickets',
+                  element: <TicketsSearch />
+                },
+                {
+                  path: 'members',
+                  element: <MembersSearch />
+                },
+                {
+                  path: 'payments',
+                  element: <PaymentsSearch />
+                }
+
+              ]
             }
           ]
         },
