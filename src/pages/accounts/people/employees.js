@@ -34,7 +34,7 @@ import MainCard from 'components/MainCard';
 import ScrollX from 'components/ScrollX';
 import makeData from 'data/react-table';
 import { renderFilterTypes, GlobalFilter } from 'utils/react-table';
-import { HeaderSort, IndeterminateCheckbox,  TablePagination, TableRowSelection } from 'components/third-party/ReactTable';
+import { HeaderSort, IndeterminateCheckbox, TablePagination, TableRowSelection } from 'components/third-party/ReactTable';
 
 // assets
 import { CloseOutlined, EyeTwoTone, EditTwoTone, DeleteTwoTone } from '@ant-design/icons';
@@ -70,7 +70,7 @@ function ReactTable({ columns, data, getHeaderProps, renderRowSubComponent, hand
     // @ts-ignore
     preGlobalFilteredRows,
     // @ts-ignore
-    setGlobalFilter,
+    setGlobalFilter
   } = useTable(
     {
       columns,
@@ -115,7 +115,7 @@ function ReactTable({ columns, data, getHeaderProps, renderRowSubComponent, hand
             <Grid item xs="auto">
               <Stack spacing={0.5}>
                 <Button variant="contained" onClick={handleAdd}>
-                  Add User
+                  Add Employee
                 </Button>
               </Stack>
             </Grid>
@@ -146,7 +146,9 @@ function ReactTable({ columns, data, getHeaderProps, renderRowSubComponent, hand
             </Select>
             {/*<SortingSelect sortBy={sortBy.id} setSortBy={setSortBy} allColumns={allColumns} />*/}
           </Stack>
-          <Link href="#" color="primary" underline='none'>Reset filter <Chip label="2" color="primary" sx={{ "&": { borderRadius: "50px", ml: 1, height: "auto" } }}></Chip></Link>
+          <Link href="#" color="primary" underline="none">
+            Reset filter <Chip label="2" color="primary" sx={{ '&': { borderRadius: '50px', ml: 1, height: 'auto' } }}></Chip>
+          </Link>
         </Stack>
 
         <Table {...getTableProps()}>
@@ -224,9 +226,9 @@ const AllUserList = () => {
     if (user && !add) setUser(null);
   };
   const handleGenderFilter = () => {
-    console.log('test')
+    console.log('test');
     // data = data.filter(el => el.gender == filterGender)
-  }
+  };
 
   const columns = useMemo(
     () => [
@@ -384,7 +386,7 @@ const AllUserList = () => {
 
       {/* add user dialog */}
       <Dialog maxWidth="sm" fullWidth onClose={handleAdd} open={add} sx={{ '& .MuiDialog-paper': { p: 0 } }}>
-        {add && <AddUser user={user} onCancel={handleAdd} />}
+        {add && <AddUser user={user} onCancel={handleAdd} title="Employee" />}
       </Dialog>
     </MainCard>
   );

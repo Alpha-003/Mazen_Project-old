@@ -481,3 +481,56 @@ SortingSelect.propTypes = {
   sortBy: PropTypes.string,
   allColumns: PropTypes.array
 };
+
+// ==============================|| COLUMN FILTERING - SELECT ||============================== //
+
+export const FilteringSelect = ({ filterBy, setSortBy, allColumns }) => {
+  const [filter, setFilter] = useState(filterBy);
+
+  const handleChange = (event) => {
+    const {
+      target: { value }
+    } = event;
+    setFilter(value);
+    setSortBy([{ id: value, desc: false }]);
+  };
+
+  return (
+    <FormControl sx={{ width: 200 }}>
+      <Select
+        id="column-hiding"
+        displayEmpty
+        value={filter}
+        onChange={handleChange}
+        input={<OutlinedInput id="select-column-hiding" placeholder="Filter By" />}
+        renderValue={(selected) => {
+          const selectedColumn = allColumns.filter((column) => column.id === selected)[0];
+          if (!selected) {
+            return <Typography variant="subtitle1">Filter By</Typography>;
+          }
+
+          return (
+            <Typography variant="subtitle2">
+              Filter By ({typeof selectedColumn.Header === 'string' ? selectedColumn.Header : selectedColumn?.title})
+            </Typography>
+          );
+        }}
+        size="small"
+      >
+        {allColumns
+          .filter((column) => column.canSort)
+          .map((column) => (
+            <MenuItem key={column.id} value={column.id}>
+              <ListItemText primary={typeof column.Header === 'string' ? column.Header : column?.title} />
+            </MenuItem>
+          ))}
+      </Select>
+    </FormControl>
+  );
+};
+
+FilteringSelect.propTypes = {
+  setSortBy: PropTypes.func,
+  filterBy: PropTypes.string,
+  allColumns: PropTypes.array
+};
