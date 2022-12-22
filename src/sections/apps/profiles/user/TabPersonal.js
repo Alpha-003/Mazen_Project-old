@@ -3,15 +3,12 @@
 import { useOutletContext } from 'react-router';
 
 import { useDispatch } from 'react-redux';
+import { styled } from '@mui/material/styles';
 
 // material-ui
 import {
-  // Autocomplete,
   Box,
   Button,
-  // CardHeader,
-  // Chip,
-  // Divider,
   FormHelperText,
   Grid,
   InputLabel,
@@ -22,8 +19,6 @@ import {
   ToggleButtonGroup,
   ToggleButton
 } from '@mui/material';
-// import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
-// import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 // third party
 import * as Yup from 'yup';
@@ -31,95 +26,37 @@ import { Formik } from 'formik';
 
 // project import
 import { openSnackbar } from 'store/reducers/snackbar';
-// import { useInputRef } from './index';
-// import countries from 'data/countries';
 import MainCard from 'components/MainCard';
 
 // assets
-// import { CloseOutlined } from '@ant-design/icons';
 import React from 'react';
 
-// styles & constant
-// const ITEM_HEIGHT = 48;
-// const ITEM_PADDING_TOP = 8;
-// const MenuProps = {
-//   PaperProps: {
-//     style: {
-//       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP
-//     }
-//   }
-// };
 const style = {
   color: 'red'
 };
-// const skills = [
-//   'Adobe XD',
-//   'After Effect',
-//   'Angular',
-//   'Animation',
-//   'ASP.Net',
-//   'Bootstrap',
-//   'C#',
-//   'CC',
-//   'Corel Draw',
-//   'CSS',
-//   'DIV',
-//   'Dreamweaver',
-//   'Figma',
-//   'Graphics',
-//   'HTML',
-//   'Illustrator',
-//   'J2Ee',
-//   'Java',
-//   'Javascript',
-//   'JQuery',
-//   'Logo Design',
-//   'Material UI',
-//   'Motion',
-//   'MVC',
-//   'MySQL',
-//   'NodeJS',
-//   'npm',
-//   'Photoshop',
-//   'PHP',
-//   'React',
-//   'Redux',
-//   'Reduxjs & tooltit',
-//   'SASS',
-//   'SCSS',
-//   'SQL Server',
-//   'SVG',
-//   'UI/UX',
-//   'User Interface Designing',
-//   'Wordpress'
-// ];
-
 function useInputRef() {
   return useOutletContext();
 }
 
 // ==============================|| TAB - PERSONAL ||============================== //
-
+const GenderToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
+  '& .MuiToggleButtonGroup-grouped': {
+    border: `1px solid ${theme.palette.mode === 'dark' ? theme.palette.divider : theme.palette.grey.A800}`,
+    '&.Mui-disabled': {
+      border: 0,
+    },
+    '&.Mui-selected': {
+      borderColor: theme.palette.mode === 'dark' ? theme.palette.primary.dark : theme.palette.primary.light
+    },
+  },
+}));
 const TabPersonal = () => {
-  // const handleChangeDay = (event, date, setFieldValue) => {
-  //   setFieldValue('dob', new Date(date.setDate(parseInt(event.target.value, 10))));
-  // };
-
-  // const handleChangeMonth = (event, date, setFieldValue) => {
-  //   setFieldValue('dob', new Date(date.setMonth(parseInt(event.target.value, 10))));
-  // };
-
   const maxDate = new Date();
   maxDate.setFullYear(maxDate.getFullYear() - 18);
 
   const dispatch = useDispatch();
   const inputRef = useInputRef();
 
-  // custom code
-  // const [role,setRole] = React.useState('')
-  // const handleChange = (event) => {
-  //   setRole(event.target.value)
-  // }
   const [gend, setGend] = React.useState('male');
   const setChange = (event, newAlignment) => {
     setGend(newAlignment);
@@ -422,14 +359,14 @@ const TabPersonal = () => {
                     {/* genders */}
                     <Grid item xs={12} sm={6}>
                       <Stack spaceing={1.25}>
-                        <ToggleButtonGroup color="primary" value={gend} exclusive onChange={setChange} aria-label="Platform">
+                        <GenderToggleButtonGroup color="primary" value={gend} exclusive onChange={setChange} aria-label="Platform">
                           <ToggleButton sx={{ width: '93px' }} value="male">
                             Male
                           </ToggleButton>
                           <ToggleButton sx={{ width: '93px' }} value="female">
                             Female
                           </ToggleButton>
-                        </ToggleButtonGroup>
+                        </GenderToggleButtonGroup>
                       </Stack>
                     </Grid>
                   </Grid>
@@ -456,11 +393,6 @@ const TabPersonal = () => {
                           id="personal-mobile"
                           placeholder="example"
                         />
-                        {/* {touched.email && errors.email && (
-                      <FormHelperText error id="personal-email-helper">
-                        {errors.email}
-                      </FormHelperText>
-                    )} */}
                       </Stack>
                     </Grid>
                     {/* email */}
@@ -539,191 +471,7 @@ const TabPersonal = () => {
               </Stack>
             </Box>
           </Grid>
-          {/* <CardHeader title="Address" />
-            <Divider />
-            <Box sx={{ p: 2.5 }}>
-              <Grid container spacing={3}>
-                <Grid item xs={12} sm={6}>
-                  <Stack spacing={1.25}>
-                    <InputLabel htmlFor="personal-addrees1">Address 01</InputLabel>
-                    <TextField
-                      multiline
-                      rows={3}
-                      fullWidth
-                      id="personal-addrees1"
-                      value={values.address}
-                      name="address"
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      placeholder="Address 01"
-                    />
-                    {touched.address && errors.address && (
-                      <FormHelperText error id="personal-address-helper">
-                        {errors.address}
-                      </FormHelperText>
-                    )}
-                  </Stack>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Stack spacing={1.25}>
-                    <InputLabel htmlFor="personal-addrees2">Address 02</InputLabel>
-                    <TextField
-                      multiline
-                      rows={3}
-                      fullWidth
-                      id="personal-addrees2"
-                      value={values.address1}
-                      name="address1"
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      placeholder="Address 02"
-                    />
-                  </Stack>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Stack spacing={1.25}>
-                    <InputLabel htmlFor="personal-country">Country</InputLabel>
-                    <Autocomplete
-                      id="personal-country"
-                      fullWidth
-                      value={countries.filter((item) => item.code === values?.country)[0]}
-                      onBlur={handleBlur}
-                      onChange={(event, newValue) => {
-                        setFieldValue('country', newValue === null ? '' : newValue.code);
-                      }}
-                      options={countries}
-                      autoHighlight
-                      isOptionEqualToValue={(option, value) => option.code === value?.code}
-                      getOptionLabel={(option) => option.label}
-                      renderOption={(props, option) => (
-                        <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-                          {option.code && (
-                            <img
-                              loading="lazy"
-                              width="20"
-                              src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-                              srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-                              alt=""
-                            />
-                          )}
-                          {option.label}
-                          {option.code && `(${option.code}) ${option.phone}`}
-                        </Box>
-                      )}
-                      renderInput={(params) => (
-                        <TextField
-                          {...params}
-                          placeholder="Choose a country"
-                          name="country"
-                          inputProps={{
-                            ...params.inputProps,
-                            autoComplete: 'new-password' // disable autocomplete and autofill
-                          }}
-                        />
-                      )}
-                    />
-                    {touched.country && errors.country && (
-                      <FormHelperText error id="personal-country-helper">
-                        {errors.country}
-                      </FormHelperText>
-                    )}
-                  </Stack>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Stack spacing={1.25}>
-                    <InputLabel htmlFor="personal-state">State</InputLabel>
-                    <TextField
-                      fullWidth
-                      id="personal-state"
-                      value={values.state}
-                      name="state"
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      placeholder="State"
-                    />
-                    {touched.state && errors.state && (
-                      <FormHelperText error id="personal-state-helper">
-                        {errors.state}
-                      </FormHelperText>
-                    )}
-                  </Stack>
-                </Grid>
-              </Grid>
-            </Box>
-            <CardHeader title="Skills" />
-            <Divider />
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', listStyle: 'none', p: 2.5, m: 0 }} component="ul">
-              <Autocomplete
-                multiple
-                fullWidth
-                id="tags-outlined"
-                options={skills}
-                value={values.skill}
-                onBlur={handleBlur}
-                getOptionLabel={(label) => label}
-                onChange={(event, newValue) => {
-                  setFieldValue('skill', newValue);
-                }}
-                renderInput={(params) => <TextField {...params} name="skill" placeholder="Add Skills" />}
-                renderTags={(value, getTagProps) =>
-                  value.map((option, index) => (
-                    <Chip
-                      key={index}
-                      {...getTagProps({ index })}
-                      variant="combined"
-                      label={option}
-                      deleteIcon={<CloseOutlined style={{ fontSize: '0.75rem' }} />}
-                      sx={{ color: 'text.primary' }}
-                    />
-                  ))
-                }
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    p: 0,
-                    '& .MuiAutocomplete-tag': {
-                      m: 1
-                    },
-                    '& fieldset': {
-                      display: 'none'
-                    },
-                    '& .MuiAutocomplete-endAdornment': {
-                      display: 'none'
-                    },
-                    '& .MuiAutocomplete-popupIndicator': {
-                      display: 'none'
-                    }
-                  }
-                }}
-              />
-            </Box>
-            <CardHeader title="Note" />
-            <Divider />
-            <Box sx={{ p: 2.5 }}>
-              <TextField
-                multiline
-                rows={5}
-                fullWidth
-                value={values.note}
-                name="note"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                id="personal-note"
-                placeholder="Note"
-              />
-              {touched.note && errors.note && (
-                <FormHelperText error id="personal-note-helper">
-                  {errors.note}
-                </FormHelperText>
-              )}
-              <Stack direction="row" justifyContent="flex-end" alignItems="center" spacing={2} sx={{ mt: 2.5 }}>
-                <Button variant="outlined" color="secondary">
-                  Cancel
-                </Button>
-                <Button disabled={isSubmitting || Object.keys(errors).length !== 0} type="submit" variant="contained">
-                  Save
-                </Button>
-              </Stack>
-            </Box> */}
+
         </form>
       )}
     </Formik>
