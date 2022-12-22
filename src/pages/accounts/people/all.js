@@ -5,9 +5,11 @@ import { useCallback, useEffect, useMemo, useState, Fragment } from 'react';
 import { alpha, useTheme } from '@mui/material/styles';
 import {
   Button,
+  Link,
   Chip,
   Dialog,
   Stack,
+  Grid,
   Table,
   TableBody,
   TableCell,
@@ -33,7 +35,7 @@ import { renderFilterTypes, GlobalFilter } from 'utils/react-table';
 import { HeaderSort, IndeterminateCheckbox, SortingSelect, TablePagination, TableRowSelection } from 'components/third-party/ReactTable';
 
 // assets
-import { CloseOutlined, PlusOutlined, EyeTwoTone, EditTwoTone, DeleteTwoTone } from '@ant-design/icons';
+import { CloseOutlined, EyeTwoTone, EditTwoTone, DeleteTwoTone } from '@ant-design/icons';
 
 const avatarImage = require.context('assets/images/users', true);
 
@@ -99,25 +101,40 @@ function ReactTable({ columns, data, getHeaderProps, renderRowSubComponent, hand
     <>
       <TableRowSelection selected={Object.keys(selectedRowIds).length} />
       <Stack spacing={3}>
+        <Stack sx={{ px: 3, pt: 3 }}>
+          <Grid container spacing={2} alignItems="center">
+            <Grid item xs>
+              <Stack spacing={0.5}>
+                <GlobalFilter
+                  preGlobalFilteredRows={preGlobalFilteredRows}
+                  globalFilter={globalFilter}
+                  setGlobalFilter={setGlobalFilter}
+                  size="normal"
+                />
+              </Stack>
+            </Grid>
+            <Grid item xs="auto">
+              <Stack spacing={0.5}>
+                <Button variant="contained" onClick={handleAdd}>
+                  Add User
+                </Button>
+              </Stack>
+            </Grid>
+          </Grid>
+        </Stack>
         <Stack
           direction={matchDownSM ? 'column' : 'row'}
           spacing={1}
           justifyContent="space-between"
           alignItems="center"
-          sx={{ p: 3, pb: 0 }}
+          sx={{ px: 3, pb: 0 }}
         >
-          <GlobalFilter
-            preGlobalFilteredRows={preGlobalFilteredRows}
-            globalFilter={globalFilter}
-            setGlobalFilter={setGlobalFilter}
-            size="small"
-          />
           <Stack direction={matchDownSM ? 'column' : 'row'} alignItems="center" spacing={1}>
             <SortingSelect sortBy={sortBy.id} setSortBy={setSortBy} allColumns={allColumns} />
-            <Button variant="contained" startIcon={<PlusOutlined />} onClick={handleAdd}>
-              Add User
-            </Button>
+            <SortingSelect sortBy={sortBy.id} setSortBy={setSortBy} allColumns={allColumns} />
+            <SortingSelect sortBy={sortBy.id} setSortBy={setSortBy} allColumns={allColumns} />
           </Stack>
+          <Link href="#" color="primary" underline='none'>Reset filter <Chip label="2" color="primary" sx={{ "&": { borderRadius: "50px", ml: 1, height: "auto" } }}></Chip></Link>
         </Stack>
 
         <Table {...getTableProps()}>
