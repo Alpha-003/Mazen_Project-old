@@ -8,6 +8,7 @@ import {
   Chip,
   Dialog,
   Stack,
+  Grid,
   Table,
   TableBody,
   TableCell,
@@ -106,19 +107,33 @@ function ReactTable({ columns, data, getHeaderProps, renderRowSubComponent, hand
           alignItems="center"
           sx={{ p: 3, pb: 0 }}
         >
-          <GlobalFilter
-            preGlobalFilteredRows={preGlobalFilteredRows}
-            globalFilter={globalFilter}
-            setGlobalFilter={setGlobalFilter}
-            size="small"
-          />
           <Stack direction={matchDownSM ? 'column' : 'row'} alignItems="center" spacing={1}>
-            <SortingSelect sortBy={sortBy.id} setSortBy={setSortBy} allColumns={allColumns} />
+            <GlobalFilter
+              preGlobalFilteredRows={preGlobalFilteredRows}
+              globalFilter={globalFilter}
+              setGlobalFilter={setGlobalFilter}
+            />
             <Button variant="contained" startIcon={<PlusOutlined />} onClick={handleAdd}>
               Add User
             </Button>
           </Stack>
+          <SortingSelect sortBy={sortBy.id} setSortBy={setSortBy} allColumns={allColumns} />
         </Stack>
+        <Grid container alignItems="center">
+          <Grid item xs spacing={3}>
+            <GlobalFilter
+              preGlobalFilteredRows={preGlobalFilteredRows}
+              globalFilter={globalFilter}
+              setGlobalFilter={setGlobalFilter}
+              fullWidth={true}
+            />
+          </Grid>
+          <Grid item xs="auto" sx={{ pl: 1 }}>
+            <Button variant="contained" onClick={handleAdd}>
+              Add User
+            </Button>
+          </Grid>
+        </Grid>
 
         <Table {...getTableProps()}>
           <TableHead>
