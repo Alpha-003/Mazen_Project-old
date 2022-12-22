@@ -65,7 +65,8 @@ const newPerson = (index) => {
     about: tempData.text.sentence,
     avatar: tempData.number.status(1, 10),
     skills: tempData.skill,
-    time: tempData.time
+    time: tempData.time,
+    amount:tempData.number.amount
   };
 };
 

@@ -80,8 +80,12 @@ const SingleFileUpload = ({ error, file, setFieldValue, sx }) => {
           ...((isDragReject || error) && {
             color: 'error.main',
             borderColor: 'error.light',
-            bgcolor: 'error.lighter'
+            bgcolor: 'error.lighter',
           }),
+          borderStyle: 'solid',
+          p: 2.5,
+          borderColor: theme.palette.grey[300],
+          bgcolor: theme.palette.grey[100],
           ...(file && {
             padding: '12% 0'
           })
