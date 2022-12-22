@@ -18,6 +18,7 @@ import { CloseOutlined, LineOutlined, SearchOutlined } from '@ant-design/icons';
 
 export function GlobalFilter({ preGlobalFilteredRows, globalFilter, setGlobalFilter, ...other }) {
   const count = preGlobalFilteredRows.length;
+  console.log(count);
   const [value, setValue] = useState(globalFilter);
   const onChange = useAsyncDebounce((value) => {
     setGlobalFilter(value || undefined);
@@ -30,7 +31,7 @@ export function GlobalFilter({ preGlobalFilteredRows, globalFilter, setGlobalFil
         setValue(e.target.value);
         onChange(e.target.value);
       }}
-      placeholder={`Search ${count} records...`}
+      placeholder={`Search`}
       id="start-adornment-email"
       startAdornment={<SearchOutlined />}
       {...other}
