@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useOutletContext } from 'react-router';
 
 // material-ui
-import { useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import {
   Box,
   Button,
@@ -11,20 +12,16 @@ import {
   DialogContent,
   DialogTitle,
   Divider,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
   Grid,
   FormHelperText,
   InputLabel,
-  ListItemText,
   MenuItem,
-  OutlinedInput,
   Select,
   Stack,
-  Switch,
   TextField,
   Tooltip,
+  ToggleButton,
+  ToggleButtonGroup,
   Typography
 } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -35,24 +32,29 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import _ from 'lodash';
 import * as Yup from 'yup';
 import { useFormik, Form, FormikProvider } from 'formik';
+import UploadSingleFile from 'components/third-party/dropzone/SingleFile';
 
 // project imports
-import Avatar from 'components/@extended/Avatar';
 import IconButton from 'components/@extended/IconButton';
 import { openSnackbar } from 'store/reducers/snackbar';
-
+import MainCard from 'components/MainCard';
 // assets
-import { CameraOutlined, DeleteFilled } from '@ant-design/icons';
+import { DeleteFilled, UserOutlined } from '@ant-design/icons';
 
-const avatarImage = require.context('assets/images/users', true);
 
 // constant
 const getInitialValues = (user) => {
   const newUser = {
-    name: '',
+    firstNameEN: '',
+    lastNameEN: '',
+    firstNameAR: '',
+    lastNameAR: '',
     email: '',
-    location: '',
-    orderStatus: ''
+    mobileNumber: '',
+    ph1: '',
+    ph2: '',
+    jobTitle: 'owner',
+    lang: 'arabic',
   };
 
   if (user) {
@@ -64,23 +66,47 @@ const getInitialValues = (user) => {
   return newUser;
 };
 
-const allStatus = ['Rejected', 'Pending', 'Verified'];
 
 // ==============================|| USER ADD / EDIT / DELETE ||============================== //
-
+const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
+  '& .MuiToggleButtonGroup-grouped': {
+    margin: theme.spacing(1),
+    '&.Mui-disabled': {
+      border: 0,
+    },
+    '&.MuiToggleButton-root': {
+      border: `1px solid ${theme.palette.mode === 'dark' ? theme.palette.divider : theme.palette.grey.A800}`
+    },
+    '&.Mui-selected': {
+      borderColor: theme.palette.mode === 'dark' ? theme.palette.primary.dark : theme.palette.primary.light
+    },
+    '&:not(:first-of-type)': {
+      borderRadius: theme.shape.borderRadius,
+    },
+    '&:first-of-type': {
+      borderRadius: theme.shape.borderRadius,
+    },
+  },
+}));
+const GenderToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
+  '& .MuiToggleButtonGroup-grouped': {
+    border: `1px solid ${theme.palette.mode === 'dark' ? theme.palette.divider : theme.palette.grey.A800}`,
+    '&.Mui-disabled': {
+      border: 0,
+    },
+    '&.Mui-selected': {
+      borderColor: theme.palette.mode === 'dark' ? theme.palette.primary.dark : theme.palette.primary.light
+    },
+  },
+}));
+function useInputRef() {
+  return useOutletContext();
+}
 const AddUser = ({ user, onCancel }) => {
-  const theme = useTheme();
   const dispatch = useDispatch();
   const isCreating = !user;
+  const inputRef = useInputRef();
 
-  const [selectedImage, setSelectedImage] = useState(undefined);
-  const [avatar, setAvatar] = useState(avatarImage(`./avatar-${isCreating && !user?.avatar ? 1 : user.avatar}.png`));
-
-  useEffect(() => {
-    if (selectedImage) {
-      setAvatar(URL.createObjectURL(selectedImage));
-    }
-  }, [selectedImage]);
 
   const UserSchema = Yup.object().shape({
     name: Yup.string().max(255).required('Name is required'),
@@ -110,13 +136,6 @@ const AddUser = ({ user, onCancel }) => {
     validationSchema: UserSchema,
     onSubmit: (values, { setSubmitting }) => {
       try {
-        // const newUser = {
-        //   name: values.name,
-        //   email: values.email,
-        //   location: values.location,
-        //   orderStatus: values.orderStatus
-        // };
-
         if (user) {
           // dispatch(updateUser(user.id, newUser)); - update
           dispatch(
@@ -152,9 +171,25 @@ const AddUser = ({ user, onCancel }) => {
       }
     }
   });
+  const style = {
+    color: 'red'
+  };
+  const { errors, touched, handleBlur, handleSubmit, handleChange, isSubmitting, values, setFieldValue } = formik;
+  const [type, setType] = useState('customer');
+  const [gend, setGend] = useState('male');
+  const [isEmp, setIsEmp] = useState(false)
 
-  const { errors, touched, handleSubmit, isSubmitting, getFieldProps, setFieldValue } = formik;
-
+  const setChange = (event, newAlignment) => {
+    setGend(newAlignment);
+  };
+  const handleType = (e, newType) => {
+    setType(newType);
+    if (newType == 'employee') {
+      setIsEmp(true)
+    } else {
+      setIsEmp(false)
+    }
+  };
   return (
     <FormikProvider value={formik}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -163,7 +198,7 @@ const AddUser = ({ user, onCancel }) => {
           <Divider />
           <DialogContent sx={{ p: 2.5 }}>
             <Grid container spacing={3}>
-              <Grid item xs={12} md={3}>
+              {/* <Grid item xs={12} md={3}>
                 <Stack direction="row" justifyContent="center" sx={{ mt: 3 }}>
                   <FormLabel
                     htmlFor="change-avtar"
@@ -205,103 +240,311 @@ const AddUser = ({ user, onCancel }) => {
                     onChange={(e) => setSelectedImage(e.target.files?.[0])}
                   />
                 </Stack>
-              </Grid>
-              <Grid item xs={12} md={8}>
+              </Grid> */}
+              <Grid item xs={12} >
                 <Grid container spacing={3}>
                   <Grid item xs={12}>
                     <Stack spacing={1.25}>
-                      <InputLabel htmlFor="user-name">Name</InputLabel>
-                      <TextField
-                        fullWidth
-                        id="user-name"
-                        placeholder="Enter User Name"
-                        {...getFieldProps('name')}
-                        error={Boolean(touched.name && errors.name)}
-                        helperText={touched.name && errors.name}
-                      />
+                      <MainCard title="Type" content={false} sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem' } }}>
+                        <Box sx={{ p: 2 }}>
+                          <StyledToggleButtonGroup
+                            value={type}
+                            exclusive
+                            onChange={handleType}
+                            aria-label="type"
+                            color="primary"
+                          >
+                            <ToggleButton size='large' value="customer" aria-label="customer">
+                              <Typography><UserOutlined sx={{ pr: 3 }} /> Customer</Typography>
+                            </ToggleButton>
+                            <ToggleButton size='large' value="employee" aria-label="employee">
+                              <Typography><UserOutlined sx={{ pr: 3 }} /> Employee</Typography>
+                            </ToggleButton>
+                          </StyledToggleButtonGroup>
+                        </Box>
+                      </MainCard>
                     </Stack>
                   </Grid>
                   <Grid item xs={12}>
-                    <Stack spacing={1.25}>
-                      <InputLabel htmlFor="user-email">Email</InputLabel>
-                      <TextField
-                        fullWidth
-                        id="user-email"
-                        placeholder="Enter User Email"
-                        {...getFieldProps('email')}
-                        error={Boolean(touched.email && errors.email)}
-                        helperText={touched.email && errors.email}
-                      />
-                    </Stack>
+                    <MainCard title="Personal Details" content={false} sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem' } }}>
+                      <Box sx={{ p: 2.5 }}>
+                        <Grid container spacing={3}>
+                          {/* first namee english */}
+                          <Grid item xs={12} sm={6}>
+                            <Stack spacing={1.25}>
+                              <InputLabel htmlFor="personal-first-name-eng">
+                                <span style={style}>*</span> First Name (English)
+                              </InputLabel>
+                              <TextField
+                                fullWidth
+                                id="personal-first-name-eng"
+                                value={values.firstNameEN}
+                                name="firstNameEN"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                placeholder="First Name Eng"
+                                autoFocus
+                                inputRef={inputRef}
+                              />
+                              {touched.firstname && errors.firstname && (
+                                <FormHelperText error id="personal-first-name-helper">
+                                  {errors.firstname}
+                                </FormHelperText>
+                              )}
+                            </Stack>
+                          </Grid>
+                          {/* first name arabic */}
+                          <Grid item xs={12} sm={6}>
+                            <Stack spacing={1.25}>
+                              <InputLabel htmlFor="personal-first-name-ar">
+                                <span style={style}>*</span> First Name (Arabic)
+                              </InputLabel>
+                              <TextField
+                                fullWidth
+                                id="personal-first-nam-ar"
+                                value={values.firstNameAR}
+                                name="lastname"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                placeholder="First Name Arabic"
+                              />
+                              {touched.lastname && errors.lastname && (
+                                <FormHelperText error id="personal-last-name-helper">
+                                  {errors.lastname}
+                                </FormHelperText>
+                              )}
+                            </Stack>
+                          </Grid>
+                          {/* last name english */}
+                          <Grid item xs={12} sm={6}>
+                            <Stack spacing={1.25}>
+                              <InputLabel htmlFor="personal-last-name-eng">Last Name (English)</InputLabel>
+                              <TextField
+                                fullWidth
+                                id="personal-last-name-eng"
+                                value={values.lastNameEN}
+                                name="lastNameEN"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                placeholder="Last Name English"
+                              />
+                              {touched.lastname && errors.lastname && (
+                                <FormHelperText error id="personal-last-name-helper">
+                                  {errors.lastname}
+                                </FormHelperText>
+                              )}
+                            </Stack>
+                          </Grid>
+                          {/* last name arabic */}
+                          <Grid item xs={12} sm={6}>
+                            <Stack spacing={1.25}>
+                              <InputLabel htmlFor="personal-last-name-ar">Last Name (Arabic)</InputLabel>
+                              <TextField
+                                fullWidth
+                                id="personal-last-name-ar"
+                                value={values.lastNameAR}
+                                name="lastname"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                placeholder="Last Name Arabic"
+                              />
+                              {touched.lastname && errors.lastname && (
+                                <FormHelperText error id="personal-last-name-helper">
+                                  {errors.lastname}
+                                </FormHelperText>
+                              )}
+                            </Stack>
+                          </Grid>
+                          {/* job title */}
+                          <Grid item xs={12} sm={6}>
+                            <Stack spacing={1.25}>
+                              <InputLabel htmlFor="job-title">Job Title</InputLabel>
+                              <Select id="job-title" value={values.jobTitle} name="jobTitle" onChange={handleChange}>
+                                <MenuItem value="owner">Owner</MenuItem>
+                                <MenuItem value="regulator">Regulator</MenuItem>
+                                <MenuItem value="client">Client</MenuItem>
+                              </Select>
+                            </Stack>
+                          </Grid>
+                          {/* Preferred Language */}
+                          <Grid item xs={12} sm={6}>
+                            <Stack spacing={1.25}>
+                              <InputLabel htmlFor="lang">Preferred Language</InputLabel>
+                              <Select id="lang" value={values.lang} name="lang" onChange={handleChange}>
+                                <MenuItem value="english">English</MenuItem>
+                                <MenuItem value="arabic">Arabic</MenuItem>
+                                <MenuItem value="spanish">Spanish</MenuItem>
+                              </Select>
+                            </Stack>
+                          </Grid>
+                          {/* genders */}
+                          <Grid item xs={12} sm={6}>
+                            <Stack spaceing={1.25}>
+                              <GenderToggleButtonGroup color="primary" value={gend} exclusive onChange={setChange} aria-label="Platform">
+                                <ToggleButton sx={{ width: '93px' }} value="male">
+                                  Male
+                                </ToggleButton>
+                                <ToggleButton sx={{ width: '93px' }} value="female">
+                                  Female
+                                </ToggleButton>
+                              </GenderToggleButtonGroup>
+                            </Stack>
+                          </Grid>
+                        </Grid>
+                      </Box>
+                    </MainCard>
                   </Grid>
                   <Grid item xs={12}>
-                    <Stack spacing={1.25}>
-                      <InputLabel htmlFor="user-orderStatus">Status</InputLabel>
-                      <FormControl fullWidth>
-                        <Select
-                          id="column-hiding"
-                          displayEmpty
-                          {...getFieldProps('orderStatus')}
-                          onChange={(event) => setFieldValue('orderStatus', event.target.value)}
-                          input={<OutlinedInput id="select-column-hiding" placeholder="Sort by" />}
-                          renderValue={(selected) => {
-                            if (!selected) {
-                              return <Typography variant="subtitle1">Select Status</Typography>;
-                            }
-
-                            return <Typography variant="subtitle2">{selected}</Typography>;
-                          }}
-                        >
-                          {allStatus.map((column) => (
-                            <MenuItem key={column} value={column}>
-                              <ListItemText primary={column} />
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
-                      {touched.orderStatus && errors.orderStatus && (
-                        <FormHelperText error id="standard-weight-helper-text-email-login" sx={{ pl: 1.75 }}>
-                          {errors.orderStatus}
-                        </FormHelperText>
-                      )}
-                    </Stack>
+                    <MainCard title="Contact Details" content={false} sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem' } }}>
+                      <Box sx={{ p: 2.5 }}>
+                        <Grid container spacing={3}>
+                          {/* Mobile Number */}
+                          <Grid item xs={12} sm={6}>
+                            <Stack spacing={1.25}>
+                              <InputLabel htmlFor="personal-mobile">
+                                <span style={style}>*</span> Mobile Number
+                              </InputLabel>
+                              <TextField
+                                type="number"
+                                fullWidth
+                                value={values.mobileNumber}
+                                name="mobile"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                id="personal-mobile"
+                                placeholder="example"
+                              />
+                            </Stack>
+                          </Grid>
+                          {/* email */}
+                          <Grid item xs={12} sm={6}>
+                            <Stack spacing={1.25}>
+                              <InputLabel htmlFor="personal-email">Email</InputLabel>
+                              <TextField
+                                type="email"
+                                fullWidth
+                                value={values.email}
+                                name="email"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                id="personal-email"
+                                placeholder="Email"
+                              />
+                              {touched.email && errors.email && (
+                                <FormHelperText error id="personal-email-helper">
+                                  {errors.email}
+                                </FormHelperText>
+                              )}
+                            </Stack>
+                          </Grid>
+                          {/* Phone 1 */}
+                          <Grid item xs={12} sm={6}>
+                            <Stack spacing={1.25}>
+                              <InputLabel htmlFor="phone-1">Phone 1</InputLabel>
+                              <TextField
+                                fullWidth
+                                id="phone-1"
+                                value={values.ph1}
+                                name="phone1"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                placeholder="example"
+                              />
+                              {touched.lastname && errors.lastname && (
+                                <FormHelperText error id="personal-last-name-helper">
+                                  {errors.lastname}
+                                </FormHelperText>
+                              )}
+                            </Stack>
+                          </Grid>
+                          {/* Phone 2 */}
+                          <Grid item xs={12} sm={6}>
+                            <Stack spacing={1.25}>
+                              <InputLabel htmlFor="phone-2">Phone 1</InputLabel>
+                              <TextField
+                                fullWidth
+                                id="phone-2"
+                                value={values.ph2}
+                                name="phone2"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                placeholder="example"
+                              />
+                              {touched.lastname && errors.lastname && (
+                                <FormHelperText error id="personal-last-name-helper">
+                                  {errors.lastname}
+                                </FormHelperText>
+                              )}
+                            </Stack>
+                          </Grid>
+                        </Grid>
+                      </Box>
+                    </MainCard>
                   </Grid>
-                  <Grid item xs={12}>
-                    <Stack spacing={1.25}>
-                      <InputLabel htmlFor="user-location">Location</InputLabel>
-                      <TextField
-                        fullWidth
-                        id="user-location"
-                        multiline
-                        rows={2}
-                        placeholder="Enter Location"
-                        {...getFieldProps('location')}
-                        error={Boolean(touched.location && errors.location)}
-                        helperText={touched.location && errors.location}
-                      />
-                    </Stack>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Stack direction="row" justifyContent="space-between" alignItems="flex-start">
-                      <Stack spacing={0.5}>
-                        <Typography variant="subtitle1">Make Contact Info Public</Typography>
-                        <Typography variant="caption" color="textSecondary">
-                          Means that anyone viewing your profile will be able to see your contacts details
-                        </Typography>
-                      </Stack>
-                      <FormControlLabel control={<Switch defaultChecked sx={{ mt: 0 }} />} label="" labelPlacement="start" />
-                    </Stack>
-                    <Divider sx={{ my: 2 }} />
-                    <Stack direction="row" justifyContent="space-between" alignItems="flex-start">
-                      <Stack spacing={0.5}>
-                        <Typography variant="subtitle1">Available to hire</Typography>
-                        <Typography variant="caption" color="textSecondary">
-                          Toggling this will let your teammates know that you are available for acquiring new projects
-                        </Typography>
-                      </Stack>
-                      <FormControlLabel control={<Switch sx={{ mt: 0 }} />} label="" labelPlacement="start" />
-                    </Stack>
-                  </Grid>
+                  {isEmp && <Grid item xs={12}>
+                    <MainCard title="Employment Details" content={false} sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem' } }}>
+                      <Box sx={{ p: 2.5 }}>
+                        <Grid container spacing={3}>
+                          {/* id front */}
+                          <Grid item xs={12} sm={6}>
+                            <Stack spacing={1.25}>
+                              <InputLabel htmlFor="personal-mobile">
+                                National Id (Front)
+                              </InputLabel>
+                              <UploadSingleFile setFieldValue={setFieldValue} file={values.files} error={touched.files && !!errors.files} />
+                              {touched.files && errors.files && (
+                                <FormHelperText error id="standard-weight-helper-text-password-login">
+                                  {errors.files}
+                                </FormHelperText>
+                              )}
+                            </Stack>
+                          </Grid>
+                          {/* id back */}
+                          <Grid item xs={12} sm={6}>
+                            <Stack spacing={1.25}>
+                              <InputLabel htmlFor="personal-mobile">
+                                National Id (Back)
+                              </InputLabel>
+                              <UploadSingleFile setFieldValue={setFieldValue} file={values.files} error={touched.files && !!errors.files} />
+                              {touched.files && errors.files && (
+                                <FormHelperText error id="standard-weight-helper-text-password-login">
+                                  {errors.files}
+                                </FormHelperText>
+                              )}
+                            </Stack>
+                          </Grid>
+                          {/* photo */}
+                          <Grid item xs={12} sm={6}>
+                            <Stack spacing={1.25}>
+                              <InputLabel htmlFor="personal-mobile">
+                                Photo
+                              </InputLabel>
+                              <UploadSingleFile setFieldValue={setFieldValue} file={values.files} error={touched.files && !!errors.files} />
+                              {touched.files && errors.files && (
+                                <FormHelperText error id="standard-weight-helper-text-password-login">
+                                  {errors.files}
+                                </FormHelperText>
+                              )}
+                            </Stack>
+                          </Grid>
+                          {/* contract*/}
+                          <Grid item xs={12} sm={6}>
+                            <Stack spacing={1.25}>
+                              <InputLabel htmlFor="personal-mobile">
+                                Contract
+                              </InputLabel>
+                              <UploadSingleFile setFieldValue={setFieldValue} file={values.files} error={touched.files && !!errors.files} />
+                              {touched.files && errors.files && (
+                                <FormHelperText error id="standard-weight-helper-text-password-login">
+                                  {errors.files}
+                                </FormHelperText>
+                              )}
+                            </Stack>
+                          </Grid>
+                        </Grid>
+                      </Box>
+                    </MainCard>
+                  </Grid>}
                 </Grid>
               </Grid>
             </Grid>
@@ -324,7 +567,7 @@ const AddUser = ({ user, onCancel }) => {
                     Cancel
                   </Button>
                   <Button type="submit" variant="contained" disabled={isSubmitting}>
-                    {user ? 'Edit' : 'Add'}
+                    {user ? 'Edit User' : 'Add User'}
                   </Button>
                 </Stack>
               </Grid>

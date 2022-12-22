@@ -1,15 +1,14 @@
 import PropTypes from 'prop-types';
 
 // material-ui
-import { CameraOutlined } from '@ant-design/icons';
-import { Typography, Stack, CardMedia } from '@mui/material';
+import { CameraOutlined, InboxOutlined } from '@ant-design/icons';
+import { Typography, Stack } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
-// assets
-import UploadCover from 'assets/images/upload/upload.svg';
 
 // ==============================|| UPLOAD - PLACEHOLDER ||============================== //
-
 export default function PlaceholderContent({ type }) {
+  const theme = useTheme()
   return (
     <>
       {type !== 'STANDARD' && (
@@ -17,28 +16,20 @@ export default function PlaceholderContent({ type }) {
           spacing={2}
           alignItems="center"
           justifyContent="center"
-          direction={{ xs: 'column', md: 'row' }}
           sx={{ width: 1, textAlign: { xs: 'center', md: 'left' } }}
         >
-          <CardMedia component="img" image={UploadCover} sx={{ width: 150 }} />
-          <Stack sx={{ p: 3 }} spacing={1}>
-            <Typography variant="h5">Drag & Drop or Select file</Typography>
-
-            <Typography color="secondary">
-              Drop files here or click&nbsp;
-              <Typography component="span" color="primary" sx={{ textDecoration: 'underline' }}>
-                browse
-              </Typography>
-              &nbsp;thorough your machine
-            </Typography>
+          <InboxOutlined style={{ fontSize: 40, color: theme.palette.primary.dark }} />
+          <Typography variant="p" sx={{ mt: 0 }}>Click or drag file to this area to upload</Typography>
+        </Stack>
+      )
+      }
+      {
+        type === 'STANDARD' && (
+          <Stack alignItems="center" justifyContent="center" sx={{ height: 1 }}>
+            <CameraOutlined style={{ fontSize: '32px' }} />
           </Stack>
-        </Stack>
-      )}
-      {type === 'STANDARD' && (
-        <Stack alignItems="center" justifyContent="center" sx={{ height: 1 }}>
-          <CameraOutlined style={{ fontSize: '32px' }} />
-        </Stack>
-      )}
+        )
+      }
     </>
   );
 }
