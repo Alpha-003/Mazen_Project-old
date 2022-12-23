@@ -67,47 +67,48 @@ const TabDetails = () => {
   const setChange = (event, newAlignment) => {
     setGend(newAlignment);
   };
-  const skills = [
-    'Adobe XD',
-    'After Effect',
-    'Angular',
-    'Animation',
-    'ASP.Net',
-    'Bootstrap',
-    'C#',
-    'CC',
-    'Corel Draw',
-    'CSS',
-    'DIV',
-    'Dreamweaver',
-    'Figma',
-    'Graphics',
-    'HTML',
-    'Illustrator',
-    'J2Ee',
-    'Java',
-    'Javascript',
-    'JQuery',
-    'Logo Design',
-    'Material UI',
-    'Motion',
-    'MVC',
-    'MySQL',
-    'NodeJS',
-    'npm',
-    'Photoshop',
-    'PHP',
-    'React',
-    'Redux',
-    'Reduxjs & tooltit',
-    'SASS',
-    'SCSS',
-    'SQL Server',
-    'SVG',
-    'UI/UX',
-    'User Interface Designing',
-    'Wordpress'
-  ];
+const skills = [
+  'Adobe XD',
+  'After Effect',
+  'Angular',
+  'Animation',
+  'ASP.Net',
+  'Bootstrap',
+  'C#',
+  'CC',
+  'Corel Draw',
+  'CSS',
+  'DIV',
+  'Dreamweaver',
+  'Figma',
+  'Graphics',
+  'HTML',
+  'Illustrator',
+  'J2Ee',
+  'Java',
+  'Javascript',
+  'JQuery',
+  'Logo Design',
+  'Material UI',
+  'Motion',
+  'MVC',
+  'MySQL',
+  'NodeJS',
+  'npm',
+  'Photoshop',
+  'PHP',
+  'React',
+  'Redux',
+  'Reduxjs & tooltit',
+  'SASS',
+  'SCSS',
+  'SQL Server',
+  'SVG',
+  'UI/UX',
+  'User Interface Designing',
+  'Wordpress'
+];
+
 
   return (
     <Formik
@@ -187,11 +188,7 @@ const TabDetails = () => {
           <Grid container columnSpacing={2} justifyContent="end">
             {/* right side  */}
             <Grid item md={7} xs={12}>
-              <MainCard
-                title="Personal Information"
-                content={false}
-                sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem', color: theme.palette.text.secondary } }}
-              >
+              <MainCard title="Organization Information" content={false} sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem', color: theme.palette.text.secondary } }}>
                 <Box sx={{ p: 2.5 }}>
                   <Grid container spacing={3}>
                     {/* first namee english */}
@@ -236,60 +233,74 @@ const TabDetails = () => {
                         )}
                       </Stack>
                     </Grid>
-                    {/* last namee english */}
+                    {/* Printing Frequency */}
                     <Grid item xs={12} sm={6}>
                       <Stack spacing={1.25}>
-                        <InputLabel htmlFor="personal-last-name-eng">Last Name (English)</InputLabel>
-                        <TextField
-                          fullWidth
-                          id="personal-last-name-eng"
-                          // value={values.lastname}
-                          name="lastname"
-                          onBlur={handleBlur}
-                          onChange={handleChange}
-                          placeholder="last Name Eng"
-                          autoFocus
-                          inputRef={inputRef}
-                        />
-                        {touched.lastname && errors.lastname && (
-                          <FormHelperText error id="personal-last-name-helper">
-                            {errors.lastname}
-                          </FormHelperText>
-                        )}
+                        <InputLabel htmlFor="printFrequency">Printing Frequency</InputLabel>
+                        <Select id="printFrequency" value={values.printFrequency} name="printFrequency" onChange={handleChange}>
+                          <MenuItem value="val1">Once a month</MenuItem>
+                          <MenuItem value="val2">Value2</MenuItem>
+                          <MenuItem value="val3">Client3</MenuItem>
+                        </Select>
                       </Stack>
                     </Grid>
-                    {/* last name arabic */}
+                    {/*Organization Size */}
                     <Grid item xs={12} sm={6}>
                       <Stack spacing={1.25}>
-                        <InputLabel htmlFor="personal-last-name-ar">Last Name (Arabic)</InputLabel>
-                        <TextField
-                          fullWidth
-                          id="personal-last-nam-ar"
-                          // value={values.lastname}
-                          name="lastname"
-                          onBlur={handleBlur}
-                          onChange={handleChange}
-                          placeholder="last Name Arabic"
-                        />
-                        {touched.lastname && errors.lastname && (
-                          <FormHelperText error id="personal-last-name-helper">
-                            {errors.lastname}
-                          </FormHelperText>
-                        )}
+                        <InputLabel htmlFor="orgSize">Organization Size</InputLabel>
+                        <Select id="orgSize" value={values.oraganizationsSize} name="oraganizationsSize" onChange={handleChange}>
+                          <MenuItem value="val1">1-5 Employees</MenuItem>
+                          <MenuItem value="val2">val2</MenuItem>
+                          <MenuItem value="val3">val3</MenuItem>
+                        </Select>
                       </Stack>
                     </Grid>
-                    {/* gender */}
-                    <Grid item xs={12} sm={6}>
-                      <Stack spaceing={1.25}>
-                        <ToggleButtonGroup color="primary" value={gend} exclusive onChange={setChange} aria-label="Platform">
-                          <ToggleButton sx={{ width: '93px' }} value="male">
-                            Male
-                          </ToggleButton>
-                          <ToggleButton sx={{ width: '93px' }} value="female">
-                            Female
-                          </ToggleButton>
-                        </ToggleButtonGroup>
-                      </Stack>
+                    {/* Category  */}
+                    <Grid item xs={12}>
+                      <Box sx={{ display: 'flex', flexWrap: 'wrap', listStyle: 'none', m: 0 }} component="ul">
+                        <Autocomplete
+                          multiple
+                          fullWidth
+                          id="tags-outlined"
+                          options={skills}
+                          value={values.skill}
+                          onBlur={handleBlur}
+                          getOptionLabel={(label) => label}
+                          onChange={(event, newValue) => {
+                            setFieldValue('skill', newValue);
+                          }}
+                          renderInput={(params) => <TextField {...params} name="skill" placeholder="Add Skills" />}
+                          renderTags={(value, getTagProps) =>
+                            value.map((option, index) => (
+                              <Chip
+                                key={index}
+                                {...getTagProps({ index })}
+                                variant="combined"
+                                label={option}
+                                deleteIcon={<CloseOutlined style={{ fontSize: '0.75rem' }} />}
+                                sx={{ color: 'text.primary' }}
+                              />
+                            ))
+                          }
+                          sx={{
+                            '& .MuiOutlinedInput-root': {
+                              p: 0,
+                              '& .MuiAutocomplete-tag': {
+                                m: 1
+                              },
+                              '& fieldset': {
+                                display: 'none'
+                              },
+                              '& .MuiAutocomplete-endAdornment': {
+                                display: 'none'
+                              },
+                              '& .MuiAutocomplete-popupIndicator': {
+                                display: 'none'
+                              }
+                            }
+                          }}
+                        />
+                      </Box>
                     </Grid>
                   </Grid>
                 </Box>
@@ -297,34 +308,9 @@ const TabDetails = () => {
             </Grid>
             {/* left side */}
             <Grid item md={5} xs={12}>
-              <MainCard
-                title="Contact Details"
-                content={false}
-                sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem', color: theme.palette.text.secondary } }}
-              >
+              <MainCard title="Contact Details" content={false} sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem', color: theme.palette.text.secondary } }}>
                 <Box sx={{ p: 2.5 }}>
                   <Grid container spacing={3}>
-                    {/* email */}
-                    <Grid item xs={12}>
-                      <Stack spacing={1.25}>
-                        <InputLabel htmlFor="personal-email">Email Address</InputLabel>
-                        <TextField
-                          type="email"
-                          fullWidth
-                          value={values.email}
-                          name="email"
-                          onBlur={handleBlur}
-                          onChange={handleChange}
-                          id="personal-email"
-                          placeholder="Email Address"
-                        />
-                        {touched.email && errors.email && (
-                          <FormHelperText error id="personal-email-helper">
-                            {errors.email}
-                          </FormHelperText>
-                        )}
-                      </Stack>
-                    </Grid>
                     {/* Mobile Number */}
                     <Grid item xs={12}>
                       <Stack spacing={1.25}>
@@ -346,18 +332,18 @@ const TabDetails = () => {
                     )} */}
                       </Stack>
                     </Grid>
-                    {/* phone Number 1 */}
+                    {/* Mobile Number 2 */}
                     <Grid item xs={12}>
                       <Stack spacing={1.25}>
-                        <InputLabel htmlFor="personal-phone-1">phone 1</InputLabel>
+                        <InputLabel htmlFor="personal-mobile-2">Mobile Number 2</InputLabel>
                         <TextField
                           type="number"
                           fullWidth
                           // value={values.email}
-                          name="phone1"
+                          name="mobile2"
                           onBlur={handleBlur}
                           onChange={handleChange}
-                          id="personal-phone-1"
+                          id="personal-mobile-2"
                           placeholder="example"
                         />
                         {/* {touched.email && errors.email && (
@@ -367,18 +353,18 @@ const TabDetails = () => {
                     )} */}
                       </Stack>
                     </Grid>
-                    {/* phone Number 2 */}
+                    {/* landline */}
                     <Grid item xs={12}>
                       <Stack spacing={1.25}>
-                        <InputLabel htmlFor="personal-phone-1">phone 2</InputLabel>
+                        <InputLabel htmlFor="landline">Landline</InputLabel>
                         <TextField
                           type="number"
                           fullWidth
                           // value={values.email}
-                          name="phone2"
+                          name="landline"
                           onBlur={handleBlur}
                           onChange={handleChange}
-                          id="personal-phone-2"
+                          id="landline"
                           placeholder="example"
                         />
                         {/* {touched.email && errors.email && (
@@ -386,6 +372,43 @@ const TabDetails = () => {
                         {errors.email}
                       </FormHelperText>
                     )} */}
+                      </Stack>
+                    </Grid>
+                    {/* email */}
+                    <Grid item xs={12}>
+                      <Stack spacing={1.25}>
+                        <InputLabel htmlFor="personal-email">Email Address</InputLabel>
+                        <TextField
+                          type="email"
+                          fullWidth
+                          value={values.email}
+                          name="email"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          id="personal-email"
+                          placeholder="Email Address"
+                        />
+                        {touched.email && errors.email && (
+                          <FormHelperText error id="personal-email-helper">
+                            {errors.email}
+                          </FormHelperText>
+                        )}
+                      </Stack>
+                    </Grid>
+                    {/* website */}
+                    <Grid item xs={12}>
+                      <Stack spacing={1.25}>
+                        <InputLabel htmlFor="website">Website</InputLabel>
+                        <TextField
+                          type="text"
+                          fullWidth
+                          // value={values.email}
+                          name="website"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          id="website"
+                          placeholder="example"
+                        />
                       </Stack>
                     </Grid>
                   </Grid>
@@ -406,7 +429,7 @@ const TabDetails = () => {
         </form>
       )}
     </Formik>
-  );
+  )
 };
 
 export default TabDetails;
