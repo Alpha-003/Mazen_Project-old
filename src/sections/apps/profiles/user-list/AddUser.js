@@ -175,6 +175,7 @@ const AddUser = ({ user, onCancel, title }) => {
   const { errors, touched, handleBlur, handleSubmit, handleChange, isSubmitting, values, setFieldValue } = formik;
   const [type, setType] = useState('customer');
   const [gend, setGend] = useState('male');
+  
   const employee = title == 'Employee';
   const [isEmp, setIsEmp] = useState(employee);
 
