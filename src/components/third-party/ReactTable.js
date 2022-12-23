@@ -102,11 +102,11 @@ export const TablePagination = ({ gotoPage, rows, setPageSize, pageSize, pageInd
                 size="small"
                 sx={{ '& .MuiSelect-select': { py: 0.75, px: 1.25 } }}
               >
-                <MenuItem value={5}>5</MenuItem>
-                <MenuItem value={10}>10</MenuItem>
-                <MenuItem value={25}>25</MenuItem>
-                <MenuItem value={50}>50</MenuItem>
-                <MenuItem value={100}>100</MenuItem>
+                <MenuItem value={5}>5/page</MenuItem>
+                <MenuItem value={10}>10/page</MenuItem>
+                <MenuItem value={25}>25/page</MenuItem>
+                <MenuItem value={50}>50/page</MenuItem>
+                <MenuItem value={100}>100/page</MenuItem>
               </Select>
             </FormControl>
           </Stack>
@@ -134,9 +134,7 @@ export const TablePagination = ({ gotoPage, rows, setPageSize, pageSize, pageInd
           page={pageIndex + 1}
           onChange={handleChangePagination}
           color="primary"
-          variant="combined"
-          showFirstButton
-          showLastButton
+          variant="outlined"
         />
       </Grid>
     </Grid>
