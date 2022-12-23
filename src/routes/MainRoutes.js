@@ -464,8 +464,6 @@ const MainRoutes = {
             {
               path: 'all',
               element: <AllUserList />
-<<<<<<< HEAD
-=======
             },
             {
               path: 'customers',
@@ -474,7 +472,6 @@ const MainRoutes = {
             {
               path: 'employees',
               element: <EmployeesList />
->>>>>>> 37fba27324cc18b96d3f61f320178f7f08d6989c
             },
             {
               path: 'search',
