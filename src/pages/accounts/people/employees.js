@@ -4,6 +4,8 @@ import { useCallback, useMemo, useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Chip, Dialog, Stack, Tooltip, Typography } from '@mui/material';
 
+// third-party
+
 // project import
 import UserView from 'sections/apps/profiles/user-list/UserView';
 import AddUser from 'sections/apps/profiles/user-list/AddUser';
@@ -16,8 +18,8 @@ import { IndeterminateCheckbox } from 'components/third-party/ReactTable';
 
 // assets
 import { CloseOutlined, EyeTwoTone, EditTwoTone, DeleteTwoTone } from '@ant-design/icons';
-import ReactTable from '../table';
 
+import ReactTable from '../table';
 const avatarImage = require.context('assets/images/users', true);
 
 // ==============================|| PROFILE - USER LIST ||============================== //
@@ -184,7 +186,7 @@ const AllUserList = () => {
     <MainCard content={false}>
       <ScrollX>
         <ReactTable
-          tableName="User"
+          tableName="Employee"
           columns={columns}
           data={data}
           handleAdd={handleAdd}
@@ -196,7 +198,7 @@ const AllUserList = () => {
 
       {/* add user dialog */}
       <Dialog maxWidth="sm" fullWidth onClose={handleAdd} open={add} sx={{ '& .MuiDialog-paper': { p: 0 } }}>
-        {add && <AddUser user={user} onCancel={handleAdd} />}
+        {add && <AddUser user={user} onCancel={handleAdd} title="Employee" />}
       </Dialog>
     </MainCard>
   );

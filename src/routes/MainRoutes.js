@@ -108,6 +108,8 @@ const PricingPage = Loadable(lazy(() => import('pages/extra-pages/pricing')));
 
 // account - people
 const AllUserList = Loadable(lazy(() => import('pages/accounts/people/all')));
+const CustomersList = Loadable(lazy(() => import('pages/accounts/people/customers')));
+const EmployeesList = Loadable(lazy(() => import('pages/accounts/people/employees')));
 
 // accoutn - people - search
 const PeopleSearch = Loadable(lazy(() => import('pages/accounts/people/search/search')));
@@ -462,6 +464,17 @@ const MainRoutes = {
             {
               path: 'all',
               element: <AllUserList />
+<<<<<<< HEAD
+=======
+            },
+            {
+              path: 'customers',
+              element: <CustomersList />
+            },
+            {
+              path: 'employees',
+              element: <EmployeesList />
+>>>>>>> 37fba27324cc18b96d3f61f320178f7f08d6989c
             },
             {
               path: 'search',

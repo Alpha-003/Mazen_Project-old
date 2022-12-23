@@ -41,7 +41,6 @@ import MainCard from 'components/MainCard';
 // assets
 import { DeleteFilled, UserOutlined } from '@ant-design/icons';
 
-
 // constant
 const getInitialValues = (user) => {
   const newUser = {
@@ -54,7 +53,7 @@ const getInitialValues = (user) => {
     ph1: '',
     ph2: '',
     jobTitle: 'owner',
-    lang: 'arabic',
+    lang: 'arabic'
   };
 
   if (user) {
@@ -66,13 +65,12 @@ const getInitialValues = (user) => {
   return newUser;
 };
 
-
 // ==============================|| USER ADD / EDIT / DELETE ||============================== //
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   '& .MuiToggleButtonGroup-grouped': {
     margin: theme.spacing(1),
     '&.Mui-disabled': {
-      border: 0,
+      border: 0
     },
     '&.MuiToggleButton-root': {
       border: `1px solid ${theme.palette.mode === 'dark' ? theme.palette.divider : theme.palette.grey.A800}`
@@ -81,32 +79,32 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
       borderColor: theme.palette.mode === 'dark' ? theme.palette.primary.dark : theme.palette.primary.light
     },
     '&:not(:first-of-type)': {
-      borderRadius: theme.shape.borderRadius,
+      borderRadius: theme.shape.borderRadius
     },
     '&:first-of-type': {
-      borderRadius: theme.shape.borderRadius,
-    },
-  },
+      borderRadius: theme.shape.borderRadius
+    }
+  }
 }));
 const GenderToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   '& .MuiToggleButtonGroup-grouped': {
     border: `1px solid ${theme.palette.mode === 'dark' ? theme.palette.divider : theme.palette.grey.A800}`,
     '&.Mui-disabled': {
-      border: 0,
+      border: 0
     },
     '&.Mui-selected': {
       borderColor: theme.palette.mode === 'dark' ? theme.palette.primary.dark : theme.palette.primary.light
-    },
-  },
+    }
+  }
 }));
 function useInputRef() {
   return useOutletContext();
 }
-const AddUser = ({ user, onCancel }) => {
+const AddUser = ({ user, onCancel, title }) => {
+  title = title || 'User';
   const dispatch = useDispatch();
   const isCreating = !user;
   const inputRef = useInputRef();
-
 
   const UserSchema = Yup.object().shape({
     name: Yup.string().max(255).required('Name is required'),
@@ -177,7 +175,8 @@ const AddUser = ({ user, onCancel }) => {
   const { errors, touched, handleBlur, handleSubmit, handleChange, isSubmitting, values, setFieldValue } = formik;
   const [type, setType] = useState('customer');
   const [gend, setGend] = useState('male');
-  const [isEmp, setIsEmp] = useState(false)
+  const employee = title == 'Employee';
+  const [isEmp, setIsEmp] = useState(employee);
 
   const setChange = (event, newAlignment) => {
     setGend(newAlignment);
@@ -185,86 +184,43 @@ const AddUser = ({ user, onCancel }) => {
   const handleType = (e, newType) => {
     setType(newType);
     if (newType == 'employee') {
-      setIsEmp(true)
+      setIsEmp(true);
     } else {
-      setIsEmp(false)
+      setIsEmp(false);
     }
   };
   return (
     <FormikProvider value={formik}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
-          <DialogTitle>{user ? 'Edit User' : 'New User'}</DialogTitle>
+          <DialogTitle>{user ? `Edit ${title}` : `New ${title}`}</DialogTitle>
           <Divider />
           <DialogContent sx={{ p: 2.5 }}>
             <Grid container spacing={3}>
-              {/* <Grid item xs={12} md={3}>
-                <Stack direction="row" justifyContent="center" sx={{ mt: 3 }}>
-                  <FormLabel
-                    htmlFor="change-avtar"
-                    sx={{
-                      position: 'relative',
-                      borderRadius: '50%',
-                      overflow: 'hidden',
-                      '&:hover .MuiBox-root': { opacity: 1 },
-                      cursor: 'pointer'
-                    }}
-                  >
-                    <Avatar alt="Avatar 1" src={avatar} sx={{ width: 72, height: 72, border: '1px dashed' }} />
-                    <Box
-                      sx={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, .75)' : 'rgba(0,0,0,.65)',
-                        width: '100%',
-                        height: '100%',
-                        opacity: 0,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}
-                    >
-                      <Stack spacing={0.5} alignItems="center">
-                        <CameraOutlined style={{ color: theme.palette.secondary.lighter, fontSize: '2rem' }} />
-                        <Typography sx={{ color: 'secondary.lighter' }}>Upload</Typography>
-                      </Stack>
-                    </Box>
-                  </FormLabel>
-                  <TextField
-                    type="file"
-                    id="change-avtar"
-                    label="Outlined"
-                    variant="outlined"
-                    sx={{ display: 'none' }}
-                    onChange={(e) => setSelectedImage(e.target.files?.[0])}
-                  />
-                </Stack>
-              </Grid> */}
-              <Grid item xs={12} >
+              <Grid item xs={12}>
                 <Grid container spacing={3}>
-                  <Grid item xs={12}>
-                    <Stack spacing={1.25}>
-                      <MainCard title="Type" content={false} sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem' } }}>
-                        <Box sx={{ p: 2 }}>
-                          <StyledToggleButtonGroup
-                            value={type}
-                            exclusive
-                            onChange={handleType}
-                            aria-label="type"
-                            color="primary"
-                          >
-                            <ToggleButton size='large' value="customer" aria-label="customer">
-                              <Typography><UserOutlined sx={{ pr: 3 }} /> Customer</Typography>
-                            </ToggleButton>
-                            <ToggleButton size='large' value="employee" aria-label="employee">
-                              <Typography><UserOutlined sx={{ pr: 3 }} /> Employee</Typography>
-                            </ToggleButton>
-                          </StyledToggleButtonGroup>
-                        </Box>
-                      </MainCard>
-                    </Stack>
-                  </Grid>
+                  {title != 'Customer' && title != 'Employee' && (
+                    <Grid item xs={12}>
+                      <Stack spacing={1.25}>
+                        <MainCard title="Type" content={false} sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem' } }}>
+                          <Box sx={{ p: 2 }}>
+                            <StyledToggleButtonGroup value={type} exclusive onChange={handleType} aria-label="type" color="primary">
+                              <ToggleButton size="large" value="customer" aria-label="customer">
+                                <Typography>
+                                  <UserOutlined sx={{ pr: 3 }} /> Customer
+                                </Typography>
+                              </ToggleButton>
+                              <ToggleButton size="large" value="employee" aria-label="employee">
+                                <Typography>
+                                  <UserOutlined sx={{ pr: 3 }} /> Employee
+                                </Typography>
+                              </ToggleButton>
+                            </StyledToggleButtonGroup>
+                          </Box>
+                        </MainCard>
+                      </Stack>
+                    </Grid>
+                  )}
                   <Grid item xs={12}>
                     <MainCard title="Personal Details" content={false} sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem' } }}>
                       <Box sx={{ p: 2.5 }}>
@@ -481,70 +437,80 @@ const AddUser = ({ user, onCancel }) => {
                       </Box>
                     </MainCard>
                   </Grid>
-                  {isEmp && <Grid item xs={12}>
-                    <MainCard title="Employment Details" content={false} sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem' } }}>
-                      <Box sx={{ p: 2.5 }}>
-                        <Grid container spacing={3}>
-                          {/* id front */}
-                          <Grid item xs={12} sm={6}>
-                            <Stack spacing={1.25}>
-                              <InputLabel htmlFor="personal-mobile">
-                                National Id (Front)
-                              </InputLabel>
-                              <UploadSingleFile setFieldValue={setFieldValue} file={values.files} error={touched.files && !!errors.files} />
-                              {touched.files && errors.files && (
-                                <FormHelperText error id="standard-weight-helper-text-password-login">
-                                  {errors.files}
-                                </FormHelperText>
-                              )}
-                            </Stack>
+                  {isEmp && (
+                    <Grid item xs={12}>
+                      <MainCard title="Employment Details" content={false} sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem' } }}>
+                        <Box sx={{ p: 2.5 }}>
+                          <Grid container spacing={3}>
+                            {/* id front */}
+                            <Grid item xs={12} sm={6}>
+                              <Stack spacing={1.25}>
+                                <InputLabel htmlFor="personal-mobile">National Id (Front)</InputLabel>
+                                <UploadSingleFile
+                                  setFieldValue={setFieldValue}
+                                  file={values.files}
+                                  error={touched.files && !!errors.files}
+                                />
+                                {touched.files && errors.files && (
+                                  <FormHelperText error id="standard-weight-helper-text-password-login">
+                                    {errors.files}
+                                  </FormHelperText>
+                                )}
+                              </Stack>
+                            </Grid>
+                            {/* id back */}
+                            <Grid item xs={12} sm={6}>
+                              <Stack spacing={1.25}>
+                                <InputLabel htmlFor="personal-mobile">National Id (Back)</InputLabel>
+                                <UploadSingleFile
+                                  setFieldValue={setFieldValue}
+                                  file={values.files}
+                                  error={touched.files && !!errors.files}
+                                />
+                                {touched.files && errors.files && (
+                                  <FormHelperText error id="standard-weight-helper-text-password-login">
+                                    {errors.files}
+                                  </FormHelperText>
+                                )}
+                              </Stack>
+                            </Grid>
+                            {/* photo */}
+                            <Grid item xs={12} sm={6}>
+                              <Stack spacing={1.25}>
+                                <InputLabel htmlFor="personal-mobile">Photo</InputLabel>
+                                <UploadSingleFile
+                                  setFieldValue={setFieldValue}
+                                  file={values.files}
+                                  error={touched.files && !!errors.files}
+                                />
+                                {touched.files && errors.files && (
+                                  <FormHelperText error id="standard-weight-helper-text-password-login">
+                                    {errors.files}
+                                  </FormHelperText>
+                                )}
+                              </Stack>
+                            </Grid>
+                            {/* contract*/}
+                            <Grid item xs={12} sm={6}>
+                              <Stack spacing={1.25}>
+                                <InputLabel htmlFor="personal-mobile">Contract</InputLabel>
+                                <UploadSingleFile
+                                  setFieldValue={setFieldValue}
+                                  file={values.files}
+                                  error={touched.files && !!errors.files}
+                                />
+                                {touched.files && errors.files && (
+                                  <FormHelperText error id="standard-weight-helper-text-password-login">
+                                    {errors.files}
+                                  </FormHelperText>
+                                )}
+                              </Stack>
+                            </Grid>
                           </Grid>
-                          {/* id back */}
-                          <Grid item xs={12} sm={6}>
-                            <Stack spacing={1.25}>
-                              <InputLabel htmlFor="personal-mobile">
-                                National Id (Back)
-                              </InputLabel>
-                              <UploadSingleFile setFieldValue={setFieldValue} file={values.files} error={touched.files && !!errors.files} />
-                              {touched.files && errors.files && (
-                                <FormHelperText error id="standard-weight-helper-text-password-login">
-                                  {errors.files}
-                                </FormHelperText>
-                              )}
-                            </Stack>
-                          </Grid>
-                          {/* photo */}
-                          <Grid item xs={12} sm={6}>
-                            <Stack spacing={1.25}>
-                              <InputLabel htmlFor="personal-mobile">
-                                Photo
-                              </InputLabel>
-                              <UploadSingleFile setFieldValue={setFieldValue} file={values.files} error={touched.files && !!errors.files} />
-                              {touched.files && errors.files && (
-                                <FormHelperText error id="standard-weight-helper-text-password-login">
-                                  {errors.files}
-                                </FormHelperText>
-                              )}
-                            </Stack>
-                          </Grid>
-                          {/* contract*/}
-                          <Grid item xs={12} sm={6}>
-                            <Stack spacing={1.25}>
-                              <InputLabel htmlFor="personal-mobile">
-                                Contract
-                              </InputLabel>
-                              <UploadSingleFile setFieldValue={setFieldValue} file={values.files} error={touched.files && !!errors.files} />
-                              {touched.files && errors.files && (
-                                <FormHelperText error id="standard-weight-helper-text-password-login">
-                                  {errors.files}
-                                </FormHelperText>
-                              )}
-                            </Stack>
-                          </Grid>
-                        </Grid>
-                      </Box>
-                    </MainCard>
-                  </Grid>}
+                        </Box>
+                      </MainCard>
+                    </Grid>
+                  )}
                 </Grid>
               </Grid>
             </Grid>
@@ -567,7 +533,7 @@ const AddUser = ({ user, onCancel }) => {
                     Cancel
                   </Button>
                   <Button type="submit" variant="contained" disabled={isSubmitting}>
-                    {user ? 'Edit User' : 'Add User'}
+                    {user ? `Edit ${title}` : `Add ${title}`}
                   </Button>
                 </Stack>
               </Grid>
@@ -581,7 +547,8 @@ const AddUser = ({ user, onCancel }) => {
 
 AddUser.propTypes = {
   user: PropTypes.object,
-  onCancel: PropTypes.func
+  onCancel: PropTypes.func,
+  title: PropTypes.string
 };
 
 export default AddUser;
