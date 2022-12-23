@@ -30,6 +30,7 @@ import { HeaderSort, TablePagination, TableRowSelection } from 'components/third
 export default function ReactTable({ tableName, columns, data, getHeaderProps, renderRowSubComponent, handleAdd }) {
   const theme = useTheme();
   const [typeFilter, setTypeFilter] = useState('Type');
+  const [statusFilter, setStatusFilter] = useState('Status');
   const [gendFilter, setGendFilter] = useState('Gender');
   const [langFilter, setLangFilter] = useState('Language');
   const [isActiveFilter, setIsActiveFilter] = useState('isActive');
@@ -53,6 +54,10 @@ export default function ReactTable({ tableName, columns, data, getHeaderProps, r
   const handleIsActiveFilter = (e) => {
     const { value } = e.target;
     setIsActiveFilter(value);
+  };
+  const handleStatusFilter = (e) => {
+    const { value } = e.target;
+    setStatusFilter(value);
   };
   const {
     getTableProps,
@@ -138,21 +143,38 @@ export default function ReactTable({ tableName, columns, data, getHeaderProps, r
               <MenuItem value="Type 1">Type 1</MenuItem>
               <MenuItem value="Type 2">Type 2</MenuItem>
             </Select>
-            <Select id="genFilter" value={gendFilter} placeholder="Filter By" onChange={handleGendFilter} sx={{ width: '98px' }}>
-              <MenuItem value="Gender">Gender</MenuItem>
-              <MenuItem value="Male">Male</MenuItem>
-              <MenuItem value="Female">Female</MenuItem>
-            </Select>
-            <Select id="langFilter" value={langFilter} placeholder="Filter By" onChange={handleLangFilter} sx={{ width: '115px' }}>
-              <MenuItem value="Language">Language</MenuItem>
-              <MenuItem value="English">English</MenuItem>
-              <MenuItem value="Arabic">Arabic</MenuItem>
-            </Select>
-            <Select id="isActive" value={isActiveFilter} placeholder="Filter By" onChange={handleIsActiveFilter} sx={{ width: '102px' }}>
-              <MenuItem value="isActive">isActive</MenuItem>
-              <MenuItem value="Offline">Offline</MenuItem>
-              <MenuItem value="Online">Online</MenuItem>
-            </Select>
+            {tableName != 'Organization' && (
+              <>
+                <Select id="genFilter" value={gendFilter} placeholder="Filter By" onChange={handleGendFilter} sx={{ width: '98px' }}>
+                  <MenuItem value="Gender">Gender</MenuItem>
+                  <MenuItem value="Male">Male</MenuItem>
+                  <MenuItem value="Female">Female</MenuItem>
+                </Select>
+                <Select id="langFilter" value={langFilter} placeholder="Filter By" onChange={handleLangFilter} sx={{ width: '115px' }}>
+                  <MenuItem value="Language">Language</MenuItem>
+                  <MenuItem value="English">English</MenuItem>
+                  <MenuItem value="Arabic">Arabic</MenuItem>
+                </Select>
+                <Select
+                  id="isActive"
+                  value={isActiveFilter}
+                  placeholder="Filter By"
+                  onChange={handleIsActiveFilter}
+                  sx={{ width: '102px' }}
+                >
+                  <MenuItem value="isActive">isActive</MenuItem>
+                  <MenuItem value="Offline">Offline</MenuItem>
+                  <MenuItem value="Online">Online</MenuItem>
+                </Select>
+              </>
+            )}
+            {tableName == 'Organization' && (
+              <Select id="genFilter" value={statusFilter} placeholder="Filter By" onChange={handleStatusFilter} sx={{ width: '98px' }}>
+                <MenuItem value="Status">Status</MenuItem>
+                <MenuItem value="Status 1">Status 1</MenuItem>
+                <MenuItem value="Status 2">Status 2</MenuItem>
+              </Select>
+            )}
             {/*<SortingSelect sortBy={sortBy.id} setSortBy={setSortBy} allColumns={allColumns} />*/}
           </Stack>
           <Link href="#" color="primary" underline="none">

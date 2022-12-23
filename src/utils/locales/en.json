@@ -144,8 +144,8 @@
   "payments": "Payments",
   "support": "Support",
   "tickets": "Tickets",
-  "all-people": "All",
-  "search-people": "Search",
+  "all": "All",
+  "search": "Search",
   "people-customers": "Customers",
   "people-employees": "Employees"
 }

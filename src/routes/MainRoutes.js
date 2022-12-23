@@ -110,6 +110,8 @@ const PricingPage = Loadable(lazy(() => import('pages/extra-pages/pricing')));
 const AllUserList = Loadable(lazy(() => import('pages/accounts/people/all')));
 const CustomersList = Loadable(lazy(() => import('pages/accounts/people/customers')));
 const EmployeesList = Loadable(lazy(() => import('pages/accounts/people/employees')));
+// account - organization
+const AllOrgList = Loadable(lazy(() => import('pages/accounts/organization/all')));
 
 // accoutn - people - search
 const PeopleSearch = Loadable(lazy(() => import('pages/accounts/people/search/search')));
@@ -510,6 +512,23 @@ const MainRoutes = {
                   element: <PaymentsSearch />
                 }
               ]
+            }
+          ]
+        },
+        {
+          path: '/organization',
+          children: [
+            {
+              path: 'all',
+              element: <AllOrgList />
+            },
+            {
+              path: 'customers',
+              element: <CustomersList />
+            },
+            {
+              path: 'employees',
+              element: <EmployeesList />
             }
           ]
         }
