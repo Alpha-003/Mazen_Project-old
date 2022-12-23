@@ -54,6 +54,7 @@ function mockData(index) {
       last: chance.last(),
       full: chance.name()
     },
+    gender: chance.gender(),
     text: {
       title: chance.sentence({ words: chance.integer({ min: 4, max: 12 }) }),
       sentence: chance.sentence(),

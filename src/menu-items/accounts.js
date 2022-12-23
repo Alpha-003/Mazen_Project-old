@@ -34,6 +34,18 @@ const accounts = {
           title: <FormattedMessage id="search-people" />,
           type: 'item',
           url: '/people/search'
+        },
+        {
+          id: 'people-customers',
+          title: <FormattedMessage id="people-customers" />,
+          type: 'item',
+          url: '/people/customers'
+        },
+        {
+          id: 'people-employees',
+          title: <FormattedMessage id="people-employees" />,
+          type: 'item',
+          url: '/people/employees'
         }
       ]
     },
@@ -50,7 +62,7 @@ const accounts = {
           url: '/organization/list'
         }
       ]
-    },
+    }
   ]
 };
 

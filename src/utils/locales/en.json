@@ -145,5 +145,7 @@
   "support": "Support",
   "tickets": "Tickets",
   "all-people": "All",
-  "search-people": "Search"
+  "search-people": "Search",
+  "people-customers": "Customers",
+  "people-employees": "Employees"
 }

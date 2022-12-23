@@ -66,7 +66,8 @@ const newPerson = (index) => {
     avatar: tempData.number.status(1, 10),
     skills: tempData.skill,
     time: tempData.time,
-    amount:tempData.number.amount
+    amount: tempData.number.amount,
+    gender: tempData.gender
   };
 };
 
