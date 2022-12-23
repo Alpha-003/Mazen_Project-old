@@ -1,6 +1,6 @@
 import { useState } from 'react';
 // material-ui
-import { CardContent, CardHeader, IconButton, Typography, Card, Box, Button, Grid, Stack, Menu, MenuItem } from '@mui/material';
+import { CardContent, CardHeader, IconButton, Typography, Card, Box, Button, Grid, Stack, Menu, MenuItem, useTheme } from '@mui/material';
 //  @ant-design/icon
 import { MoreOutlined, PhoneOutlined, EnvironmentOutlined } from '@ant-design/icons';
 // project import
@@ -15,13 +15,14 @@ const TabAddressess = () => {
   const handleClick = (event) => {
     setAnchorEl(event?.currentTarget);
   };
+  const theme = useTheme();
   const cardHeaderDefault = {
     marginLeft: '10px',
     fontSize: '12px',
     borderRadius: '10px',
     fontWeight: 500,
-    color: '#1890FF',
-    background: '#E6F7FF',
+    color: theme.palette.primary.main,
+    background: theme.palette.primary.lighter,
     p: '0 8px'
   };
   const cardContentDefault = {

@@ -120,7 +120,6 @@ const TicketsSearch = Loadable(lazy(() => import('pages/accounts/people/search/t
 const MembersSearch = Loadable(lazy(() => import('pages/accounts/people/search/tabs/members')));
 const PaymentsSearch = Loadable(lazy(() => import('pages/accounts/people/search/tabs/payments')));
 
-
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -462,11 +461,11 @@ const MainRoutes = {
           children: [
             {
               path: 'all',
-              element: < AllUserList />
+              element: <AllUserList />
             },
             {
               path: 'search',
-              element: <PeopleSearch />,
+              element: <PeopleSearch search={true} />,
               children: [
                 {
                   path: 'details',
@@ -500,11 +499,10 @@ const MainRoutes = {
                   path: 'payments',
                   element: <PaymentsSearch />
                 }
-
               ]
             }
           ]
-        },
+        }
       ]
     },
     {
