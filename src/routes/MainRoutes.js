@@ -462,8 +462,39 @@ const MainRoutes = {
         },
         // profile
         {
-          path: 'profile',
-          element: <UserTabPersonal />
+          path: 'profiles',
+          children: [
+            {
+              path: 'user',
+              element: <UserProfile />,
+              children: [
+                {
+                  path: 'personal',
+                  element: <UserTabPersonal />
+                },
+                {
+                  path: 'payment',
+                  element: <UserTabAddressess />
+                },
+                {
+                  path: 'password',
+                  element: <UserTabPassword />
+                },
+                {
+                  path: 'settings',
+                  element: <UserTabSettings />
+                }
+              ]
+            },
+            {
+              path: 'user-list',
+              element: <ProfileUserList />
+            },
+            {
+              path: 'user-card',
+              element: <ProfileUserCard />
+            }
+          ]
         },
 
         // account start

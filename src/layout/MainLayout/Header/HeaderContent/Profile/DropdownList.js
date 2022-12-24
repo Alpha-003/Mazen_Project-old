@@ -10,16 +10,22 @@ import { EditOutlined, LaptopOutlined, LogoutOutlined, UserOutlined, UserSwitchO
 import useAuth from 'hooks/useAuth';
 // ==============================|| HEADER PROFILE - PROFILE TAB ||============================== //
 
-const DropdownList = ({ handleLogout }) => {
+const DropdownList = ({ handleLogout, setOpen }) => {
   const { user } = useAuth();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
+    setOpen(false);
   };
 
   return (
     <List component="nav" sx={{ p: 0, '& .MuiListItemIcon-root': { minWidth: 32 } }}>
-      <ListItemButton selected={selectedIndex === 0} component={Link} to="/profile" onClick={(event) => handleListItemClick(event, 0)}>
+      <ListItemButton
+        selected={selectedIndex === 0}
+        component={Link}
+        to="/profiles/user/personal"
+        onClick={(event) => handleListItemClick(event, 0)}
+      >
         <ListItemIcon>
           <UserOutlined />
         </ListItemIcon>
@@ -64,7 +70,8 @@ const DropdownList = ({ handleLogout }) => {
 };
 
 DropdownList.propTypes = {
-  handleLogout: PropTypes.func
+  handleLogout: PropTypes.func,
+  setOpen: PropTypes.func
 };
 
 export default DropdownList;
