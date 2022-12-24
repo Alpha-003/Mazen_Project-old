@@ -460,6 +460,13 @@ const MainRoutes = {
           path: 'pricing',
           element: <PricingPage />
         },
+        // profile
+        {
+          path: 'profile',
+          element: <UserTabPersonal />
+        },
+
+        // account start
         {
           path: '/people',
           children: [
@@ -532,6 +539,7 @@ const MainRoutes = {
             }
           ]
         }
+        // account end
       ]
     },
     {

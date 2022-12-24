@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-
+import { Link } from 'react-router-dom';
 // material-ui
 import { List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 
@@ -19,13 +19,13 @@ const DropdownList = ({ handleLogout }) => {
 
   return (
     <List component="nav" sx={{ p: 0, '& .MuiListItemIcon-root': { minWidth: 32 } }}>
-      <ListItemButton selected={selectedIndex === 0} onClick={(event) => handleListItemClick(event, 0)}>
+      <ListItemButton selected={selectedIndex === 0} component={Link} to="/profile" onClick={(event) => handleListItemClick(event, 0)}>
         <ListItemIcon>
           <UserOutlined />
         </ListItemIcon>
         <ListItemText primary="My Profile" />
       </ListItemButton>
-      <ListItemButton divider="true" selected={selectedIndex === 1} onClick={(event) => handleListItemClick(event, 1)}>
+      <ListItemButton divider={true} selected={selectedIndex === 1} onClick={(event) => handleListItemClick(event, 1)}>
         <ListItemIcon>
           <EditOutlined />
         </ListItemIcon>
@@ -47,14 +47,14 @@ const DropdownList = ({ handleLogout }) => {
           </ListItemButton>
         </>
       )}
-      <ListItemButton divider="true" selected={selectedIndex === 5} onClick={(event) => handleListItemClick(event, 5)}>
+      <ListItemButton divider={true} selected={selectedIndex === 5} onClick={(event) => handleListItemClick(event, 5)}>
         <ListItemIcon>
           <QuestionCircleOutlined />
         </ListItemIcon>
         <ListItemText primary="Help Center" />
       </ListItemButton>
       <ListItemButton selected={selectedIndex === 2} onClick={handleLogout} sx={{ color: 'error.main' }}>
-        <ListItemIcon sx={{ rotate: '-90deg', transformOrigin: '23% 45%',color: 'error.main' }}>
+        <ListItemIcon sx={{ rotate: '-90deg', transformOrigin: '23% 45%', color: 'error.main' }}>
           <LogoutOutlined />
         </ListItemIcon>
         <ListItemText primary="Logout" />
