@@ -36,7 +36,7 @@ const TabAddresses = () => {
     setAnchorEl(null);
   };
   return (
-    <Card>
+    <Card sx={{ boxShadow: 'none', margin: '20px' }}>
       <CardHeader
         title="Address Book"
         action={

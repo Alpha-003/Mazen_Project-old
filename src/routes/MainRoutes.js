@@ -119,7 +119,7 @@ const QuotationsSearch = Loadable(lazy(() => import('pages/accounts/people/searc
 const OrdersSearch = Loadable(lazy(() => import('pages/accounts/people/search/tabs/orders')));
 const ProjectsSearch = Loadable(lazy(() => import('pages/accounts/people/search/tabs/projects')));
 const TicketsSearch = Loadable(lazy(() => import('pages/accounts/people/search/tabs/tickets')));
-const MembersSearch = Loadable(lazy(() => import('pages/accounts/people/search/tabs/members')));
+const OrganizationsSearch = Loadable(lazy(() => import('pages/accounts/people/search/tabs/organizations')));
 const PaymentsSearch = Loadable(lazy(() => import('pages/accounts/people/search/tabs/payments')));
 
 // ==============================|| MAIN ROUTING ||============================== //
@@ -502,8 +502,8 @@ const MainRoutes = {
                   element: <TicketsSearch />
                 },
                 {
-                  path: 'members',
-                  element: <MembersSearch />
+                  path: 'organizations',
+                  element: <OrganizationsSearch />
                 },
                 {
                   path: 'payments',

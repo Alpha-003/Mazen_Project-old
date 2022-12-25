@@ -44,6 +44,7 @@ import { useTheme } from '@mui/material/styles';
 // assets
 // import { CloseOutlined } from '@ant-design/icons';
 import React from 'react';
+import Genders from 'components/custom/Gender';
 function useInputRef() {
   return useOutletContext();
 }
@@ -51,6 +52,7 @@ function useInputRef() {
 const TabDetails = () => {
   // theme
   const theme = useTheme();
+  // borders
 
   const maxDate = new Date();
   maxDate.setFullYear(maxDate.getFullYear() - 18);
@@ -281,14 +283,7 @@ const TabDetails = () => {
                     {/* gender */}
                     <Grid item xs={12} sm={6}>
                       <Stack spaceing={1.25}>
-                        <ToggleButtonGroup color="primary" value={gend} exclusive onChange={setChange} aria-label="Platform">
-                          <ToggleButton sx={{ width: '93px' }} value="male">
-                            Male
-                          </ToggleButton>
-                          <ToggleButton sx={{ width: '93px' }} value="female">
-                            Female
-                          </ToggleButton>
-                        </ToggleButtonGroup>
+                        <Genders gendVal={values.gender} />
                       </Stack>
                     </Grid>
                   </Grid>

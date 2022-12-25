@@ -15,6 +15,7 @@ import {
   IconButton,
   CardContent
 } from '@mui/material';
+import PaginationComp from 'components/custom/PaginationComp';
 import React from 'react';
 
 const TabQuotations = () => {
@@ -25,7 +26,6 @@ const TabQuotations = () => {
   const handleClick = (event) => {
     setAnchorEl(event?.currentTarget);
   };
-
   // custom styles
   const mainCardHeaderDefault = {
     marginLeft: '10px',
@@ -67,7 +67,7 @@ const TabQuotations = () => {
     setAnchorEl(null);
   };
   return (
-    <Card sx={{boxShadow:"none",margin:"20px"}}>
+    <Card sx={{ boxShadow: 'none', margin: '20px' }}>
       <CardHeader
         title={
           <Grid container alignItems="center">
@@ -120,15 +120,15 @@ const TabQuotations = () => {
           </Button>
         }
       />
-      <Grid container spacing={1}>
+      <Grid container spacing={1} justifyContent="center">
         <Grid item md={12}>
           <Card sx={cardStyle}>
             <CardHeader
               sx={{ borderBottom: 1, borderColor: '#e6ebf1' }}
               title={
                 <Stack direction="row" alignItems="center">
-                  <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>Office New Giza</Typography>
-                  <Typography sx={cardHeaderDefault}>Default</Typography>
+                  <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>Quote #500-126334-427</Typography>
+                  <Typography sx={cardHeaderDefault}>In Progress</Typography>
                 </Stack>
               }
               subheader={
@@ -202,25 +202,11 @@ const TabQuotations = () => {
                     </Stack>
                     <Stack direction="row" spacing={1} alignItems="center">
                       <EnvironmentOutlined />
-                      <Typography sx={cardText}>Office New Giza</Typography>
+                      <Typography sx={cardText}>Quote #500-126334-427</Typography>
                     </Stack>
                   </Stack>
                 </Stack>
               </Stack>
-              {/* <Stack spacing={1}>
-                  <Typography>101,5z Mubarak Street, Ard Elgolf, Cairo</Typography>
-                  <Stack direction="row" spacing={2}>
-                    <Stack direction="row" spacing={0.5} alignItems="center">
-                      <PhoneOutlined />
-                      <Typography>+201097977924</Typography>
-                    </Stack>
-                    <Stack direction="row" spacing={0.5} alignItems="center">
-                      <EnvironmentOutlined />
-
-                      <Typography>+201097977924</Typography>
-                    </Stack>
-                  </Stack>
-                </Stack> */}
             </CardContent>
           </Card>
         </Grid>
@@ -230,8 +216,8 @@ const TabQuotations = () => {
               sx={{ borderBottom: 1, borderColor: '#e6ebf1' }}
               title={
                 <Stack direction="row" alignItems="center">
-                  <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>Office New Giza</Typography>
-                  <Typography sx={cardHeaderDefault}>Default</Typography>
+                  <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>Quote #500-126334-427</Typography>
+                  <Typography sx={cardHeaderDefault}>In Progress</Typography>
                 </Stack>
               }
               subheader={
@@ -285,12 +271,12 @@ const TabQuotations = () => {
               </MenuItem>
             </Menu>
             <CardContent>
-                <Stack direction="row">
-                  <CardHeader title={<Typography sx={cardText}>3</Typography>} subheader="Items" />
-                  <CardHeader title={<Typography sx={cardText}>3 Days</Typography>} subheader="Tile Limit" />
-                  <CardHeader title={<Typography sx={cardText}>2nd</Typography>} subheader="Version" />
-                  <CardHeader title={<Typography sx={cardText}>750,000 EGP</Typography>} subheader="Total" />
-                </Stack>
+              <Stack direction="row">
+                <CardHeader title={<Typography sx={cardText}>3</Typography>} subheader="Items" />
+                <CardHeader title={<Typography sx={cardText}>3 Days</Typography>} subheader="Tile Limit" />
+                <CardHeader title={<Typography sx={cardText}>2nd</Typography>} subheader="Version" />
+                <CardHeader title={<Typography sx={cardText}>750,000 EGP</Typography>} subheader="Total" />
+              </Stack>
             </CardContent>
           </Card>
         </Grid>
@@ -300,8 +286,8 @@ const TabQuotations = () => {
               sx={{ borderBottom: 1, borderColor: '#e6ebf1' }}
               title={
                 <Stack direction="row" alignItems="center">
-                  <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>Office New Giza</Typography>
-                  <Typography sx={cardHeaderDefault}>Default</Typography>
+                  <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>Quote #500-126334-427</Typography>
+                  <Typography sx={cardHeaderDefault}>In Progress</Typography>
                 </Stack>
               }
               subheader={
@@ -355,12 +341,12 @@ const TabQuotations = () => {
               </MenuItem>
             </Menu>
             <CardContent>
-                <Stack direction="row">
-                  <CardHeader title={<Typography sx={cardText}>3</Typography>} subheader="Items" />
-                  <CardHeader title={<Typography sx={cardText}>3 Days</Typography>} subheader="Tile Limit" />
-                  <CardHeader title={<Typography sx={cardText}>2nd</Typography>} subheader="Version" />
-                  <CardHeader title={<Typography sx={cardText}>750,000 EGP</Typography>} subheader="Total" />
-                </Stack>
+              <Stack direction="row">
+                <CardHeader title={<Typography sx={cardText}>3</Typography>} subheader="Items" />
+                <CardHeader title={<Typography sx={cardText}>3 Days</Typography>} subheader="Tile Limit" />
+                <CardHeader title={<Typography sx={cardText}>2nd</Typography>} subheader="Version" />
+                <CardHeader title={<Typography sx={cardText}>750,000 EGP</Typography>} subheader="Total" />
+              </Stack>
             </CardContent>
           </Card>
         </Grid>
@@ -370,8 +356,8 @@ const TabQuotations = () => {
               sx={{ borderBottom: 1, borderColor: '#e6ebf1' }}
               title={
                 <Stack direction="row" alignItems="center">
-                  <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>Office New Giza</Typography>
-                  <Typography sx={cardHeaderDefault}>Default</Typography>
+                  <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>Quote #500-126334-427</Typography>
+                  <Typography sx={cardHeaderDefault}>In Progress</Typography>
                 </Stack>
               }
               subheader={
@@ -425,12 +411,12 @@ const TabQuotations = () => {
               </MenuItem>
             </Menu>
             <CardContent>
-                <Stack direction="row">
-                  <CardHeader title={<Typography sx={cardText}>3</Typography>} subheader="Items" />
-                  <CardHeader title={<Typography sx={cardText}>3 Days</Typography>} subheader="Tile Limit" />
-                  <CardHeader title={<Typography sx={cardText}>2nd</Typography>} subheader="Version" />
-                  <CardHeader title={<Typography sx={cardText}>750,000 EGP</Typography>} subheader="Total" />
-                </Stack>
+              <Stack direction="row">
+                <CardHeader title={<Typography sx={cardText}>3</Typography>} subheader="Items" />
+                <CardHeader title={<Typography sx={cardText}>3 Days</Typography>} subheader="Tile Limit" />
+                <CardHeader title={<Typography sx={cardText}>2nd</Typography>} subheader="Version" />
+                <CardHeader title={<Typography sx={cardText}>750,000 EGP</Typography>} subheader="Total" />
+              </Stack>
             </CardContent>
           </Card>
         </Grid>
@@ -440,8 +426,8 @@ const TabQuotations = () => {
               sx={{ borderBottom: 1, borderColor: '#e6ebf1' }}
               title={
                 <Stack direction="row" alignItems="center">
-                  <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>Office New Giza</Typography>
-                  <Typography sx={cardHeaderDefault}>Default</Typography>
+                  <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>Quote #500-126334-427</Typography>
+                  <Typography sx={cardHeaderDefault}>In Progress</Typography>
                 </Stack>
               }
               subheader={
@@ -495,12 +481,12 @@ const TabQuotations = () => {
               </MenuItem>
             </Menu>
             <CardContent>
-                <Stack direction="row">
-                  <CardHeader title={<Typography sx={cardText}>3</Typography>} subheader="Items" />
-                  <CardHeader title={<Typography sx={cardText}>3 Days</Typography>} subheader="Tile Limit" />
-                  <CardHeader title={<Typography sx={cardText}>2nd</Typography>} subheader="Version" />
-                  <CardHeader title={<Typography sx={cardText}>750,000 EGP</Typography>} subheader="Total" />
-                </Stack>
+              <Stack direction="row">
+                <CardHeader title={<Typography sx={cardText}>3</Typography>} subheader="Items" />
+                <CardHeader title={<Typography sx={cardText}>3 Days</Typography>} subheader="Tile Limit" />
+                <CardHeader title={<Typography sx={cardText}>2nd</Typography>} subheader="Version" />
+                <CardHeader title={<Typography sx={cardText}>750,000 EGP</Typography>} subheader="Total" />
+              </Stack>
             </CardContent>
           </Card>
         </Grid>
@@ -510,8 +496,8 @@ const TabQuotations = () => {
               sx={{ borderBottom: 1, borderColor: '#e6ebf1' }}
               title={
                 <Stack direction="row" alignItems="center">
-                  <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>Office New Giza</Typography>
-                  <Typography sx={cardHeaderDefault}>Default</Typography>
+                  <Typography sx={{ fontSize: '16px', fontWeight: 600 }}>Quote #500-126334-427</Typography>
+                  <Typography sx={cardHeaderDefault}>In Progress</Typography>
                 </Stack>
               }
               subheader={
@@ -565,14 +551,17 @@ const TabQuotations = () => {
               </MenuItem>
             </Menu>
             <CardContent>
-                <Stack direction="row">
-                  <CardHeader title={<Typography sx={cardText}>3</Typography>} subheader="Items" />
-                  <CardHeader title={<Typography sx={cardText}>3 Days</Typography>} subheader="Tile Limit" />
-                  <CardHeader title={<Typography sx={cardText}>2nd</Typography>} subheader="Version" />
-                  <CardHeader title={<Typography sx={cardText}>750,000 EGP</Typography>} subheader="Total" />
-                </Stack>
+              <Stack direction="row">
+                <CardHeader title={<Typography sx={cardText}>3</Typography>} subheader="Items" />
+                <CardHeader title={<Typography sx={cardText}>3 Days</Typography>} subheader="Tile Limit" />
+                <CardHeader title={<Typography sx={cardText}>2nd</Typography>} subheader="Version" />
+                <CardHeader title={<Typography sx={cardText}>750,000 EGP</Typography>} subheader="Total" />
+              </Stack>
             </CardContent>
           </Card>
+        </Grid>
+        <Grid item>
+          <PaginationComp pageNum={6} />
         </Grid>
       </Grid>
     </Card>

@@ -29,7 +29,7 @@ const SearchTabs = () => {
     case '/people/search/tickets':
       selectedTab = 5;
       break;
-    case '/people/search/members':
+    case '/people/search/organizations':
       selectedTab = 6;
       break;
     case '/people/search/payments':
@@ -47,7 +47,7 @@ const SearchTabs = () => {
   };
 
   return (
-    <MainCard border={false} boxShadow>
+    <MainCard border={false} boxShadow sx={{ mt: '20px' }}>
       <Box sx={{ width: '100%' }}>
         <Tabs value={value} onChange={handleChange} variant="scrollable" scrollButtons="auto" aria-label="account profile tab">
           <Tab label="Details" component={Link} to="/people/search/details" />
@@ -56,7 +56,7 @@ const SearchTabs = () => {
           <Tab label="Orders" component={Link} to="/people/search/orders" />
           <Tab label="Projects" component={Link} to="/people/search/projects" />
           <Tab label="Tickets" component={Link} to="/people/search/tickets" />
-          <Tab label="Members" component={Link} to="/people/search/members" />
+          <Tab label="Organizations" component={Link} to="/people/search/organizations" />
           <Tab label="Payments" component={Link} to="/people/search/payments" />
         </Tabs>
       </Box>
