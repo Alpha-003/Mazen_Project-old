@@ -6,7 +6,8 @@ import MainCard from 'components/MainCard';
 
 // assets
 import { SearchOutlined } from '@ant-design/icons';
-
+// proptypes
+import PropTypes from 'prop-types';
 // image
 import Avatar from 'components/@extended/Avatar';
 import SearchTabs from './tabs/main';
@@ -209,10 +210,12 @@ const PeopleSearch = ({ search }) => {
       ) : (
         ''
       )}
-      <Box sx={{ height: '20px' }}></Box>
       {search ? <SearchTabs /> : <UserTabPersonal />}
     </Grid>
   );
+};
+PeopleSearch.propTypes = {
+  search: PropTypes.bool
 };
 
 export default PeopleSearch;

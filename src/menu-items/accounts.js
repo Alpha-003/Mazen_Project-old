@@ -33,7 +33,7 @@ const accounts = {
           id: 'people-search',
           title: <FormattedMessage id="search" />,
           type: 'item',
-          url: '/people/search'
+          url: '/people/search/details'
         },
         {
           id: 'people-customers',
