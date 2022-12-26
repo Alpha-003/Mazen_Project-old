@@ -184,7 +184,7 @@ const AllUserList = () => {
     <MainCard content={false}>
       <ScrollX>
         <ReactTable
-          tableName="Organization"
+          tableName="agency"
           columns={columns}
           data={data}
           handleAdd={handleAdd}
@@ -196,7 +196,7 @@ const AllUserList = () => {
 
       {/* add org dialog */}
       <Dialog maxWidth="sm" fullWidth onClose={handleAdd} open={add} sx={{ '& .MuiDialog-paper': { p: 0 } }}>
-        {add && <AddOrg user={org} type="all" onCancel={handleAdd} />}
+        {add && <AddOrg user={org} orgType="Agency" onCancel={handleAdd} />}
       </Dialog>
     </MainCard>
   );
