@@ -110,6 +110,8 @@ const PricingPage = Loadable(lazy(() => import('pages/extra-pages/pricing')));
 const AllUserList = Loadable(lazy(() => import('pages/accounts/people/all')));
 const CustomersList = Loadable(lazy(() => import('pages/accounts/people/customers')));
 const EmployeesList = Loadable(lazy(() => import('pages/accounts/people/employees')));
+// account - organization
+const AllOrgList = Loadable(lazy(() => import('pages/accounts/organization/all')));
 
 // accoutn - people - search
 const PeopleSearch = Loadable(lazy(() => import('pages/accounts/people/search/search')));
@@ -458,6 +460,44 @@ const MainRoutes = {
           path: 'pricing',
           element: <PricingPage />
         },
+        // profile
+        {
+          path: 'profiles',
+          children: [
+            {
+              path: 'user',
+              element: <UserProfile />,
+              children: [
+                {
+                  path: 'personal',
+                  element: <UserTabPersonal />
+                },
+                {
+                  path: 'payment',
+                  element: <UserTabAddressess />
+                },
+                {
+                  path: 'password',
+                  element: <UserTabPassword />
+                },
+                {
+                  path: 'settings',
+                  element: <UserTabSettings />
+                }
+              ]
+            },
+            {
+              path: 'user-list',
+              element: <ProfileUserList />
+            },
+            {
+              path: 'user-card',
+              element: <ProfileUserCard />
+            }
+          ]
+        },
+
+        // account start
         {
           path: '/people',
           children: [
@@ -512,7 +552,25 @@ const MainRoutes = {
               ]
             }
           ]
+        },
+        {
+          path: '/organization',
+          children: [
+            {
+              path: 'all',
+              element: <AllOrgList />
+            },
+            {
+              path: 'customers',
+              element: <CustomersList />
+            },
+            {
+              path: 'employees',
+              element: <EmployeesList />
+            }
+          ]
         }
+        // account end
       ]
     },
     {

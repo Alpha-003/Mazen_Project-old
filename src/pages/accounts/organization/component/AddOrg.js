@@ -42,30 +42,31 @@ import MainCard from 'components/MainCard';
 import { DeleteFilled, UserOutlined } from '@ant-design/icons';
 
 // constant
-const getInitialValues = (user) => {
-  const newUser = {
-    firstNameEN: '',
-    lastNameEN: '',
-    firstNameAR: '',
-    lastNameAR: '',
+const getInitialValues = (org) => {
+  const newOrg = {
+    nameEN: '',
+    nameAR: '',
+    printFreq: 'once',
+    orgSize: '1-5',
+    agencyCat: '',
+    note: '',
+    mobile: '',
+    mobile2: '',
+    landline: '',
     email: '',
-    mobileNumber: '',
-    ph1: '',
-    ph2: '',
-    jobTitle: 'owner',
-    lang: 'arabic'
+    website: ''
   };
 
-  if (user) {
-    newUser.name = user.fatherName;
-    newUser.location = user.address;
-    return _.merge({}, newUser, user);
+  if (org) {
+    newOrg.name = org.name;
+    newOrg.location = org.address;
+    return _.merge({}, newOrg, org);
   }
 
-  return newUser;
+  return newOrg;
 };
 
-// ==============================|| USER ADD / EDIT / DELETE ||============================== //
+// ==============================|| Org ADD / EDIT / DELETE ||============================== //
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   '& .MuiToggleButtonGroup-grouped': {
     margin: theme.spacing(1),
@@ -100,13 +101,13 @@ const GenderToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
 function useInputRef() {
   return useOutletContext();
 }
-const AddUser = ({ user, onCancel, title }) => {
-  title = title || 'User';
+const AddOrg = ({ org, onCancel, title }) => {
+  title = title || 'Organization';
   const dispatch = useDispatch();
-  const isCreating = !user;
+  const isCreating = !org;
   const inputRef = useInputRef();
 
-  const UserSchema = Yup.object().shape({
+  const OrgSchema = Yup.object().shape({
     name: Yup.string().max(255).required('Name is required'),
     orderStatus: Yup.string().required('Name is required'),
     email: Yup.string().max(255).required('Email is required').email('Must be a valid email'),
@@ -114,11 +115,11 @@ const AddUser = ({ user, onCancel, title }) => {
   });
 
   const deleteHandler = () => {
-    // dispatch(deleteUser(user?.id)); - delete
+    // dispatch(deleteOrg(Org?.id)); - delete
     dispatch(
       openSnackbar({
         open: true,
-        message: 'User deleted successfully.',
+        message: 'Org deleted successfully.',
         variant: 'alert',
         alert: {
           color: 'success'
@@ -130,16 +131,16 @@ const AddUser = ({ user, onCancel, title }) => {
   };
 
   const formik = useFormik({
-    initialValues: getInitialValues(user),
-    validationSchema: UserSchema,
+    initialValues: getInitialValues(org),
+    validationSchema: OrgSchema,
     onSubmit: (values, { setSubmitting }) => {
       try {
-        if (user) {
-          // dispatch(updateUser(user.id, newUser)); - update
+        if (org) {
+          // dispatch(updateOrg(Org.id, newOrg)); - update
           dispatch(
             openSnackbar({
               open: true,
-              message: 'User update successfully.',
+              message: 'Organization update successfully.',
               variant: 'alert',
               alert: {
                 color: 'success'
@@ -148,11 +149,11 @@ const AddUser = ({ user, onCancel, title }) => {
             })
           );
         } else {
-          // dispatch(createUser(newUser)); - add
+          // dispatch(createOrg(newOrg)); - add
           dispatch(
             openSnackbar({
               open: true,
-              message: 'User add successfully.',
+              message: 'Organization add successfully.',
               variant: 'alert',
               alert: {
                 color: 'success'
@@ -173,7 +174,7 @@ const AddUser = ({ user, onCancel, title }) => {
     color: 'red'
   };
   const { errors, touched, handleBlur, handleSubmit, handleChange, isSubmitting, values, setFieldValue } = formik;
-  const [type, setType] = useState('customer');
+  const [type, setType] = useState('Agency');
   const [gend, setGend] = useState('male');
 
   const employee = title == 'Employee';
@@ -194,7 +195,7 @@ const AddUser = ({ user, onCancel, title }) => {
     <FormikProvider value={formik}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
-          <DialogTitle>{user ? `Edit ${title}` : `New ${title}`}</DialogTitle>
+          <DialogTitle>{org ? `Edit ${title}` : `New ${title}`}</DialogTitle>
           <Divider />
           <DialogContent sx={{ p: 2.5 }}>
             <Grid container spacing={3}>
@@ -206,14 +207,24 @@ const AddUser = ({ user, onCancel, title }) => {
                         <MainCard title="Type" content={false} sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem' } }}>
                           <Box sx={{ p: 2 }}>
                             <StyledToggleButtonGroup value={type} exclusive onChange={handleType} aria-label="type" color="primary">
-                              <ToggleButton size="large" value="customer" aria-label="customer">
+                              <ToggleButton size="large" value="Agency" aria-label="agency">
                                 <Typography>
-                                  <UserOutlined sx={{ pr: 3 }} /> Customer
+                                  <UserOutlined sx={{ pr: 3 }} /> Agency
                                 </Typography>
                               </ToggleButton>
-                              <ToggleButton size="large" value="employee" aria-label="employee">
+                              <ToggleButton size="large" value="Business" aria-label="business">
                                 <Typography>
-                                  <UserOutlined sx={{ pr: 3 }} /> Employee
+                                  <UserOutlined sx={{ pr: 3 }} /> Business
+                                </Typography>
+                              </ToggleButton>
+                              <ToggleButton size="large" value="Supplier" aria-label="supplier">
+                                <Typography>
+                                  <UserOutlined sx={{ pr: 3 }} /> Supplier
+                                </Typography>
+                              </ToggleButton>
+                              <ToggleButton size="large" value="Manufacturer" aria-label="manufacturer">
+                                <Typography>
+                                  <UserOutlined sx={{ pr: 3 }} /> Manufacturer
                                 </Typography>
                               </ToggleButton>
                             </StyledToggleButtonGroup>
@@ -223,114 +234,74 @@ const AddUser = ({ user, onCancel, title }) => {
                     </Grid>
                   )}
                   <Grid item xs={12}>
-                    <MainCard title="Personal Details" content={false} sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem' } }}>
+                    <MainCard title={`${type} Details`} content={false} sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem' } }}>
                       <Box sx={{ p: 2.5 }}>
                         <Grid container spacing={3}>
-                          {/* first namee english */}
+                          {/*  name english */}
                           <Grid item xs={12} sm={6}>
                             <Stack spacing={1.25}>
-                              <InputLabel htmlFor="personal-first-name-eng">
-                                <span style={style}>*</span> First Name (English)
+                              <InputLabel htmlFor="name-eng">
+                                <span style={style}>*</span> {type} Name (English)
                               </InputLabel>
                               <TextField
                                 fullWidth
-                                id="personal-first-name-eng"
-                                value={values.firstNameEN}
-                                name="firstNameEN"
+                                id="name-eng"
+                                value={values.nameEN}
+                                name="nameEN"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
-                                placeholder="First Name Eng"
+                                placeholder="Name Eng"
                                 autoFocus
                                 inputRef={inputRef}
                               />
-                              {touched.firstname && errors.firstname && (
-                                <FormHelperText error id="personal-first-name-helper">
-                                  {errors.firstname}
+                              {touched.nameEN && errors.nameEN && (
+                                <FormHelperText error id="name-helper">
+                                  {errors.nameEN}
                                 </FormHelperText>
                               )}
                             </Stack>
                           </Grid>
-                          {/* first name arabic */}
+                          {/*  name arabic */}
                           <Grid item xs={12} sm={6}>
                             <Stack spacing={1.25}>
-                              <InputLabel htmlFor="personal-first-name-ar">
-                                <span style={style}>*</span> First Name (Arabic)
+                              <InputLabel htmlFor="name-ar">
+                                <span style={style}>*</span> {type} Name (Arabic)
                               </InputLabel>
                               <TextField
                                 fullWidth
-                                id="personal-first-nam-ar"
-                                value={values.firstNameAR}
-                                name="lastname"
+                                id="nam-ar"
+                                value={values.nameAR}
+                                name="nameAR"
                                 onBlur={handleBlur}
                                 onChange={handleChange}
                                 placeholder="First Name Arabic"
                               />
-                              {touched.lastname && errors.lastname && (
+                              {touched.nameAR && errors.nameAR && (
                                 <FormHelperText error id="personal-last-name-helper">
-                                  {errors.lastname}
+                                  {errors.nameAR}
                                 </FormHelperText>
                               )}
                             </Stack>
                           </Grid>
-                          {/* last name english */}
+                          {/* print frq */}
                           <Grid item xs={12} sm={6}>
                             <Stack spacing={1.25}>
-                              <InputLabel htmlFor="personal-last-name-eng">Last Name (English)</InputLabel>
-                              <TextField
-                                fullWidth
-                                id="personal-last-name-eng"
-                                value={values.lastNameEN}
-                                name="lastNameEN"
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                placeholder="Last Name English"
-                              />
-                              {touched.lastname && errors.lastname && (
-                                <FormHelperText error id="personal-last-name-helper">
-                                  {errors.lastname}
-                                </FormHelperText>
-                              )}
-                            </Stack>
-                          </Grid>
-                          {/* last name arabic */}
-                          <Grid item xs={12} sm={6}>
-                            <Stack spacing={1.25}>
-                              <InputLabel htmlFor="personal-last-name-ar">Last Name (Arabic)</InputLabel>
-                              <TextField
-                                fullWidth
-                                id="personal-last-name-ar"
-                                value={values.lastNameAR}
-                                name="lastname"
-                                onBlur={handleBlur}
-                                onChange={handleChange}
-                                placeholder="Last Name Arabic"
-                              />
-                              {touched.lastname && errors.lastname && (
-                                <FormHelperText error id="personal-last-name-helper">
-                                  {errors.lastname}
-                                </FormHelperText>
-                              )}
-                            </Stack>
-                          </Grid>
-                          {/* job title */}
-                          <Grid item xs={12} sm={6}>
-                            <Stack spacing={1.25}>
-                              <InputLabel htmlFor="job-title">Job Title</InputLabel>
-                              <Select id="job-title" value={values.jobTitle} name="jobTitle" onChange={handleChange}>
-                                <MenuItem value="owner">Owner</MenuItem>
-                                <MenuItem value="regulator">Regulator</MenuItem>
-                                <MenuItem value="client">Client</MenuItem>
+                              <InputLabel htmlFor="printingFreq">Printing Frequency</InputLabel>
+                              <Select id="printingFreq" value={values.printFreq} name="printingFreq" onChange={handleChange}>
+                                <MenuItem value="once">Once a month</MenuItem>
+                                <MenuItem value="twice">Twice a month</MenuItem>
+                                <MenuItem value="triple">Triple a month</MenuItem>
                               </Select>
                             </Stack>
                           </Grid>
-                          {/* Preferred Language */}
+                          {/* org size*/}
                           <Grid item xs={12} sm={6}>
                             <Stack spacing={1.25}>
-                              <InputLabel htmlFor="lang">Preferred Language</InputLabel>
-                              <Select id="lang" value={values.lang} name="lang" onChange={handleChange}>
-                                <MenuItem value="english">English</MenuItem>
-                                <MenuItem value="arabic">Arabic</MenuItem>
-                                <MenuItem value="spanish">Spanish</MenuItem>
+                              <InputLabel htmlFor="orgSize">Organization Size</InputLabel>
+                              <Select id="orgSize" value={values.orgSize} name="emp" onChange={handleChange}>
+                                <MenuItem value="1-5">1-5 Employees</MenuItem>
+                                <MenuItem value="6-10">6-10 Employees</MenuItem>
+                                <MenuItem value="11-15">11-15 Employees</MenuItem>
                               </Select>
                             </Stack>
                           </Grid>
@@ -534,7 +505,7 @@ const AddUser = ({ user, onCancel, title }) => {
                     Cancel
                   </Button>
                   <Button type="submit" variant="contained" disabled={isSubmitting}>
-                    {user ? `Edit ${title}` : `Add ${title}`}
+                    {org ? `Edit ${title}` : `Add ${title}`}
                   </Button>
                 </Stack>
               </Grid>
@@ -546,10 +517,10 @@ const AddUser = ({ user, onCancel, title }) => {
   );
 };
 
-AddUser.propTypes = {
-  user: PropTypes.object,
+AddOrg.propTypes = {
+  org: PropTypes.object,
   onCancel: PropTypes.func,
   title: PropTypes.string
 };
 
-export default AddUser;
+export default AddOrg;

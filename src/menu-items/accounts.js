@@ -25,13 +25,13 @@ const accounts = {
       children: [
         {
           id: 'people-list',
-          title: <FormattedMessage id="all-people" />,
+          title: <FormattedMessage id="all" />,
           type: 'item',
           url: '/people/all'
         },
         {
           id: 'people-search',
-          title: <FormattedMessage id="search-people" />,
+          title: <FormattedMessage id="search" />,
           type: 'item',
           url: '/people/search/details'
         },
@@ -57,9 +57,9 @@ const accounts = {
       children: [
         {
           id: 'organization-list',
-          title: <FormattedMessage id="list" />,
+          title: <FormattedMessage id="all" />,
           type: 'item',
-          url: '/organization/list'
+          url: '/organization/all'
         }
       ]
     }

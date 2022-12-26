@@ -30,7 +30,6 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired
 };
 
-
 // ==============================|| HEADER CONTENT - PROFILE ||============================== //
 
 const Profile = () => {
@@ -131,7 +130,7 @@ const Profile = () => {
                     </CardContent>
                     {open && (
                       <>
-                        <DropdownList handleLogout={handleLogout} />
+                        <DropdownList handleLogout={handleLogout} setOpen={setOpen} />
                       </>
                     )}
                   </MainCard>
