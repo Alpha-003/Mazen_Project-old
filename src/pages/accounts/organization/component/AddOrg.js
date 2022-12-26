@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useOutletContext } from 'react-router';
 
 // material-ui
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import {
   Box,
   Button,
@@ -22,7 +22,10 @@ import {
   Tooltip,
   ToggleButton,
   ToggleButtonGroup,
-  Typography
+  Typography,
+  Autocomplete,
+  Chip,
+  TextareaAutosize
 } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 
@@ -39,7 +42,7 @@ import IconButton from 'components/@extended/IconButton';
 import { openSnackbar } from 'store/reducers/snackbar';
 import MainCard from 'components/MainCard';
 // assets
-import { DeleteFilled, UserOutlined } from '@ant-design/icons';
+import { DeleteFilled, UserOutlined, CloseOutlined } from '@ant-design/icons';
 
 // constant
 const getInitialValues = (org) => {
@@ -48,7 +51,7 @@ const getInitialValues = (org) => {
     nameAR: '',
     printFreq: 'once',
     orgSize: '1-5',
-    agencyCat: '',
+    category: [],
     note: '',
     mobile: '',
     mobile2: '',
@@ -87,17 +90,6 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
     }
   }
 }));
-const GenderToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
-  '& .MuiToggleButtonGroup-grouped': {
-    border: `1px solid ${theme.palette.mode === 'dark' ? theme.palette.divider : theme.palette.grey.A800}`,
-    '&.Mui-disabled': {
-      border: 0
-    },
-    '&.Mui-selected': {
-      borderColor: theme.palette.mode === 'dark' ? theme.palette.primary.dark : theme.palette.primary.light
-    }
-  }
-}));
 function useInputRef() {
   return useOutletContext();
 }
@@ -106,14 +98,54 @@ const AddOrg = ({ org, onCancel, title }) => {
   const dispatch = useDispatch();
   const isCreating = !org;
   const inputRef = useInputRef();
+  const theme = useTheme();
+  const categories = [
+    'Adobe XD',
+    'After Effect',
+    'Angular',
+    'Animation',
+    'ASP.Net',
+    'Bootstrap',
+    'C#',
+    'CC',
+    'Corel Draw',
+    'CSS',
+    'DIV',
+    'Dreamweaver',
+    'Figma',
+    'Graphics',
+    'HTML',
+    'Illustrator',
+    'J2Ee',
+    'Java',
+    'Javascript',
+    'JQuery',
+    'Logo Design',
+    'Material UI',
+    'Motion',
+    'MVC',
+    'MySQL',
+    'NodeJS',
+    'npm',
+    'Photoshop',
+    'PHP',
+    'React',
+    'Redux',
+    'Reduxjs & tooltit',
+    'SASS',
+    'SCSS',
+    'SQL Server',
+    'SVG',
+    'UI/UX',
+    'User Interface Designing',
+    'Wordpress'
+  ];
 
   const OrgSchema = Yup.object().shape({
-    name: Yup.string().max(255).required('Name is required'),
-    orderStatus: Yup.string().required('Name is required'),
-    email: Yup.string().max(255).required('Email is required').email('Must be a valid email'),
-    location: Yup.string().max(500)
+    nameEN: Yup.string().max(255).required('Name(English) is required'),
+    nameAR: Yup.string().max(255).required('Name(Arabic) is required'),
+    mobile: Yup.number().max(11)
   });
-
   const deleteHandler = () => {
     // dispatch(deleteOrg(Org?.id)); - delete
     dispatch(
@@ -175,14 +207,10 @@ const AddOrg = ({ org, onCancel, title }) => {
   };
   const { errors, touched, handleBlur, handleSubmit, handleChange, isSubmitting, values, setFieldValue } = formik;
   const [type, setType] = useState('Agency');
-  const [gend, setGend] = useState('male');
 
   const employee = title == 'Employee';
   const [isEmp, setIsEmp] = useState(employee);
 
-  const setChange = (event, newAlignment) => {
-    setGend(newAlignment);
-  };
   const handleType = (e, newType) => {
     setType(newType);
     if (newType == 'employee') {
@@ -305,17 +333,78 @@ const AddOrg = ({ org, onCancel, title }) => {
                               </Select>
                             </Stack>
                           </Grid>
-                          {/* genders */}
-                          <Grid item xs={12} sm={6}>
+                          {/* Category */}
+                          <Grid item sm={12}>
                             <Stack spaceing={1.25}>
-                              <GenderToggleButtonGroup color="primary" value={gend} exclusive onChange={setChange} aria-label="Platform">
-                                <ToggleButton sx={{ width: '93px' }} value="male">
-                                  Male
-                                </ToggleButton>
-                                <ToggleButton sx={{ width: '93px' }} value="female">
-                                  Female
-                                </ToggleButton>
-                              </GenderToggleButtonGroup>
+                              <InputLabel htmlFor="category" sx={{ mb: '8px' }}>
+                                {type} Category
+                              </InputLabel>
+                              <Autocomplete
+                                multiple={true}
+                                fullWidth
+                                id="category"
+                                options={categories}
+                                value={values.category}
+                                onBlur={handleBlur}
+                                getOptionLabel={(label) => label}
+                                onChange={(event, newValue) => {
+                                  setFieldValue('category', newValue);
+                                }}
+                                renderInput={(params) => <TextField {...params} name="category" placeholder="Type here..." />}
+                                renderTags={(value, getTagProps) =>
+                                  value.map((option, index) => (
+                                    <Chip
+                                      key={index}
+                                      {...getTagProps({ index })}
+                                      variant="combined"
+                                      label={option}
+                                      deleteIcon={<CloseOutlined style={{ fontSize: '0.75rem' }} />}
+                                      sx={{ color: 'text.primary' }}
+                                    />
+                                  ))
+                                }
+                                sx={{
+                                  '& .MuiOutlinedInput-root': {
+                                    p: 0,
+                                    height: '50px',
+                                    border: `1px solid ${theme.palette.grey[300]}`,
+                                    '& .MuiAutocomplete-tag': {
+                                      m: 1
+                                    },
+                                    '& fieldset': {
+                                      display: 'none'
+                                    },
+                                    '& .MuiAutocomplete-endAdornment': {
+                                      display: 'none'
+                                    },
+                                    '& .MuiAutocomplete-popupIndicator': {
+                                      display: 'none'
+                                    }
+                                  }
+                                }}
+                              />
+                            </Stack>
+                          </Grid>
+                          {/* Note */}
+                          <Grid item sm={12}>
+                            <Stack spacing={1.25}>
+                              <InputLabel htmlFor="note" sx={{ mb: '8px' }}>
+                                Note
+                              </InputLabel>
+                              <TextareaAutosize
+                                aria-label="minimum height"
+                                minRows={3}
+                                placeholder="Note"
+                                style={{
+                                  border: `1px solid ${theme.palette.grey[300]}`,
+                                  borderRadius: theme.shape.borderRadius,
+                                  padding: `10.5px 12px`,
+                                  '&:focus': {
+                                    borderColor: 'red',
+                                    outline
+                                  }
+                                }}
+                              />
                             </Stack>
                           </Grid>
                         </Grid>

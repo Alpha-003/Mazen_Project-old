@@ -8,12 +8,8 @@ import { CloseOutlined } from '@ant-design/icons';
 
 // material-ui
 import {
-  // Autocomplete,
   Box,
   Button,
-  // CardHeader,
-  // Chip,
-  // Divider,
   FormHelperText,
   Grid,
   InputLabel,
@@ -67,48 +63,47 @@ const TabDetails = () => {
   const setChange = (event, newAlignment) => {
     setGend(newAlignment);
   };
-const skills = [
-  'Adobe XD',
-  'After Effect',
-  'Angular',
-  'Animation',
-  'ASP.Net',
-  'Bootstrap',
-  'C#',
-  'CC',
-  'Corel Draw',
-  'CSS',
-  'DIV',
-  'Dreamweaver',
-  'Figma',
-  'Graphics',
-  'HTML',
-  'Illustrator',
-  'J2Ee',
-  'Java',
-  'Javascript',
-  'JQuery',
-  'Logo Design',
-  'Material UI',
-  'Motion',
-  'MVC',
-  'MySQL',
-  'NodeJS',
-  'npm',
-  'Photoshop',
-  'PHP',
-  'React',
-  'Redux',
-  'Reduxjs & tooltit',
-  'SASS',
-  'SCSS',
-  'SQL Server',
-  'SVG',
-  'UI/UX',
-  'User Interface Designing',
-  'Wordpress'
-];
-
+  const skills = [
+    'Adobe XD',
+    'After Effect',
+    'Angular',
+    'Animation',
+    'ASP.Net',
+    'Bootstrap',
+    'C#',
+    'CC',
+    'Corel Draw',
+    'CSS',
+    'DIV',
+    'Dreamweaver',
+    'Figma',
+    'Graphics',
+    'HTML',
+    'Illustrator',
+    'J2Ee',
+    'Java',
+    'Javascript',
+    'JQuery',
+    'Logo Design',
+    'Material UI',
+    'Motion',
+    'MVC',
+    'MySQL',
+    'NodeJS',
+    'npm',
+    'Photoshop',
+    'PHP',
+    'React',
+    'Redux',
+    'Reduxjs & tooltit',
+    'SASS',
+    'SCSS',
+    'SQL Server',
+    'SVG',
+    'UI/UX',
+    'User Interface Designing',
+    'Wordpress'
+  ];
 
   return (
     <Formik
@@ -188,7 +183,11 @@ const skills = [
           <Grid container columnSpacing={2} justifyContent="end">
             {/* right side  */}
             <Grid item md={7} xs={12}>
-              <MainCard title="Organization Information" content={false} sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem', color: theme.palette.text.secondary } }}>
+              <MainCard
+                title="Organization Information"
+                content={false}
+                sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem', color: theme.palette.text.secondary } }}
+              >
                 <Box sx={{ p: 2.5 }}>
                   <Grid container spacing={3}>
                     {/* first namee english */}
@@ -308,7 +307,11 @@ const skills = [
             </Grid>
             {/* left side */}
             <Grid item md={5} xs={12}>
-              <MainCard title="Contact Details" content={false} sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem', color: theme.palette.text.secondary } }}>
+              <MainCard
+                title="Contact Details"
+                content={false}
+                sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem', color: theme.palette.text.secondary } }}
+              >
                 <Box sx={{ p: 2.5 }}>
                   <Grid container spacing={3}>
                     {/* Mobile Number */}
@@ -429,7 +432,7 @@ const skills = [
         </form>
       )}
     </Formik>
-  )
+  );
 };
 
 export default TabDetails;
