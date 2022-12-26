@@ -67,47 +67,47 @@ const TabDetails = () => {
   const setChange = (event, newAlignment) => {
     setGend(newAlignment);
   };
-const skills = [
-  'Adobe XD',
-  'After Effect',
-  'Angular',
-  'Animation',
-  'ASP.Net',
-  'Bootstrap',
-  'C#',
-  'CC',
-  'Corel Draw',
-  'CSS',
-  'DIV',
-  'Dreamweaver',
-  'Figma',
-  'Graphics',
-  'HTML',
-  'Illustrator',
-  'J2Ee',
-  'Java',
-  'Javascript',
-  'JQuery',
-  'Logo Design',
-  'Material UI',
-  'Motion',
-  'MVC',
-  'MySQL',
-  'NodeJS',
-  'npm',
-  'Photoshop',
-  'PHP',
-  'React',
-  'Redux',
-  'Reduxjs & tooltit',
-  'SASS',
-  'SCSS',
-  'SQL Server',
-  'SVG',
-  'UI/UX',
-  'User Interface Designing',
-  'Wordpress'
-];
+  const skills = [
+    'Adobe XD',
+    'After Effect',
+    'Angular',
+    'Animation',
+    'ASP.Net',
+    'Bootstrap',
+    'C#',
+    'CC',
+    'Corel Draw',
+    'CSS',
+    'DIV',
+    'Dreamweaver',
+    'Figma',
+    'Graphics',
+    'HTML',
+    'Illustrator',
+    'J2Ee',
+    'Java',
+    'Javascript',
+    'JQuery',
+    'Logo Design',
+    'Material UI',
+    'Motion',
+    'MVC',
+    'MySQL',
+    'NodeJS',
+    'npm',
+    'Photoshop',
+    'PHP',
+    'React',
+    'Redux',
+    'Reduxjs & tooltit',
+    'SASS',
+    'SCSS',
+    'SQL Server',
+    'SVG',
+    'UI/UX',
+    'User Interface Designing',
+    'Wordpress'
+  ];
 
 
   return (
@@ -257,7 +257,7 @@ const skills = [
                     </Grid>
                     {/* Category  */}
                     <Grid item xs={12}>
-                      <Box sx={{ display: 'flex', flexWrap: 'wrap', listStyle: 'none', m: 0 }} component="ul">
+                      <Box sx={{ display: 'flex', flexWrap: 'wrap', listStyle: 'none', m: 0, p: 0 }} component="ul">
                         <Autocomplete
                           multiple
                           fullWidth
@@ -284,6 +284,8 @@ const skills = [
                           }
                           sx={{
                             '& .MuiOutlinedInput-root': {
+                              minHeight: '50px',
+                              border: `1px solid ${theme.palette.grey[300]}`,
                               p: 0,
                               '& .MuiAutocomplete-tag': {
                                 m: 1

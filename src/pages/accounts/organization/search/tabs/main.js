@@ -14,28 +14,28 @@ const SearchTabs = () => {
 
   let selectedTab = 0;
   switch (pathname) {
-    case '/people/search/addresses':
+    case '/organization/search/addresses':
       selectedTab = 1;
       break;
-    case '/people/search/quotations':
+    case '/organization/search/quotations':
       selectedTab = 2;
       break;
-    case '/people/search/orders':
+    case '/organization/search/orders':
       selectedTab = 3;
       break;
-    case '/people/search/projects':
+    case '/organization/search/projects':
       selectedTab = 4;
       break;
-    case '/people/search/tickets':
+    case '/organization/search/tickets':
       selectedTab = 5;
       break;
-    case '/people/search/members':
+    case '/organization/search/members':
       selectedTab = 6;
       break;
-    case '/people/search/payments':
+    case '/organization/search/payments':
       selectedTab = 7;
       break;
-    case '/people/search/details':
+    case '/organization/search/details':
     default:
       selectedTab = 0;
   }
@@ -50,14 +50,14 @@ const SearchTabs = () => {
     <MainCard border={false} boxShadow>
       <Box sx={{ width: '100%' }}>
         <Tabs value={value} onChange={handleChange} variant="scrollable" scrollButtons="auto" aria-label="account profile tab">
-          <Tab label="Details" component={Link} to="/people/search/details" />
-          <Tab label="Adresses" component={Link} to="/people/search/addresses" />
-          <Tab label="Quotations" component={Link} to="/people/search/quotations" />
-          <Tab label="Orders" component={Link} to="/people/search/orders" />
-          <Tab label="Projects" component={Link} to="/people/search/projects" />
-          <Tab label="Tickets" component={Link} to="/people/search/tickets" />
-          <Tab label="Members" component={Link} to="/people/search/members" />
-          <Tab label="Payments" component={Link} to="/people/search/payments" />
+          <Tab label="Details" component={Link} to="/organization/search/details" />
+          <Tab label="Adresses" component={Link} to="/organization/search/addresses" />
+          <Tab label="Quotations" component={Link} to="/organization/search/quotations" />
+          <Tab label="Orders" component={Link} to="/organization/search/orders" />
+          <Tab label="Projects" component={Link} to="/organization/search/projects" />
+          <Tab label="Tickets" component={Link} to="/organization/search/tickets" />
+          <Tab label="Members" component={Link} to="/organization/search/members" />
+          <Tab label="Payments" component={Link} to="/organization/search/payments" />
         </Tabs>
       </Box>
       <Box sx={{ mt: 2.5 }}>

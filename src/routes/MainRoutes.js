@@ -124,6 +124,17 @@ const TicketsSearch = Loadable(lazy(() => import('pages/accounts/people/search/t
 const OrganizationsSearch = Loadable(lazy(() => import('pages/accounts/people/search/tabs/organizations')));
 const PaymentsSearch = Loadable(lazy(() => import('pages/accounts/people/search/tabs/payments')));
 
+// accounts - organizations - search
+const OrganizationSearch = Loadable(lazy(() => import('pages/accounts/organization/search/search')));
+const OrgDetailsSearch = Loadable(lazy(() => import('pages/accounts/organization/search/tabs/details')));
+const OrgAddressesSearch = Loadable(lazy(() => import('pages/accounts/organization/search/tabs/addresses')));
+const OrgQuotationsSearch = Loadable(lazy(() => import('pages/accounts/organization/search/tabs/quotations')));
+const OrgOrdersSearch = Loadable(lazy(() => import('pages/accounts/organization/search/tabs/orders')));
+const OrgProjectsSearch = Loadable(lazy(() => import('pages/accounts/organization/search/tabs/projects')));
+const OrgTicketsSearch = Loadable(lazy(() => import('pages/accounts/organization/search/tabs/tickets')));
+const OrgMembersSearch = Loadable(lazy(() => import('pages/accounts/organization/search/tabs/members')));
+const OrgPaymentsSearch = Loadable(lazy(() => import('pages/accounts/organization/search/tabs/payments')));
+
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -497,7 +508,7 @@ const MainRoutes = {
           ]
         },
 
-        // account start
+        // account start / people start
         {
           path: '/people',
           children: [
@@ -553,6 +564,7 @@ const MainRoutes = {
             }
           ]
         },
+        // organization
         {
           path: '/organization',
           children: [
@@ -567,6 +579,44 @@ const MainRoutes = {
             {
               path: 'employees',
               element: <EmployeesList />
+            },
+            {
+              path: 'search',
+              element: <OrganizationSearch />,
+              children: [
+                {
+                  path: 'details',
+                  element: <OrgDetailsSearch />
+                },
+                {
+                  path: 'addresses',
+                  element: <OrgAddressesSearch />
+                },
+                {
+                  path: 'quotations',
+                  element: <OrgQuotationsSearch />
+                },
+                {
+                  path: 'orders',
+                  element: <OrgOrdersSearch />
+                },
+                {
+                  path: 'projects',
+                  element: <OrgProjectsSearch />
+                },
+                {
+                  path: 'tickets',
+                  element: <OrgTicketsSearch />
+                },
+                {
+                  path: 'members',
+                  element: <OrgMembersSearch />
+                },
+                {
+                  path: 'payments',
+                  element: <OrgPaymentsSearch />
+                }
+              ]
             }
           ]
         }
