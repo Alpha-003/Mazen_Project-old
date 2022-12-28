@@ -85,6 +85,12 @@ const accounts = {
           type: 'item',
           url: '/organization/manufacturer'
         },
+        {
+          id: 'organization-search',
+          title: <FormattedMessage id="search" />,
+          type: 'item',
+          url: '/organization/search/details'
+        }
       ]
     }
   ]

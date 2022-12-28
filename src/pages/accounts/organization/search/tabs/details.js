@@ -256,7 +256,7 @@ const TabDetails = () => {
                     </Grid>
                     {/* Category  */}
                     <Grid item xs={12}>
-                      <Box sx={{ display: 'flex', flexWrap: 'wrap', listStyle: 'none', m: 0 }} component="ul">
+                      <Box sx={{ display: 'flex', flexWrap: 'wrap', listStyle: 'none', m: 0, p: 0 }} component="ul">
                         <Autocomplete
                           multiple
                           fullWidth
@@ -283,6 +283,8 @@ const TabDetails = () => {
                           }
                           sx={{
                             '& .MuiOutlinedInput-root': {
+                              minHeight: '50px',
+                              border: `1px solid ${theme.palette.grey[300]}`,
                               p: 0,
                               '& .MuiAutocomplete-tag': {
                                 m: 1

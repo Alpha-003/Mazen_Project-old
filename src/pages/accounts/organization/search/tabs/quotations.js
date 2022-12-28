@@ -1,6 +1,5 @@
 // material-ui
-import { Card, CardHeader, Stack, Typography , useTheme} from '@mui/material';
-import Button from 'themes/overrides/Button';
+import { Card, CardHeader, Stack, Typography, useTheme, Button } from '@mui/material';
 
 const TabQuotations = () => {
   // theme

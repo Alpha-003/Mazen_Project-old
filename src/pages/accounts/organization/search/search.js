@@ -12,7 +12,7 @@ import Avatar from 'components/@extended/Avatar';
 import SearchTabs from './tabs/main';
 const circleImage = require.context('assets/images/organization', true);
 // ==============================|| PROFILE - USER LIST ||============================== //
-const PeopleSearch = () => {
+const OrganizationSearch = () => {
   // theme
   const theme = useTheme();
   const btnStyle = {
@@ -173,4 +173,4 @@ const PeopleSearch = () => {
   );
 };
 
-export default PeopleSearch;
+export default OrganizationSearch;
