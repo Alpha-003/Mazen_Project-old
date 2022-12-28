@@ -62,6 +62,30 @@ const accounts = {
           url: '/organization/all'
         },
         {
+          id: 'organization-agencies',
+          title: <FormattedMessage id="agencies" />,
+          type: 'item',
+          url: '/organization/agencies'
+        },
+        {
+          id: 'organization-businesses',
+          title: <FormattedMessage id="businesses" />,
+          type: 'item',
+          url: '/organization/businesses'
+        },
+        {
+          id: 'organization-suppliers',
+          title: <FormattedMessage id="suppliers" />,
+          type: 'item',
+          url: '/organization/suppliers'
+        },
+        {
+          id: 'organization-manufacturer',
+          title: <FormattedMessage id="manufacturer" />,
+          type: 'item',
+          url: '/organization/manufacturer'
+        },
+        {
           id: 'organization-search',
           title: <FormattedMessage id="search" />,
           type: 'item',

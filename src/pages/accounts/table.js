@@ -35,7 +35,12 @@ export default function ReactTable({ tableName, columns, data, getHeaderProps, r
   const [langFilter, setLangFilter] = useState('Language');
   const [isActiveFilter, setIsActiveFilter] = useState('isActive');
   const matchDownSM = useMediaQuery(theme.breakpoints.down('sm'));
-
+  const showDropDowns =
+    tableName == 'Organization' ||
+    tableName == 'agency' ||
+    tableName == 'business' ||
+    tableName == 'supplier' ||
+    tableName == 'manufacturer';
   const filterTypes = useMemo(() => renderFilterTypes, []);
   const sortBy = { id: 'fatherName', desc: false };
 
@@ -143,7 +148,7 @@ export default function ReactTable({ tableName, columns, data, getHeaderProps, r
               <MenuItem value="Type 1">Type 1</MenuItem>
               <MenuItem value="Type 2">Type 2</MenuItem>
             </Select>
-            {tableName != 'Organization' && (
+            {!showDropDowns && (
               <>
                 <Select id="genFilter" value={gendFilter} placeholder="Filter By" onChange={handleGendFilter} sx={{ width: '98px' }}>
                   <MenuItem value="Gender">Gender</MenuItem>
@@ -168,7 +173,7 @@ export default function ReactTable({ tableName, columns, data, getHeaderProps, r
                 </Select>
               </>
             )}
-            {tableName == 'Organization' && (
+            {showDropDowns && (
               <Select id="genFilter" value={statusFilter} placeholder="Filter By" onChange={handleStatusFilter} sx={{ width: '98px' }}>
                 <MenuItem value="Status">Status</MenuItem>
                 <MenuItem value="Status 1">Status 1</MenuItem>

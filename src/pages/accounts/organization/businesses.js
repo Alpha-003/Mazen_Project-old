@@ -1,0 +1,205 @@
+import { useCallback, useMemo, useState } from 'react';
+
+// material-ui
+import { useTheme } from '@mui/material/styles';
+import { Chip, Dialog, Stack, Tooltip, Typography } from '@mui/material';
+
+// project import
+import UserView from 'sections/apps/profiles/user-list/UserView';
+import AddOrg from './component/AddOrg';
+import Avatar from 'components/@extended/Avatar';
+import IconButton from 'components/@extended/IconButton';
+import MainCard from 'components/MainCard';
+import ScrollX from 'components/ScrollX';
+import makeData from 'data/react-table';
+import { IndeterminateCheckbox } from 'components/third-party/ReactTable';
+
+// assets
+import { CloseOutlined, EyeTwoTone, EditTwoTone, DeleteTwoTone } from '@ant-design/icons';
+import ReactTable from '../table';
+
+const avatarImage = require.context('assets/images/users', true);
+
+// ==============================|| PROFILE - USER LIST ||============================== //
+
+const AllUserList = () => {
+  const theme = useTheme();
+
+  const data = useMemo(() => makeData(200), []);
+  const [org, setOrg] = useState(null);
+  const [add, setAdd] = useState(false);
+  // const [filterGender, setFilterGender] = useState(null)
+
+  const handleAdd = () => {
+    setAdd(!add);
+    if (org && !add) setOrg(null);
+  };
+  const handleGenderFilter = () => {
+    console.log('test');
+    // data = data.filter(el => el.gender == filterGender)
+  };
+
+  const columns = useMemo(
+    () => [
+      {
+        title: 'Row Selection',
+        // eslint-disable-next-line
+        Header: ({ getToggleAllPageRowsSelectedProps }) => <IndeterminateCheckbox indeterminate {...getToggleAllPageRowsSelectedProps()} />,
+        accessor: 'selection',
+        // eslint-disable-next-line
+        Cell: ({ row }) => <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />,
+        disableSortBy: true
+      },
+      {
+        Header: 'Id',
+        accessor: 'id',
+        className: 'cell-center'
+      },
+      {
+        Header: 'Organization Name',
+        accessor: 'fatherName',
+        // eslint-disable-next-line
+        Cell: ({ row }) => {
+          // eslint-disable-next-line
+          const { values } = row;
+          return (
+            <Stack direction="row" spacing={1.5} alignItems="center">
+              {/* eslint-disable-next-line */}
+              <Avatar variant="circle" alt="Avatar 1" size="sm" src={avatarImage(`./avatar-${!values.avatar ? 1 : values.avatar}.png`)} />
+              <Stack spacing={0}>
+                {/* eslint-disable-next-line */}
+                <Typography variant="subtitle1">{values.fatherName}</Typography>
+                <Typography variant="caption" color="textSecondary">
+                  {/* eslint-disable-next-line */}
+                  {values.email}
+                </Typography>
+              </Stack>
+            </Stack>
+          );
+        }
+      },
+      {
+        Header: 'Avatar',
+        accessor: 'avatar',
+        disableSortBy: true
+      },
+      {
+        Header: 'Email',
+        accessor: 'email'
+      },
+      {
+        Header: 'Location',
+        accessor: 'address'
+      },
+      {
+        Header: 'Order',
+        accessor: 'age',
+        className: 'cell-right'
+      },
+      {
+        Header: 'Spent',
+        accessor: 'amount',
+        className: 'cell-right',
+        Cell: ({ value }) => {
+          return `$${value.toFixed(2)}`;
+        }
+      },
+      {
+        Header: 'Status',
+        accessor: 'status',
+        // eslint-disable-next-line
+        Cell: ({ value }) => {
+          switch (value) {
+            case 'Complicated':
+              return <Chip color="error" label="Canceled" size="small" variant="light" />;
+            case 'Relationship':
+              return <Chip color="success" label="Complete" size="small" variant="light" />;
+            case 'Single':
+            default:
+              return <Chip color="info" label="Pending" size="small" variant="light" />;
+          }
+        }
+      },
+      {
+        Header: 'Actions',
+        className: 'cell-center',
+        disableSortBy: true,
+        // eslint-disable-next-line
+        Cell: ({ row }) => {
+          // eslint-disable-next-line
+          const collapseIcon = row.isExpanded ? (
+            <CloseOutlined style={{ color: theme.palette.error.main }} />
+          ) : (
+            <EyeTwoTone twoToneColor={theme.palette.secondary.main} />
+          );
+          return (
+            <Stack direction="row" alignItems="center" justifyContent="center" spacing={0}>
+              <Tooltip title="View">
+                <IconButton
+                  color="secondary"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    // eslint-disable-next-line
+                    row.toggleRowExpanded();
+                  }}
+                >
+                  {collapseIcon}
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Edit">
+                <IconButton
+                  color="primary"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    // eslint-disable-next-line
+                    setUser(row.values);
+                    handleAdd();
+                  }}
+                >
+                  <EditTwoTone twoToneColor={theme.palette.primary.main} />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Delete">
+                <IconButton
+                  color="error"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                >
+                  <DeleteTwoTone twoToneColor={theme.palette.error.main} />
+                </IconButton>
+              </Tooltip>
+            </Stack>
+          );
+        }
+      }
+    ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [theme]
+  );
+
+  const renderRowSubComponent = useCallback(({ row }) => <UserView data={data[row.id]} />, [data]);
+
+  return (
+    <MainCard content={false}>
+      <ScrollX>
+        <ReactTable
+          tableName="business"
+          columns={columns}
+          data={data}
+          handleAdd={handleAdd}
+          handleGenderFilter={handleGenderFilter}
+          getHeaderProps={(column) => column.getSortByToggleProps()}
+          renderRowSubComponent={renderRowSubComponent}
+        />
+      </ScrollX>
+
+      {/* add org dialog */}
+      <Dialog maxWidth="sm" fullWidth onClose={handleAdd} open={add} sx={{ '& .MuiDialog-paper': { p: 0 } }}>
+        {add && <AddOrg user={org} orgType="Business" onCancel={handleAdd} />}
+      </Dialog>
+    </MainCard>
+  );
+};
+
+export default AllUserList;

@@ -80,7 +80,7 @@ const SingleFileUpload = ({ error, file, setFieldValue, sx }) => {
           ...((isDragReject || error) && {
             color: 'error.main',
             borderColor: 'error.light',
-            bgcolor: 'error.lighter',
+            bgcolor: 'error.lighter'
           }),
           borderStyle: 'solid',
           p: 2.5,
