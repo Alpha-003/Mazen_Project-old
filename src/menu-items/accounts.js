@@ -62,6 +62,12 @@ const accounts = {
           url: '/organization/all'
         },
         {
+          id: 'organization-search',
+          title: <FormattedMessage id="search" />,
+          type: 'item',
+          url: '/organization/search/details'
+        },
+        {
           id: 'organization-agencies',
           title: <FormattedMessage id="agencies" />,
           type: 'item',
@@ -84,12 +90,6 @@ const accounts = {
           title: <FormattedMessage id="manufacturer" />,
           type: 'item',
           url: '/organization/manufacturer'
-        },
-        {
-          id: 'organization-search',
-          title: <FormattedMessage id="search" />,
-          type: 'item',
-          url: '/organization/search/details'
         }
       ]
     }

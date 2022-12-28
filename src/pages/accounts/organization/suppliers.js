@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Chip, Dialog, Stack, Tooltip, Typography } from '@mui/material';
+import { Chip, Dialog, Grid, Stack, Tooltip, Typography } from '@mui/material';
 
 // project import
 import UserView from 'sections/apps/profiles/user-list/UserView';
@@ -13,6 +13,8 @@ import MainCard from 'components/MainCard';
 import ScrollX from 'components/ScrollX';
 import makeData from 'data/react-table';
 import { IndeterminateCheckbox } from 'components/third-party/ReactTable';
+import Breadcrumbs from 'components/@extended/Breadcrumbs';
+import navigation from 'menu-items';
 
 // assets
 import { CloseOutlined, EyeTwoTone, EditTwoTone, DeleteTwoTone } from '@ant-design/icons';
@@ -181,24 +183,27 @@ const AllUserList = () => {
   const renderRowSubComponent = useCallback(({ row }) => <UserView data={data[row.id]} />, [data]);
 
   return (
-    <MainCard content={false}>
-      <ScrollX>
-        <ReactTable
-          tableName="supplier"
-          columns={columns}
-          data={data}
-          handleAdd={handleAdd}
-          handleGenderFilter={handleGenderFilter}
-          getHeaderProps={(column) => column.getSortByToggleProps()}
-          renderRowSubComponent={renderRowSubComponent}
-        />
-      </ScrollX>
+    <Grid>
+      <Breadcrumbs navigation={navigation} title card={false} divider={false} />
+      <MainCard content={false}>
+        <ScrollX>
+          <ReactTable
+            tableName="supplier"
+            columns={columns}
+            data={data}
+            handleAdd={handleAdd}
+            handleGenderFilter={handleGenderFilter}
+            getHeaderProps={(column) => column.getSortByToggleProps()}
+            renderRowSubComponent={renderRowSubComponent}
+          />
+        </ScrollX>
 
-      {/* add org dialog */}
-      <Dialog maxWidth="sm" fullWidth onClose={handleAdd} open={add} sx={{ '& .MuiDialog-paper': { p: 0 } }}>
-        {add && <AddOrg user={org} orgType="Supplier" onCancel={handleAdd} />}
-      </Dialog>
-    </MainCard>
+        {/* add org dialog */}
+        <Dialog maxWidth="sm" fullWidth onClose={handleAdd} open={add} sx={{ '& .MuiDialog-paper': { p: 0 } }}>
+          {add && <AddOrg user={org} orgType="Supplier" onCancel={handleAdd} />}
+        </Dialog>
+      </MainCard>
+    </Grid>
   );
 };
 
