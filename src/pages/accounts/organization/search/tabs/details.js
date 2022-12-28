@@ -109,7 +109,6 @@ const TabDetails = () => {
     'Wordpress'
   ];
 
-
   return (
     <Formik
       initialValues={{
@@ -144,7 +143,7 @@ const TabDetails = () => {
           'Reduxjs & tooltit',
           'SASS'
         ],
-        note: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.`,
+        note: ``,
         submit: null
       }}
       validationSchema={Yup.object().shape({
@@ -188,7 +187,11 @@ const TabDetails = () => {
           <Grid container columnSpacing={2} justifyContent="end">
             {/* right side  */}
             <Grid item md={7} xs={12}>
-              <MainCard title="Organization Information" content={false} sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem', color: theme.palette.text.secondary } }}>
+              <MainCard
+                title="Organization Information"
+                content={false}
+                sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem', color: theme.palette.text.secondary } }}
+              >
                 <Box sx={{ p: 2.5 }}>
                   <Grid container spacing={3}>
                     {/* first namee english */}
@@ -257,52 +260,77 @@ const TabDetails = () => {
                     </Grid>
                     {/* Category  */}
                     <Grid item xs={12}>
-                      <Box sx={{ display: 'flex', flexWrap: 'wrap', listStyle: 'none', m: 0, p: 0 }} component="ul">
-                        <Autocomplete
-                          multiple
-                          fullWidth
-                          id="tags-outlined"
-                          options={skills}
-                          value={values.skill}
-                          onBlur={handleBlur}
-                          getOptionLabel={(label) => label}
-                          onChange={(event, newValue) => {
-                            setFieldValue('skill', newValue);
-                          }}
-                          renderInput={(params) => <TextField {...params} name="skill" placeholder="Add Skills" />}
-                          renderTags={(value, getTagProps) =>
-                            value.map((option, index) => (
-                              <Chip
-                                key={index}
-                                {...getTagProps({ index })}
-                                variant="combined"
-                                label={option}
-                                deleteIcon={<CloseOutlined style={{ fontSize: '0.75rem' }} />}
-                                sx={{ color: 'text.primary' }}
-                              />
-                            ))
-                          }
-                          sx={{
-                            '& .MuiOutlinedInput-root': {
-                              minHeight: '50px',
-                              border: `1px solid ${theme.palette.grey[300]}`,
-                              p: 0,
-                              '& .MuiAutocomplete-tag': {
-                                m: 1
-                              },
-                              '& fieldset': {
-                                display: 'none'
-                              },
-                              '& .MuiAutocomplete-endAdornment': {
-                                display: 'none'
-                              },
-                              '& .MuiAutocomplete-popupIndicator': {
-                                display: 'none'
-                              }
+                      <Stack spacing={1.25}>
+                        <InputLabel htmlFor="category">Category</InputLabel>
+                        <Box sx={{ display: 'flex', flexWrap: 'wrap', listStyle: 'none', m: 0, p: 0 }} component="ul">
+                          <Autocomplete
+                            multiple
+                            fullWidth
+                            id="category"
+                            options={skills}
+                            value={values.skill}
+                            onBlur={handleBlur}
+                            getOptionLabel={(label) => label}
+                            onChange={(event, newValue) => {
+                              setFieldValue('skill', newValue);
+                            }}
+                            renderInput={(params) => <TextField {...params} name="skill" placeholder="Add Skills" />}
+                            renderTags={(value, getTagProps) =>
+                              value.map((option, index) => (
+                                <Chip
+                                  key={index}
+                                  {...getTagProps({ index })}
+                                  variant="combined"
+                                  label={option}
+                                  deleteIcon={<CloseOutlined style={{ fontSize: '0.75rem' }} />}
+                                  sx={{ color: 'text.primary' }}
+                                />
+                              ))
                             }
-                          }}
+                            sx={{
+                              '& .MuiOutlinedInput-root': {
+                                minHeight: '50px',
+                                border: `1px solid ${theme.palette.grey[300]}`,
+                                p: 0,
+                                '& .MuiAutocomplete-tag': {
+                                  m: 1
+                                },
+                                '& fieldset': {
+                                  display: 'none'
+                                },
+                                '& .MuiAutocomplete-endAdornment': {
+                                  display: 'none'
+                                },
+                                '& .MuiAutocomplete-popupIndicator': {
+                                  display: 'none'
+                                }
+                              }
+                            }}
+                          />
+                        </Box>
+                      </Stack>
+                    </Grid>
+                    {/* Note  */}
+                    <Grid item xs={12}>
+                      <Stack spacing={1.25}>
+                        <InputLabel htmlFor="note">Note</InputLabel>
+                        <TextField
+                          multiline
+                          rows={1}
+                          fullWidth
+                          value={values.note}
+                          name="note"
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          id="note"
+                          placeholder="Note"
                         />
-                      </Box>
+                        {touched.note && errors.note && (
+                          <FormHelperText error id="personal-note-helper">
+                            {errors.note}
+                          </FormHelperText>
+                        )}
+                      </Stack>
                     </Grid>
                   </Grid>
                 </Box>
@@ -310,7 +338,11 @@ const TabDetails = () => {
             </Grid>
             {/* left side */}
             <Grid item md={5} xs={12}>
-              <MainCard title="Contact Details" content={false} sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem', color: theme.palette.text.secondary } }}>
+              <MainCard
+                title="Contact Details"
+                content={false}
+                sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem', color: theme.palette.text.secondary } }}
+              >
                 <Box sx={{ p: 2.5 }}>
                   <Grid container spacing={3}>
                     {/* Mobile Number */}
@@ -431,7 +463,7 @@ const TabDetails = () => {
         </form>
       )}
     </Formik>
-  )
+  );
 };
 
 export default TabDetails;

@@ -3,7 +3,8 @@ import { Grid, Stack, TextField, InputLabel, Box, Typography, Button, Divider, u
 import AnimateButton from 'components/@extended/AnimateButton';
 // project import
 import MainCard from 'components/MainCard';
-
+import Breadcrumbs from 'components/@extended/Breadcrumbs';
+import navigation from 'menu-items';
 // assets
 import { SearchOutlined } from '@ant-design/icons';
 
@@ -25,6 +26,7 @@ const OrganizationSearch = () => {
   };
   return (
     <Grid>
+      <Breadcrumbs navigation={navigation} title card={false} divider={false} />
       <MainCard>
         <Grid container columnSpacing={2} rowSpacing={3}>
           <Grid item xs={6}>
@@ -59,8 +61,8 @@ const OrganizationSearch = () => {
           </Grid>
           <Grid item xs={12}>
             <Stack direction="row" justifyContent="space-between">
-              <Stack direction="row" alignItems="center" spacing={1} sx={{ color: theme.palette.warning }}>
-                <Box sx={{ width: '100px', background: theme.palette.warning, height: '16px', borderRadius: '10px' }}></Box>
+              <Stack direction="row" alignItems="center" spacing={1} sx={{ color: theme.palette.warning.main }}>
+                <Box sx={{ width: '100px', background: theme.palette.warning.main, height: '16px', borderRadius: '10px' }}></Box>
                 <Typography>Organization was not found</Typography>
               </Stack>
               <Stack direction="row" columnGap={2}>

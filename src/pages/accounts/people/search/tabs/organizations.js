@@ -92,7 +92,7 @@ const TabOrganizations = () => {
           <Grid container alignItems="center">
             <Grid item md={2}>
               <Stack direction="row" alignItems="center">
-                <Typography sx={{ fontWeight: 500 }}>Organizationss</Typography>
+                <Typography sx={{ fontWeight: 500 }}>Organizations</Typography>
                 <Typography sx={mainCardHeaderDefault}>3 Total</Typography>
               </Stack>
             </Grid>

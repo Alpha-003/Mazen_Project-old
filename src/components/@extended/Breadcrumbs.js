@@ -1,36 +1,36 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 // material-ui
-import MuiBreadcrumbs from '@mui/material/Breadcrumbs';
-import { useTheme } from '@mui/material/styles';
+// import MuiBreadcrumbs from '@mui/material/Breadcrumbs';
+// import { useTheme } from '@mui/material/styles';
 import { Divider, Grid, Typography } from '@mui/material';
 
 // project imports
 import MainCard from '../MainCard';
 
 // assets
-import { ApartmentOutlined, HomeFilled, HomeOutlined } from '@ant-design/icons';
+// import { ApartmentOutlined, HomeFilled, HomeOutlined } from '@ant-design/icons';
 
 // ==============================|| BREADCRUMBS ||============================== //
 
 const Breadcrumbs = ({
   card,
   divider = true,
-  icon,
-  icons,
-  maxItems,
+  // icon,
+  // icons,
+  // maxItems,
   navigation,
   rightAlign,
-  separator,
+  // separator,
   title,
   titleBottom,
   sx,
   ...others
 }) => {
-  const theme = useTheme();
-  const [main, setMain] = useState();
+  // const theme = useTheme();
+  // const [main, setMain] = useState();
   const [item, setItem] = useState();
 
   let currentPath = document.location.pathname;
@@ -44,13 +44,13 @@ const Breadcrumbs = ({
     currentPath = '/apps/kanban/board';
   }
 
-  const iconSX = {
-    marginRight: theme.spacing(0.75),
-    marginTop: `-${theme.spacing(0.25)}`,
-    width: '1rem',
-    height: '1rem',
-    color: theme.palette.secondary.main
-  };
+  // const iconSX = {
+  //   marginRight: theme.spacing(0.75),
+  //   marginTop: `-${theme.spacing(0.25)}`,
+  //   width: '1rem',
+  //   height: '1rem',
+  //   color: theme.palette.secondary.main
+  // };
 
   // set active item state
   const getCollapse = (menu) => {
@@ -60,7 +60,7 @@ const Breadcrumbs = ({
           getCollapse(collapse);
         } else if (collapse.type && collapse.type === 'item') {
           if (currentPath.includes(collapse.url)) {
-            setMain(menu);
+            // setMain(menu);
             setItem(collapse);
           }
         }
@@ -79,38 +79,38 @@ const Breadcrumbs = ({
   });
 
   // item separator
-  const SeparatorIcon = separator;
-  const separatorIcon = separator ? <SeparatorIcon style={{ fontSize: '0.75rem', marginTop: 2 }} /> : '/';
+  // const SeparatorIcon = separator;
+  // const separatorIcon = separator ? <SeparatorIcon style={{ fontSize: '0.75rem', marginTop: 2 }} /> : '/';
 
-  let mainContent;
-  let itemContent;
+  // let mainContent;
+  // let itemContent;
   let breadcrumbContent = <Typography />;
-  let itemTitle = '';
-  let CollapseIcon;
-  let ItemIcon;
+  // let itemTitle = '';
+  // let CollapseIcon;
+  // let ItemIcon;
 
   // collapse item
-  if (main && main.type === 'collapse') {
-    CollapseIcon = main.icon ? main.icon : ApartmentOutlined;
-    mainContent = (
-      <Typography component={Link} to={document.location.pathname} variant="h6" sx={{ textDecoration: 'none' }} color="textSecondary">
-        {icons && <CollapseIcon style={iconSX} />}
-        {main.title}
-      </Typography>
-    );
-  }
+  // if (main && main.type === 'collapse') {
+  //   CollapseIcon = main.icon ? main.icon : ApartmentOutlined;
+  //   mainContent = (
+  //     <Typography component={Link} to={document.location.pathname} variant="h6" sx={{ textDecoration: 'none' }} color="textSecondary">
+  //       {icons && <CollapseIcon style={iconSX} />}
+  //       {main.title}
+  //     </Typography>
+  //   );
+  // }
 
   // items
   if (item && item.type === 'item') {
-    itemTitle = item.title;
+    // itemTitle = item.title;
 
-    ItemIcon = item.icon ? item.icon : ApartmentOutlined;
-    itemContent = (
-      <Typography variant="subtitle1" color="textPrimary">
-        {icons && <ItemIcon style={iconSX} />}
-        {itemTitle}
-      </Typography>
-    );
+    // ItemIcon = item.icon ? item.icon : ApartmentOutlined;
+    // itemContent = (
+    //   <Typography variant="subtitle1" color="textPrimary">
+    //     {icons && <ItemIcon style={iconSX} />}
+    //     {itemTitle}
+    //   </Typography>
+    // );
 
     // main
     if (item.breadcrumbs !== false) {
@@ -134,7 +134,7 @@ const Breadcrumbs = ({
                 <Typography variant="h2">{item.title}</Typography>
               </Grid>
             )}
-            <Grid item>
+            {/* <Grid item>
               <MuiBreadcrumbs aria-label="breadcrumb" maxItems={maxItems || 8} separator={separatorIcon}>
                 <Typography component={Link} to="/" color="textSecondary" variant="h6" sx={{ textDecoration: 'none' }}>
                   {icons && <HomeOutlined style={iconSX} />}
@@ -144,7 +144,7 @@ const Breadcrumbs = ({
                 {mainContent}
                 {itemContent}
               </MuiBreadcrumbs>
-            </Grid>
+            </Grid> */}
             {title && titleBottom && (
               <Grid item sx={{ mt: card === false ? 0.25 : 1 }}>
                 <Typography variant="h2">{item.title}</Typography>

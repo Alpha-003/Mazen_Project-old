@@ -43,12 +43,12 @@ const GenderToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   '& .MuiToggleButtonGroup-grouped': {
     border: `1px solid ${theme.palette.mode === 'dark' ? theme.palette.divider : theme.palette.grey.A800}`,
     '&.Mui-disabled': {
-      border: 0,
+      border: 0
     },
     '&.Mui-selected': {
       borderColor: theme.palette.mode === 'dark' ? theme.palette.primary.dark : theme.palette.primary.light
-    },
-  },
+    }
+  }
 }));
 const TabPersonal = () => {
   const maxDate = new Date();
@@ -471,7 +471,6 @@ const TabPersonal = () => {
               </Stack>
             </Box>
           </Grid>
-
         </form>
       )}
     </Formik>

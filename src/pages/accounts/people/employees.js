@@ -2,7 +2,9 @@ import { useCallback, useMemo, useState } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Chip, Dialog, Stack, Tooltip, Typography } from '@mui/material';
+import { Chip, Dialog, Grid, Stack, Tooltip, Typography } from '@mui/material';
+import Breadcrumbs from 'components/@extended/Breadcrumbs';
+import navigation from 'menu-items';
 
 // third-party
 
@@ -183,24 +185,27 @@ const AllUserList = () => {
   const renderRowSubComponent = useCallback(({ row }) => <UserView data={data[row.id]} />, [data]);
 
   return (
-    <MainCard content={false}>
-      <ScrollX>
-        <ReactTable
-          tableName="Employee"
-          columns={columns}
-          data={data}
-          handleAdd={handleAdd}
-          handleGenderFilter={handleGenderFilter}
-          getHeaderProps={(column) => column.getSortByToggleProps()}
-          renderRowSubComponent={renderRowSubComponent}
-        />
-      </ScrollX>
+    <Grid>
+      <Breadcrumbs navigation={navigation} title card={false} divider={false} />
+      <MainCard content={false}>
+        <ScrollX>
+          <ReactTable
+            tableName="Employee"
+            columns={columns}
+            data={data}
+            handleAdd={handleAdd}
+            handleGenderFilter={handleGenderFilter}
+            getHeaderProps={(column) => column.getSortByToggleProps()}
+            renderRowSubComponent={renderRowSubComponent}
+          />
+        </ScrollX>
 
-      {/* add user dialog */}
-      <Dialog maxWidth="sm" fullWidth onClose={handleAdd} open={add} sx={{ '& .MuiDialog-paper': { p: 0 } }}>
-        {add && <AddUser user={user} onCancel={handleAdd} title="Employee" />}
-      </Dialog>
-    </MainCard>
+        {/* add user dialog */}
+        <Dialog maxWidth="sm" fullWidth onClose={handleAdd} open={add} sx={{ '& .MuiDialog-paper': { p: 0 } }}>
+          {add && <AddUser user={user} onCancel={handleAdd} title="Employee" />}
+        </Dialog>
+      </MainCard>
+    </Grid>
   );
 };
 

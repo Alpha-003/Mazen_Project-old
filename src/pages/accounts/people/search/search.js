@@ -12,6 +12,9 @@ import PropTypes from 'prop-types';
 import Avatar from 'components/@extended/Avatar';
 import SearchTabs from './tabs/main';
 import UserTabPersonal from 'sections/apps/profiles/user/TabPersonal';
+import Breadcrumbs from 'components/@extended/Breadcrumbs';
+import navigation from 'menu-items';
+
 const circleImage = require.context('assets/images/users/', true);
 // ==============================|| PROFILE - USER LIST ||============================== //
 const PeopleSearch = ({ search }) => {
@@ -28,6 +31,7 @@ const PeopleSearch = ({ search }) => {
   };
   return (
     <Grid>
+      <Breadcrumbs navigation={navigation} title card={false} divider={false} />
       <MainCard>
         <Grid container columnSpacing={2} rowSpacing={3}>
           {/* phone number */}
