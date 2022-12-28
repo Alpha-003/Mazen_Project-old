@@ -2,11 +2,7 @@
 import { FormattedMessage } from 'react-intl';
 
 // assets
-import {
-  AppstoreOutlined,
-  TagsOutlined,
-  BuildOutlined
-} from '@ant-design/icons';
+import { AppstoreOutlined, TagsOutlined, BuildOutlined } from '@ant-design/icons';
 
 // icons
 const icons = {

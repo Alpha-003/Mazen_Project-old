@@ -8,12 +8,8 @@ import { CloseOutlined } from '@ant-design/icons';
 
 // material-ui
 import {
-  // Autocomplete,
   Box,
   Button,
-  // CardHeader,
-  // Chip,
-  // Divider,
   FormHelperText,
   Grid,
   InputLabel,
@@ -109,7 +105,6 @@ const TabDetails = () => {
     'Wordpress'
   ];
 
-
   return (
     <Formik
       initialValues={{
@@ -188,7 +183,11 @@ const TabDetails = () => {
           <Grid container columnSpacing={2} justifyContent="end">
             {/* right side  */}
             <Grid item md={7} xs={12}>
-              <MainCard title="Organization Information" content={false} sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem', color: theme.palette.text.secondary } }}>
+              <MainCard
+                title="Organization Information"
+                content={false}
+                sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem', color: theme.palette.text.secondary } }}
+              >
                 <Box sx={{ p: 2.5 }}>
                   <Grid container spacing={3}>
                     {/* first namee english */}
@@ -310,7 +309,11 @@ const TabDetails = () => {
             </Grid>
             {/* left side */}
             <Grid item md={5} xs={12}>
-              <MainCard title="Contact Details" content={false} sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem', color: theme.palette.text.secondary } }}>
+              <MainCard
+                title="Contact Details"
+                content={false}
+                sx={{ '& .MuiInputLabel-root': { fontSize: '0.875rem', color: theme.palette.text.secondary } }}
+              >
                 <Box sx={{ p: 2.5 }}>
                   <Grid container spacing={3}>
                     {/* Mobile Number */}
@@ -431,7 +434,7 @@ const TabDetails = () => {
         </form>
       )}
     </Formik>
-  )
+  );
 };
 
 export default TabDetails;

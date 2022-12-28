@@ -147,5 +147,9 @@
   "all": "All",
   "search": "Search",
   "people-customers": "Customers",
-  "people-employees": "Employees"
+  "people-employees": "Employees",
+  "agencies": "Agencies",
+  "businesses": "Businesses",
+  "suppliers": "Suppliers",
+  "manufacturer": "Manufacturer"
 }

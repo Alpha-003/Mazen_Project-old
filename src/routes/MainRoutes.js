@@ -112,6 +112,10 @@ const CustomersList = Loadable(lazy(() => import('pages/accounts/people/customer
 const EmployeesList = Loadable(lazy(() => import('pages/accounts/people/employees')));
 // account - organization
 const AllOrgList = Loadable(lazy(() => import('pages/accounts/organization/all')));
+const Agencies = Loadable(lazy(() => import('pages/accounts/organization/agencies')));
+const Businesses = Loadable(lazy(() => import('pages/accounts/organization/businesses')));
+const Suppliers = Loadable(lazy(() => import('pages/accounts/organization/suppliers')));
+const Manufacturer = Loadable(lazy(() => import('pages/accounts/organization/manufacturer')));
 
 // accoutn - people - search
 const PeopleSearch = Loadable(lazy(() => import('pages/accounts/people/search/search')));
@@ -573,10 +577,21 @@ const MainRoutes = {
               element: <AllOrgList />
             },
             {
-              path: 'customers',
-              element: <CustomersList />
+              path: 'agencies',
+              element: <Agencies />
             },
             {
+              path: 'businesses',
+              element: <Businesses />
+            },
+            {
+              path: 'suppliers',
+              element: <Suppliers />
+            },
+            {
+              path: 'manufacturer',
+              element: <Manufacturer />
+              },{
               path: 'employees',
               element: <EmployeesList />
             },
