@@ -43,7 +43,7 @@ const CommonLayout = ({ layout = 'blank' }) => {
 
   const menu = useSelector((state) => state.menu);
   const { componentDrawerOpen } = menu;
-
+  console.log(menu);
   const handleDrawerOpen = () => {
     dispatch(openComponentDrawer({ componentDrawerOpen: !componentDrawerOpen }));
   };
