@@ -5,10 +5,12 @@ import { useEffect, useState } from 'react';
 // material-ui
 // import MuiBreadcrumbs from '@mui/material/Breadcrumbs';
 // import { useTheme } from '@mui/material/styles';
-import { Divider, Grid, Typography } from '@mui/material';
+import { Divider, Grid, Link, Stack, Typography, useTheme } from '@mui/material';
 
 // project imports
 import MainCard from '../MainCard';
+import { ArrowLeftOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router';
 
 // assets
 // import { ApartmentOutlined, HomeFilled, HomeOutlined } from '@ant-design/icons';
@@ -43,6 +45,9 @@ const Breadcrumbs = ({
   if (currentPath === '/apps/kanban/backlogs') {
     currentPath = '/apps/kanban/board';
   }
+  // for going back page
+  const navigate = useNavigate();
+  const theme = useTheme();
 
   // const iconSX = {
   //   marginRight: theme.spacing(0.75),
@@ -131,7 +136,14 @@ const Breadcrumbs = ({
           >
             {title && !titleBottom && (
               <Grid item>
-                <Typography variant="h2">{item.title}</Typography>
+                <Stack direction="row" columnGap={2} alignItems="center">
+                  <Link aria-label="back button" sx={{ color: theme.palette.common.black }} onClick={() => navigate(-1)}>
+                    <ArrowLeftOutlined />
+                  </Link>
+                  <Typography variant="h2" sx={{ fontSize: '20px', fontWeight: 700 }}>
+                    {item.title}
+                  </Typography>
+                </Stack>
               </Grid>
             )}
             {/* <Grid item>
@@ -147,7 +159,14 @@ const Breadcrumbs = ({
             </Grid> */}
             {title && titleBottom && (
               <Grid item sx={{ mt: card === false ? 0.25 : 1 }}>
-                <Typography variant="h2">{item.title}</Typography>
+                <Stack direction="row" columnGap={2} alignItems="center">
+                  <Link aria-label="back button" sx={{ color: theme.palette.common.black }} onClick={() => navigate(-1)}>
+                    <ArrowLeftOutlined />
+                  </Link>
+                  <Typography variant="h2" sx={{ fontSize: '20px', fontWeight: 700 }}>
+                    {item.title}
+                  </Typography>
+                </Stack>
               </Grid>
             )}
           </Grid>
