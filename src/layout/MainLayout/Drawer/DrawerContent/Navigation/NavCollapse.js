@@ -89,7 +89,6 @@ const NavCollapse = ({ menu, level }) => {
           setOpen(true);
         }
       }
-
       if (pathname.includes(item.url)) {
         setOpen(true);
         setSelected(menu.id);
