@@ -137,7 +137,7 @@ const Breadcrumbs = ({
             {title && !titleBottom && (
               <Grid item>
                 <Stack direction="row" columnGap={2} alignItems="center">
-                  <Link aria-label="back button" sx={{ color: theme.palette.common.black }} onClick={() => navigate(-1)}>
+                  <Link aria-label="back button" sx={{ color: theme.palette.common.black, cursor: 'pointer' }} onClick={() => navigate(-1)}>
                     <ArrowLeftOutlined />
                   </Link>
                   <Typography variant="h2" sx={{ fontSize: '20px', fontWeight: 700 }}>
@@ -160,7 +160,7 @@ const Breadcrumbs = ({
             {title && titleBottom && (
               <Grid item sx={{ mt: card === false ? 0.25 : 1 }}>
                 <Stack direction="row" columnGap={2} alignItems="center">
-                  <Link aria-label="back button" sx={{ color: theme.palette.common.black }} onClick={() => navigate(-1)}>
+                  <Link aria-label="back button" sx={{ color: theme.palette.common.black, cursor: 'pointer' }} onClick={() => navigate(-1)}>
                     <ArrowLeftOutlined />
                   </Link>
                   <Typography variant="h2" sx={{ fontSize: '20px', fontWeight: 700 }}>
